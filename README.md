@@ -1,1 +1,2 @@
-# sudo-self.github.io
+# Static
+#Jesse.Jessenet.us
