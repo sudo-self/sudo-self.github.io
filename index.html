@@ -1,8 +1,171 @@
-
-    
-    
-    <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
+    <project name="sno" default="compile" basedir=".">
+        <description>
+          NES GAMES READY
+        </description>
+
+        <!-- Settings -->
+        <property name="src" location="src" />
+        <property name="build" location="bin" />
+        <property name="reports" location="reports" />
+        <property name="docs" location="docs" />
+        <property name="lib" location="lib" />
+        <property name="test.romdir" location="roms" />
+        <!-- Emma Settings -->
+        <property name="emma.dir" location="emma" />
+        <property name="emma.instr" location="${emma.dir}/instr" />
+        <property name="emma.coverage" location="${emma.dir}/coverage" />
+        <!-- Profiler Settings -->
+        <property name="profile.properties" value="${lib}/sno.profile.properties" />
+        <property name="profile.jar" value="${lib}/profile.jar" />
+
+        <!-- Set up our classpaths for testing/regular builds -->
+        <path id="classpath.base">
+            <pathelement location="${build}" />
+        </path>
+        <path id="classpath.test">
+            <path refid="junit.lib" />
+            <path refid="classpath.base" />
+        </path>
+        <fileset id="test.rom" dir="${test.romdir}">
+            <include name="**/*.zip" />
+            <include name="**/*.smc" />
+        </fileset>
+
+        <!-- Junit definitions -->
+        <path id="junit.lib">
+            <pathelement path="${lib}/junit.jar" />
+            <pathelement path="${lib}/hamcrest.jar" />
+        </path>
+        <path id="ant-junit.lib">
+            <pathelement path="${lib}/ant-junit4.jar" />
+            <path refid="junit.lib" />
+        </path>
+        <taskdef name="junit" classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask" classpathref="ant-junit.lib" />
+        <taskdef name="junitreport" classname="org.apache.tools.ant.taskdefs.optional.junit.XMLResultAggregator" classpathref="ant-junit.lib" />
+
+        <!-- Emma definitions -->
+        <path id="emma.lib">
+            <pathelement path="${lib}/emma_ant.jar" />
+            <pathelement path="${lib}/emma.jar" />
+        </path>
+        <taskdef resource="emma_ant.properties" classpathref="emma.lib" />
+
+        <!-- Initialize some things -->
+        <target name="init">
+            <tstamp />
+            <mkdir dir="${build}" />
+            <mkdir dir="${emma.instr}" />
+            <mkdir dir="${reports}" />
+        </target>
+
+        <!-- Compile everything -->
+        <target name="compile" depends="init" description="compile the source ">
+            <!-- Compile the java code from ${src} into ${build} -->
+            <javac srcdir="${src}" destdir="${build}" debug="true" includeantruntime="false">
+                <classpath refid="classpath.test" />
+            </javac>
+            <copy todir="${build}" file="sno.properties" />
+            <jar destfile="${build}/sno.jar" basedir="${build}" excludes="**/test/** *.jar *.zip" update="true" duplicate="fail">
+                <manifest>
+                    <attribute name="Build-Date" value="${TODAY}" />
+                </manifest>
+            </jar>
+            <!-- keytool -genkey -keystore sno.jks -alias sno -storepass snoapplet -validity 3650 -keysize 2048 -keyalg RSA -->
+            <signjar alias="sno" jar="${build}/sno.jar" keystore="${lib}/sno.jks" storepass="snoapplet" />
+        </target>
+
+        <!-- Junit test/Emma code coverage task-->
+        <target name="test" depends="compile" description="Run the Unit Tests">
+            <mkdir dir="${reports}" />
+            <emma>
+                <instr instrpathref="classpath.base" destdir="${emma.instr}" metadatafile="${emma.coverage}/metadata.emma" merge="true" />
+            </emma>
+
+            <!-- Run any file ending in Test.class as a junit test -->
+            <junit fork="yes" forkmode="once" dir=".">
+                <jvmarg value="-Demma.coverage.out.file=${emma.coverage}/coverage.emma" />
+                <jvmarg value="-Demma.coverage.out.merge=true" />
+                <classpath>
+                    <pathelement location="${emma.instr}" />
+                    <path refid="classpath.test" />
+                    <path refid="emma.lib" />
+                </classpath>
+                <formatter type="xml" />
+                <batchtest todir="${reports}">
+                    <fileset dir="${emma.instr}" includes="**/*Test.class" />
+                </batchtest>
+            </junit>
+
+            <!-- Generate an html report of all of the tests -->
+            <junitreport todir="${reports}">
+                <fileset dir="${reports}">
+                    <include name="TEST-*.xml" />
+                </fileset>
+                <report format="frames" todir="${reports}/html" />
+            </junitreport>
+
+            <!-- Emma report -->
+            <emma verbosity="verbose">
+                <report sourcepath="${src}">
+                    <fileset dir="${emma.coverage}">
+                        <include name="*.emma" />
+                    </fileset>
+                    <!--<txt outfile="${emma.coverage}/coverage.txt" />-->
+                    <html outfile="${emma.coverage}/coverage.html" />
+                </report>
+            </emma>
+        </target>
+
+
+        <!-- Findbugs Task -->
+        <taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" classpath="${lib}/findbugs-ant.jar" />
+        <taskdef name="convertXmlToText" classname="edu.umd.cs.findbugs.anttask.ConvertXmlToTextTask" classpath="${lib}/findbugs-ant.jar" />
+        <property name="findbugs.home" value="${lib}/findbugs/" />
+        <target name="findbugs" description="Run findbugs and generate a report" depends="compile">
+            <mkdir dir="${reports}" />
+            <findbugs home="${findbugs.home}" output="xml" outputFile="${reports}/findbugs.xml">
+                <sourcePath path="${src}" />
+                <class location="${build}" />
+                <auxClasspath path="${lib}/junit.jar" />
+                <auxClasspath path="${lib}/hamcrest.jar" />
+            </findbugs>
+            <convertXmlToText home="${findbugs.home}" input="${reports}/findbugs.xml" output="${reports}/findbugs.html" />
+        </target>
+
+        <!-- Javadoc Task -->
+        <target name="javadoc" description="Create javadocs">
+            <javadoc sourcepath="${src}" destdir="${docs}/" classpathref="classpath.test" useexternalfile="yes" linksource="true"/>
+        </target>
+
+        <!-- Java Profiler Task -->
+        <target name="profile" depends="compile">
+            <java classpathref="classpath.base" classname="edu.fit.cs.sno.snes.Core" fork="yes">
+                <jvmarg value="-Dprofile.properties=${profile.properties}" />
+                <jvmarg value="-javaagent:${profile.jar}" />
+                <arg value="${test.romdir}/${toString:test.rom}" />
+            </java>
+        </target>
+
+        <!-- Run the program -->
+        <target name="run" depends="compile">
+            <java classpathref="classpath.base" classname="edu.fit.cs.sno.snes.Core" fork="yes">
+                <arg value="${test.romdir}/${toString:test.rom}" />
+            </java>
+        </target>
+
+        <!-- Clean task -->
+        <target name="clean" description="Clean">
+            <delete dir="${build}" />
+            <delete dir="${docs}" />
+            <delete dir="${reports}" />
+            <delete dir="${emma.instr}" />
+            <delete dir="${emma.coverage}" />
+            <delete dir="${emma.dir}" />
+        </target>
+    </project>
+
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,10 +175,181 @@
         <link rel="stylesheet" href="/assets/css/common.css" />
         <script src="/assets/js/categories.js"></script>
         <style type="text/css">
+            <theme>
+                <formatVersion>3</formatVersion>
+                <include>./../simple.xml</include>
+
+                <view name="system">
+
+                    <image name="background" extra="true">
+                        <path>./art/nes_art_blur.jpg</path>
+                    </image>
+
+                    <image name="logo">
+                        <path>./art/nes2.svg</path>
+                    </image>
+                    
+                    <helpsystem name="help">
+                        <textColor>ffffff88</textColor>
+                        <iconColor>ffffff88</iconColor>
+                    </helpsystem>
+                    
+                </view>
+
+                <view name="basic, detailed">
+                
+                    <text name="system_name_1" extra="true">
+                        <text>Nintendo</text>
+                        <forceUppercase>1</forceUppercase>
+                        <size>0.45 0.08</size>
+                        <pos>0.527 0.01</pos>
+                        <color>7b7d7f</color>
+                        <fontPath>./../art/OPENSANS-LIGHT.TTF</fontPath>
+                        <fontSize>0.055</fontSize>
+                        <alignment>right</alignment>
+                    </text>
+                    
+                    <text name="system_name_2" extra="true">
+                        <text>Entertainment System</text>
+                        <forceUppercase>1</forceUppercase>
+                        <size>0.45 0.08</size>
+                        <pos>0.527 0.07</pos>
+                        <color>7b7d7f</color>
+                        <fontPath>./../art/OPENSANS-LIGHT.TTF</fontPath>
+                        <fontSize>0.055</fontSize>
+                        <alignment>right</alignment>
+                    </text>
+
+                    <image name="logo">
+                        <path>./art/nes1.svg</path>
+                        <pos>0.025 0.079</pos>
+                        <maxSize>0.45 0.1</maxSize>
+                        <origin>0 0.5</origin>
+                    </image>
+
+                </view>
+
+                <view name="basic">
+                
+                    <textlist name="gamelist">
+                        <pos>0.025 0.22</pos>
+                        <size>0.950 0.68</size>
+                        <alignment>center</alignment>
+                        <horizontalMargin>0.01</horizontalMargin>
+                    </textlist>
+                    
+                </view>
+
+                <view name="detailed">
+                
+            <!-- <measuring rectangle
+                    <image name="measure" extra="true">
+                        <pos>0.025 0.6</pos>
+                        <origin>0 0</origin>
+                        <size>0.125 0.301</size>
+                        <path>./../art/white.png</path>
+                        <color>ff00ff</color>
+                    </image>
+            -->
+
+                    <image name="md_image">
+                        <pos>0.025 0.22</pos>
+            <!--             <size>0.125 0.301</size>
+             -->            <maxSize>0.125 0.301</maxSize>
+                        <origin>0 0</origin>
+                    </image>
+                    
+                    <text name="md_lbl_rating">
+                        <pos>0.177 0.21</pos>
+                    </text>
+                    
+                    <text name="md_lbl_releasedate">
+                        <pos>0.177 0.25</pos>
+                    </text>
+                    
+                    <text name="md_lbl_developer">
+                        <pos>0.177 0.29</pos>
+                        <size>0.133 0.04</size>
+                    </text>
+
+                    <text name="md_lbl_publisher">
+                        <pos>0.177 0.33</pos>
+                        <size>0.133 0.04</size>
+                    </text>
+                    
+                    <text name="md_lbl_genre">
+                        <pos>0.177 0.37</pos>
+                    </text>
+                    
+                    <text name="md_lbl_players">
+                        <pos>0.177 0.41</pos>
+                    </text>
+
+                    <text name="md_lbl_lastplayed">
+                        <pos>0.177 0.45</pos>
+                    </text>
+
+                    <text name="md_lbl_playcount">
+                        <pos>0.177 0.49</pos>
+                    </text>
+                    
+                    <text name="md_playcount">
+                        <pos>0.31 0.49</pos>
+                    </text>
+
+                    <datetime name="md_lastplayed">
+                        <pos>0.31 0.45</pos>
+                    </datetime>
+                    
+                    <text name="md_players">
+                        <pos>0.31 0.41</pos>
+                    </text>
+                    
+                    <text name="md_genre">
+                        <pos>0.31 0.37</pos>
+                        <size>0.24 0.04</size>
+                    </text>
+
+                    <text name="md_publisher">
+                        <pos>0.31 0.33</pos>
+                        <size>0.24 0.04</size>
+                    </text>
+                    
+                    <text name="md_developer">
+                        <pos>0.31 0.29</pos>
+                        <size>0.24 0.04</size>
+                    </text>
+                    
+                    <datetime name="md_releasedate">
+                        <pos>0.31 0.25</pos>
+                    </datetime>
+                    
+                    <rating name="md_rating">
+                        <pos>0.31 0.216</pos>
+                        <size>0.028 0.028</size>
+                        <filledPath>./../art/star_filled_spacing.svg</filledPath>
+                        <unfilledPath>./../art/star_hollow_3_spacing.svg</unfilledPath>
+                    </rating>
+                    
+                    <text name="md_description">
+                        <size>0.52 0.3</size>
+                        <pos>0.025 0.577</pos>
+                    </text>
+                    
+                    <textlist name="gamelist">
+                        <pos>0.615 0.22</pos>
+                        <size>0.359 0.68</size>
+                        <alignment>left</alignment>
+                        <horizontalMargin>0.01</horizontalMargin>
+                    </textlist>
+
+                </view>
+                
+            </theme>
             body {background-color: #b7bac9}
             p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 26.4px Verdana; color: #000000; -webkit-text-stroke: #000000}
-            p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: left; left: 16.4px Verdana; color: #ffffff; -webkit-text-stroke: #ffffff}
-            p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: left; font: 16.4px Verdana; color: #ffffff; -webkit-text-stroke: #ffffff; background-color: #9d0024}
+            p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; center: 16.4px Verdana; color: #ffffff; -webkit-text-stroke: #ffffff}
+            p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 16.4px Verdana; color: #ffffff; -webkit-text-stroke: #ffffff; background-color: #9d0024}
             p.p4 {margin: 0.0px 0.0px 6.0px 0.0px; font: 14.7px Verdana; color: #000000; -webkit-text-stroke: #000000}
             p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.7px Verdana; color: #000000; -webkit-text-stroke: #000000; background-color: #ffffff}
             p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: left; font: 16.4px Verdana; color: #ffffff; -webkit-text-stroke: #ffffff; background-color: #56627f}
@@ -32,93 +366,112 @@
             span.s4 {font: 14.7px Courier; font-kerning: none; background-color: #ffffff}
             span.s5 {font: 24.0px Courier; font-kerning: none}
             span.s6 {text-decoration: font-kerning: none}
-</style>
-<p class="p1"><span class="s1"><b>Pi is a Place for Pirates and Treasures<span class="Apple-converted-space"></span>
-<a href="https://ibb.co/09PjLh0"><img src="https://i.ibb.co/R6LpKzX/SKY-COS.png" alt="SKY-COS" width="100%" border="0"></a><br /><a target='_blank' href='https://imgbb.com/'></a><p class="p3"><span class="s2"><p class="p3"><span class="s2"><b>I believe that HTML and CSS were always the foundation of the internet and have been since the early 1980s<span class="Apple-converted-space">
-<span class="s1"><b><p class="p6"><span class="s2"><b>All i could find was this broken keyboard that was missing the letter X. So i wrote this with HTML & CSS. <b>BOLD and BRAVE<b> Pirates having traveled the LAN were ready to adventure through https:// world wide web possiblly finding purpose beyond the localhost. Legend has it one of the treasure seeking pirates found Apache Web Server in the farthest depths of the internet and used it to harvest the power of the server traveling farther than any WAN had ever gone before.<span class="Apple-converted-space"></span></p></b>
-<p class="p3"><span class="s2">
-<img src="https://i.ibb.co/Mnp8TRb/Alison-Wonderland-New-Day-Official-Video-V9dp-Rn-IP9r0-0002.png" alt="Alison-Wonderland-New-Day-Official-Video-V9dp-Rn-IP9r0-0002" boarder=“0” align="right"></p></span><span class="s3"><span class="Apple-converted-space">
-<p class="p5"><span class="s2"></span></p><iframe align+"right"width="300" height="500" align="right" src="https://www.youtube.com/embed/Ydnlxkj0DqU" align="right" iPhone Jailbreak" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" loop=1; allowfullscreen></iframe><span class="Apple-converted-space"></span>
-<p class="p3"><span class="s2"><b><p class="p1"><span class="s1"><b>i lost my ipod<span class="Apple-converted-space"></span><span class="Apple-converted-space"></span>
-<p class="p4"><span class="s3"><span class="Apple-converted-space"></span>
-       <style>
-       body  {
-        background-image: url('https://i.ibb.co/3TVS32K/old-letters-mail-on-scrolls-jpg.webp');
-        background-color: #cccccc;
-       }
-       </style>
-<p class="p3"><span class="s2"><span class="Apple-converted-space"></span></b></span></p>
-<a href="https://ibb.co/jb64BQ5"><img src="https://i.ibb.co/MSy7R3M/Screenshot-2022-11-29-at-20-11-33.png" alt="Screenshot-2022-11-29-at-20-11-33" border="0"></a>
-<a href="https://ibb.co/nDFQkVc"><img src="https://i.ibb.co/nDFQkVc/IMG-3692.jpg" alt="IMG-3692" border="0"></a>
-<a href="https://ibb.co/W2KhFjs"><img src="https://i.ibb.co/W2KhFjs/M1.jpg" alt="M1" border="0"></a><a href="https://ibb.co/fN3kH93"><a href="https://ibb.co/HDmsWN2"><img src="https://i.ibb.co/FbGMSsW/IMG-3610.jpg"alt="IMG-3610" border="0"></a><p class="p3"><span class="s2"><b><button>THIS BUTTON DOES NOTHING</button><span class="Apple-converted-space"></span></i></span></p><img src="https://i.ibb.co/bv4sXF4/wp2022124.jpg" alt="wp2022124" align="left"><p class="p3"><span class="s2"><b><span class="Apple-converted-space"></span>    <divstyle="background-image:url('https://wallpaperaccess.com/full/11793.jpg);background-repeat:repeat-x;width:400px;height:400px;border:1px solid black;padding:10px;"></p>
-<iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="450" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/us/playlist/edmxhouse/pl.u-ZmblxW1FVlKePxM"></iframe><p class="p3"><span class="s2"><b>Apache on Raspberry Pi 3 B+<span class="Apple-converted-space"><a class="p1"><span class="Apple-converted-space"></span></b></span></p>
-    </a><p class="p3"><span class="s2"><b><button type="button"
-    onclick="document.getElementById('demo').innerHTML = Date()">
-    THIS BUTTON ACTUALLY WORKS</button>
-<p id="demo"></p><span class="Apple-converted-space"><p class="p2"><span class="s2"></span></p><span class="s4"></p>The map indicates the treasure was buried near /var/www/html/index.html</span><span class="s3"><span class="Apple-converted-space"></span></p></span></html><a href="https://ibb.co/89tswVk"><b></b><img src="https://i.ibb.co/qpVj8w6/1715696.png" alt="1715696" width="100%' border="0"><p class="p3"><b><a href="mailto:admin@jessenet.us?subject=Hello%20again" target="_top"><button>BUTTON IS FOR SENDING A PRIVATE MESSAGE TO THE SHIP...</button><span class="Apple-converted-space"><span class="Apple-converted-space"></span></b></span></p>
-<a href="https://ibb.co/Sn5ZN4F"><img src="https://i.ibb.co/Sn5ZN4F/Screen-Shot-2022-12-23-at-1-44-16-AM.png" alt="Screen-Shot-2022-12-23-at-1-44-16-AM" align="left"border="0"></a></b></span>
-   <a class="p1"><span class="Apple-converted-space"></span></p><span class="Apple-converted-space">
-<span class="s4"><b>Skilled Developer that created this site on Raspberry Pi using only HTML, CSS, and a blank word document. Diverse networking background including an IT degree and several linux certifications. Military experiences such as problem solving and conflict resolution. A warrior spirit that can adapt and overcome challenges while working alongside others in a team or project environment.</b><span class="s3"><span class="Apple-converted-space"></span></p></span>
-</span>
-<p class="p6"><span class="s2"><b>Encrypt your Message with PGP<span class="Apple-converted-space">
-    <span class="s4"></p><span class="Apple-converted-space"></span><span class="s3"><textarea name="text" cols="100" rows="5" readonly="readonly">
-        -----BEGIN PGP PUBLIC KEY BLOCK-----
+</style><applet code="edu.fit.cs.sno.applet.SNOApplet.class"
+    archive="sno.jar" width="512" height="496">
+<param name="sno.applet.width" value="512">
+<param name="sno.applet.height" value="496">
+</applet><p class="p1"><span class="s1"><b>Pi is a Place for Pirates and Treasures<span class="Apple-converted-space"></span>
+    <applet code="edu.fit.cs.sno.applet.SNOApplet.class"
+            archive="sno.jar" width="512" height="496">
+        <param name="sno.applet.width" value="512">
+        <param name="sno.applet.height" value="496">
+    </applet>
+    <a href="https://ibb.co/09PjLh0"><img src="https://i.ibb.co/R6LpKzX/SKY-COS.png" alt="SKY-COS" width="100%" border="0"></a><br /><a target='_blank' href='https://imgbb.com/'></a><p class="p3"><span class="s2"><p class="p3"><span class="s2"><b>I believe that HTML and CSS were always the foundation of the internet and have been since the early 1980s<span class="Apple-converted-space">
+    <span class="s1"><b><p class="p6"><span class="s2"><b>All i could find was this broken keyboard that was missing the letter X. So i wrote this with HTML & CSS. <b>BOLD and BRAVE<b> Pirates having traveled the LAN were ready to adventure through https:// world wide web possiblly finding purpose beyond the localhost. Legend has it one of the treasure seeking pirates found Apache Web Server in the farthest depths of the internet and used it to harvest the power of the server traveling farther than any WAN had ever gone before.<span class="Apple-converted-space"></span></p></b><iframe src="https://www.retrogames.cc/embed/43940-super-mario-bros-advance-2-super-mario-bros-3.html" width="600" height="450" frameborder="no" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe><p class="p3"><span class="s2">
+    <img src="https://i.ibb.co/Mnp8TRb/Alison-Wonderland-New-Day-Official-Video-V9dp-Rn-IP9r0-0002.png" alt="Alison-Wonderland-New-Day-Official-Video-V9dp-Rn-IP9r0-0002" boarder=“0” align="right"></p></span><span class="s3"><span class="Apple-converted-space">
+    <p class="p5"><span class="s2"></span></p><iframe align+"right"width="600" height="645" align="right" src="https://www.youtube.com/embed/Ydnlxkj0DqU" align="right" iPhone Jailbreak" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" loop=1; allowfullscreen></iframe><span class="Apple-converted-space"></span>
+    <p class="p3"><span class="s2"><b><p class="p1"><span class="s1"><b>i lost my ipod<span class="Apple-converted-space"></span><span class="Apple-converted-space"></span>
+    <p class="p4"><span class="s3"><span class="Apple-converted-space"></span>
+           <style>
+           body  {
+            background-image: url('https://i.ibb.co/3TVS32K/old-letters-mail-on-scrolls-jpg.webp');
+            background-color: #cccccc;
+           }
+           </style>
+    <p class="p3"><span class="s2"><span class="Apple-converted-space"></span></b></span></p>
+    <a href="https://ibb.co/jb64BQ5"><img src="https://i.ibb.co/MSy7R3M/Screenshot-2022-11-29-at-20-11-33.png" alt="Screenshot-2022-11-29-at-20-11-33" border="0"></a>
+    <a href="https://ibb.co/nDFQkVc"><img src="https://i.ibb.co/nDFQkVc/IMG-3692.jpg" alt="IMG-3692" border="0"></a>
+    <a href="https://ibb.co/W2KhFjs"><img src="https://i.ibb.co/W2KhFjs/M1.jpg" alt="M1" border="0"></a><a href="https://ibb.co/fN3kH93"><a href="https://ibb.co/HDmsWN2"><img src="https://i.ibb.co/FbGMSsW/IMG-3610.jpg"alt="IMG-3610" border="0"></a><p class="p3"><span class="s2"><b><button>THIS BUTTON DOES NOTHING</button><span class="Apple-converted-space"></span></i></span></p>><img src="https://i.ibb.co/bv4sXF4/wp2022124.jpg" alt="wp2022124" align="left"><p class="p3"><span class="s2"><b><span class="Apple-converted-space"></span>    <divstyle="background-image:url('https://wallpaperaccess.com/full/11793.jpg);background-repeat:repeat-x;width:400px;height:400px;border:1px solid black;padding:10px;"></p>
+        <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="450" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/us/playlist/edmxhouse/pl.u-ZmblxW1FVlKePxM"></iframe><p class="p3"><span class="s2"><b>Apache on Raspberry Pi 3 B+<span class="Apple-converted-space"><a class="p1"><span class="Apple-converted-space"></span></b></span></p><iframe width="560" height="315" src="https://www.youtube.com/embed/BcgMkaIW4Wk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></iframe>
+        </a><p class="p3"><span class="s2"><b><button type="button"
+        onclick="document.getElementById('demo').innerHTML = Date()">
+        THIS BUTTON ACTUALLY WORKS</button>
+    <p id="demo"></p><span class="Apple-converted-space"><p class="p2"><span class="s2"></span></p><iframe width="600" height="400" src="https://www.youtube.com/embed/nNxprYkycmU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><p class="p3"><b><a href="mailto:admin@jessenet.us?subject=Hello%20again" target="_top"><button>BUTTON IS FOR SENDING A PRIVATE MESSAGE TO THE SHIP...</button><span class="Apple-converted-space"><span class="Apple-converted-space"></span></b></span></p>
+    <a href="https://ibb.co/Sn5ZN4F"><img src="https://i.ibb.co/Sn5ZN4F/Screen-Shot-2022-12-23-at-1-44-16-AM.png" alt="Screen-Shot-2022-12-23-at-1-44-16-AM" align="left"border="0"></a></b></span>
+       <a class="p1"><span class="Apple-converted-space"></span></p><span class="Apple-converted-space">
+    <span class="s4"><b>Skilled Developer that created this site on Raspberry Pi using only HTML, CSS, and a blank word document. Diverse networking background including an IT degree and several linux certifications. Military experiences such as problem solving and conflict resolution. A warrior spirit that can adapt and overcome challenges while working alongside others in a team or project environment.</b><span class="s3"><span class="Apple-converted-space"></span></p></span><iframe src="https://www.retrogames.cc/embed/21531-bad-news-baseball-usa.html" align="right"width="500" height="350" frameborder="no" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe></span><span class="s2"><b>ARRRGH BAD NEWS BASEBALL HAS ARRIVED PRESS PLAY NOW TO LOAD THE CLASSIC FOR FREE NOT LIKE YOUR GONNA WIN ANY TREASURE VISITOR<span class="Apple-converted-space"><p class="p6"><span class="s2"><b>Encrypt with PGP for additional privacy<span class="Apple-converted-space">
+        <span class="s4"></p><span class="Apple-converted-space"></span><span class="s3"><textarea name="text" cols="65" rows="10" readonly="readonly">
+            -----BEGIN PGP PUBLIC KEY BLOCK-----
+            
+            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
+            tvW5VcoYlSsswqM=
+            =PSAE
+            -----END PGP PUBLIC KEY BLOCK-----</textarea></span></p></span>
+        <!-- HTML Codes by Quackit.com -->
+        <style>
+        .html-marquee {
+          height:300px;
+          width:500px;
+          background-color:#000000;
+          background-image:url(https://i.ibb.co/yyjXLHr/Screen-Shot-2022-12-23-at-5-36-33-AM.png);
+          font-family:Garamond;
+          font-size:18px;
+          color:#aaaaaa;
+          font-weight:bold;
+          border-width:4;
+          border-style:solid;
+          border-color:#000000;
+        }
+        </style>
+        <marquee align="right"class="html-marquee" direction="left" behavior="scroll" scrollamount="1">
+        <img src="https://i.ibb.co/qCVXmk0/Screen-Shot-2022-12-23-at-5-25-38-AM.png"> <p>In nearly the same breath as she arrived the ship dissappeared in the night sky..</p>
+        </marquee>
         
-        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
-        tvW5VcoYlSsswqM=
-        =PSAE
-        -----END PGP PUBLIC KEY BLOCK-----</textarea></span></p></span>
-    
-    
-    
-    
-    
-
