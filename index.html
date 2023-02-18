@@ -4,21 +4,17 @@
 <project name="sno" default="compile" basedir=".">
 <description>
 </description>
-
 <property name="src" location="src" />
 <property name="build" location="bin" />
 <property name="reports" location="reports" />
 <property name="docs" location="docs" />
 <property name="lib" location="lib" />
 <property name="test.romdir" location="roms" />
-
 <property name="emma.dir" location="emma" />
 <property name="emma.instr" location="${emma.dir}/instr" />
 <property name="emma.coverage" location="${emma.dir}/coverage" />
-
 <property name="profile.properties" value="${lib}/sno.profile.properties" />
 <property name="profile.jar" value="${lib}/profile.jar" />
-
 <path id="classpath.base">
 <pathelement location="${build}" />
 </path>
@@ -30,7 +26,6 @@
 <include name="**/*.zip" />
 <include name="**/*.smc" />
 </fileset>
-
 <path id="junit.lib">
 <pathelement path="${lib}/junit.jar" />
 <pathelement path="${lib}/hamcrest.jar" />
@@ -41,22 +36,18 @@
 </path>
 <taskdef name="junit" classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask" classpathref="ant-junit.lib" />
 <taskdef name="junitreport" classname="org.apache.tools.ant.taskdefs.optional.junit.XMLResultAggregator" classpathref="ant-junit.lib" />
-
 <path id="emma.lib">
 <pathelement path="${lib}/emma_ant.jar" />
 <pathelement path="${lib}/emma.jar" />
 </path>
 <taskdef resource="emma_ant.properties" classpathref="emma.lib" />
-
 <target name="init">
 <tstamp />
 <mkdir dir="${build}" />
 <mkdir dir="${emma.instr}" />
 <mkdir dir="${reports}" />
 </target>
-
 <target name="compile" depends="init" description="compile the source ">
-
 <javac srcdir="${src}" destdir="${build}" debug="true" includeantruntime="false">
 <classpath refid="classpath.test" />
 </javac>
@@ -66,21 +57,18 @@
 <attribute name="Build-Date" value="${TODAY}" />
 </manifest>
 </jar>
-
 <signjar alias="sno" jar="${build}/sno.jar" keystore="${lib}/sno.jks" storepass="snoapplet" />
 </target>
-
 <target name="test" depends="compile" description="Run the Unit Tests">
 <mkdir dir="${reports}" />
 <emma>
 <instr instrpathref="classpath.base" destdir="${emma.instr}" metadatafile="${emma.coverage}/metadata.emma" merge="true" />
 </emma>
-
 <junit fork="yes" forkmode="once" dir=".">
 <jvmarg value="-Demma.coverage.out.file=${emma.coverage}/coverage.emma" />
 <jvmarg value="-Demma.coverage.out.merge=true" />
 <classpath>
- <pathelement location="${emma.instr}" />
+<pathelement location="${emma.instr}" />
 <path refid="classpath.test" />
 <path refid="emma.lib" />
 </classpath>
@@ -89,25 +77,21 @@
 <fileset dir="${emma.instr}" includes="**/*Test.class" />
 </batchtest>
 </junit>
-
 <junitreport todir="${reports}">
 <fileset dir="${reports}">
 <include name="TEST-*.xml" />
 </fileset>
 <report format="frames" todir="${reports}/html" />
 </junitreport>
-
 <emma verbosity="verbose">
 <report sourcepath="${src}">
 <fileset dir="${emma.coverage}">
 <include name="*.emma" />
 </fileset>
-
 <html outfile="${emma.coverage}/coverage.html" />
 </report>
 </emma>
 </target>
-
 <taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" classpath="${lib}/findbugs-ant.jar" />
 <taskdef name="convertXmlToText" classname="edu.umd.cs.findbugs.anttask.ConvertXmlToTextTask" classpath="${lib}/findbugs-ant.jar" />
 <property name="findbugs.home" value="${lib}/findbugs/" />
@@ -121,11 +105,9 @@
 </findbugs>
 <convertXmlToText home="${findbugs.home}" input="${reports}/findbugs.xml" output="${reports}/findbugs.html" />
 </target>
-
 <target name="javadoc" description="Create javadocs">
 <javadoc sourcepath="${src}" destdir="${docs}/" classpathref="classpath.test" useexternalfile="yes" linksource="true" />
 </target>
-
 <target name="profile" depends="compile">
 <java classpathref="classpath.base" classname="edu.fit.cs.sno.snes.Core" fork="yes">
 <jvmarg value="-Dprofile.properties=${profile.properties}" />
@@ -133,13 +115,11 @@
 <arg value="${test.romdir}/${toString:test.rom}" />
 </java>
 </target>
-
 <target name="run" depends="compile">
 <java classpathref="classpath.base" classname="edu.fit.cs.sno.snes.Core" fork="yes">
 <arg value="${test.romdir}/${toString:test.rom}" />
 </java>
 </target>
-
 <target name="clean" description="Clean">
 <delete dir="${build}" />
 <delete dir="${docs}" />
@@ -351,10 +331,10 @@
             span.s6 {text-decoration: font-kerning: none}
 </style><applet code="edu.fit.cs.sno.applet.SNOApplet.class" archive="sno.jar" width="512" height="496">
 <param name="sno.applet.width" value="512"><param name="sno.applet.height" value="496"><p class="p1"><span class="s1"><b>PI IS A PLACE FOR PIRATES, CODING, AND HIIDEN TREASURES<span class="Apple-converted-space"></applet><p class="p3"><span class="s2"><b><span class="Apple-converted-space"></span></applet><p class="p3"><span class="s2"><p class="p3"><span class="s2"><b>I believe that HTML and CSS were always the foundation of the internet and have been since the early 1980s<span class="Apple-converted-space"><span class="s3"><img src="https://i.ibb.co/Mnp8TRb/Alison-Wonderland-New-Day-Official-Video-V9dp-Rn-IP9r0-0002.png" alt="Alison-Wonderland-New-Day-Official-Video-V9dp-Rn-IP9r0-0002" boarder=“0” align="right">
-    <a href="https://imgbb.com/"><img src="https://i.ibb.co/RvCzhKP/wb.gif" alt="wb" align="left" border="0"></a><span class="Apple-converted-space"></span></p></span><span class="s1"><b><p class="p6"><span class="s2"><b>All i could find was this broken keyboard that was missing the letter X. So i wrote this with HTML & CSS. <b>BOLD and BRAVE<b> Pirates having traveled the LAN were ready to adventure through https:// world wide web possiblly finding purpose beyond the localhost. Legend has it one of the treasure seeking pirates found Apache Web Server in the farthest depths of the internet and used it to harvest the power of the server traveling farther than any WAN had ever gone before.<p class="p1"><span class="s4"><p class="p3"><span class="s2"><p class="p3"><span class="s2"><b>Skilled Developer that created this site on Raspberry Pi using only HTML, CSS, and a blank word document. Diverse networking background including an IT degree and several linux certifications. Military experiences such as problem solving and conflict resolution. A warrior spirit that can adapt and overcome challenges while working alongside others in a team or project environment.<span class="Apple-converted-space"><span class="s3"></b><a href="https://ibb.co/J3JfMbQ"><img src="https://i.ibb.co/1zWDwp6/Screenshot-2023-01-13-at-3-04-35-PM.png" alt="Screenshot-2023-01-13-at-3-04-35-PM" width="100%" border="0"></a><br /><br /><p class="p1"><span class="s1"><b>PRESS THE BLUE "PLAY NOW" BUTTON TO START THE SUPER NINTENDO<span class="Apple-converted-space"><span class="Apple-converted-space"></span></p><a href="https://imgbb.com/"><img src="https://i.ibb.co/hLqDJJJ/Screen-Shot-2022-12-24-at-5-10-02-PM.png" width="100%" alt="Screen-Shot-2022-12-24-at-5-10-02-PM" border="0"></a><br /><a target='_blank' href='https://imgbb.com/'></a>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/RvCzhKP/wb.gif" alt="wb" align="left" border="0"></a><span class="Apple-converted-space"></span></p></span><span class="s1"><b><p class="p6"><span class="s2"><b>All i could find was this broken keyboard that was missing the letter X. So i wrote this with HTML & CSS. <b>BOLD and BRAVE<b> Pirates having traveled the LAN were ready to adventure through https:// world wide web possiblly finding purpose beyond the localhost. Legend has it one of the treasure seeking pirates found Apache Web Server in the farthest depths of the internet and used it to harvest the power of the server traveling farther than any WAN had ever gone before.<p class="p1"><span class="s4"><p class="p3"><span class="s2"><p class="p3"><span class="s2"><b>Skilled Developer that created this site on Raspberry Pi using only HTML, CSS, and a blank word document. Diverse networking background including an IT degree and several linux certifications. Military experiences such as problem solving and conflict resolution. A warrior spirit that can adapt and overcome challenges while working alongside others in a team or project environment.<span class="Apple-converted-space"><span class="s3"></b><a href="https://ibb.co/J3JfMbQ"><img src="https://i.ibb.co/1zWDwp6/Screenshot-2023-01-13-at-3-04-35-PM.png" alt="Screenshot-2023-01-13-at-3-04-35-PM" width="100%" border="0"></a><br /><br /><p class="p1"><span class="s1"><b>PRESS THE BLUE "PLAY NOW" BUTTON TO START THE SUPER NINTENDO<span class="Apple-converted-space"><span class="Apple-converted-space"></span></p><a href="https://imgbb.com/"><img src="https://i.ibb.co/hLqDJJJ/Screen-Shot-2022-12-24-at-5-10-02-PM.png" width="100%" alt="Screen-Shot-2022-12-24-at-5-10-02-PM" border="0"></a><br /><a target='_blank' href='https://imgbb.com/'></a>
 <iframe width="300" height="600" src="https://www.youtube.com/embed/ODwrhVEoxzM" title="checkra1n iPhone 7" frameborder="0" align="right" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p></a>
 <iframe src="https://www.retrogames.cc/embed/43940-super-mario-bros-advance-2-super-mario-bros-3.html" width="600" height="600" align="left" frameborder="no" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe><p class="p3"><span class="s2"></span><span class="s3"><span class="Apple-converted-space">
-    <p class="p5"><span class="s2"></span></p><iframe align="right" width="300" height="600" align="right" src="https://www.youtube.com/embed/Ydnlxkj0DqU" align="right" iPhone Jailbreak" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" loop=1; allowfullscreen></iframe><span class="Apple-converted-space"></span>
+<p class="p5"><span class="s2"></span></p><iframe align="right" width="300" height="600" align="right" src="https://www.youtube.com/embed/Ydnlxkj0DqU" align="right" iPhone Jailbreak" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" loop=1; allowfullscreen></iframe><span class="Apple-converted-space"></span>
 <p class="p3"><span class="s2"><b><p class="p1"><span class="s1"><span class="Apple-converted-space"></span><span class="Apple-converted-space"></span>
 <p class="p4"><span class="s3"><span class="Apple-converted-space"></span>
 <style>
@@ -366,9 +346,38 @@
 <p class="p3"><span class="s2"><span class="Apple-converted-space"></span></b></span>
 <a href="https://ibb.co/nDFQkVc"><img src="https://i.ibb.co/nDFQkVc/IMG-3692.jpg" alt="IMG-3692" border="0"></a>
 <a href="https://ibb.co/W2KhFjs"><img src="https://i.ibb.co/W2KhFjs/M1.jpg" alt="M1" border="0"></a><a href="https://imgbb.com/"><img src="https://i.ibb.co/bdzCf7c/run.gif" alt="run" border="0"></a><a href="https://ibb.co/fN3kH93"><a href="https://ibb.co/HDmsWN2"><img src="https://i.ibb.co/FbGMSsW/IMG-3610.jpg" alt="IMG-3610" border="0"></a><p class="p3"><span class="s2"><b><button>THIS BUTTON DOES NOTHING</button><span class="Apple-converted-space"></span></i></span></p><img src="https://i.ibb.co/bv4sXF4/wp2022124.jpg" alt="wp2022124" align="left"><p class="p3"><span class="s2"><b><span class="Apple-converted-space"></span> <divstyle="background-image:url('https: wallpaperaccess.com full 11793.jpg);background-repeat:repeat-x;width:400px;height:400px;border:1px solid black;padding:10px;"></p><a href="https://imgbb.com/"><img src="https://i.ibb.co/0GLtMKQ/gi.webp" alt="gi" align="right" border="0"></a><a href="https://imgbb.com/"><img src="https://i.ibb.co/Wssq64M/NFT.gif" alt="NFT" align="right" border="0"><a href="https://imgbb.com/"><img src="https://i.ibb.co/sj29fqR/drop.gif" alt="drop" border="0"></a><a href="https://imgbb.com/"><img src="https://i.ibb.co/DWhDgr2/giphy.gif" alt="giphy" align="left" border="0"></a><a href="https://imgbb.com/"><img src="https://i.ibb.co/GxBb1sH/ss.webp" alt="ss" border="0"></a><br /><br />
-<a class="p1"><span class="Apple-converted-space"></span></p><span class="Apple-converted-space"><br><span class="Apple-converted-space"><SPAN STYLE="background-image: url(https://upload.wikimedia.org/wikipedia/commons/f/f5/Cool_waters_of_the_turquoise_blue_Aegean_Sea_-_Ayval%C4%B1k_-_panoramio.jpg">PIRATE & PARROT Brewing, CO. @1985</SPAN><br><br /><span class="s3"><span class="Apple-converted-space"></span></p><img src="https://i.ibb.co/TLg7kfw/Qm-XA6-Pb-U36b8amx-CDrwef-YP4-Qg-SG2-Unugee-Cdjc-Sj-TVf-Ud.gif" alt="Qm-XA6-Pb-U36b8amx-CDrwef-YP4-Qg-SG2-Unugee-Cdjc-Sj-TVf-Ud" align="right" border="0"></a><iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="450" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/us/playlist/edmxhouse/pl.u-ZmblxW1FVlKePxM"></iframe>
-<a href="https://ibb.co/kDcf6rw"><img src="https://i.ibb.co/Jpk4FbG/Screenshot-2023-01-11-at-6-57-47-PM.png" alt="Screenshot-2023-01-11-at-6-57-47-PM" border="0"></a><a href="https://imgbb.com/"><a href="https://ibb.co/k6PNnpX"><img src="https://i.ibb.co/k6PNnpX/giphy.gif" alt="giphy" align="right" border="0"></a><img src="https://i.ibb.co/1KsM5Q0/done-with-you.gif" alt="done-with-you" align="right" border="0"></a><a href="https://imgbb.com/"><img src="https://i.ibb.co/s1fqgLx/tumblr-o0ll94-A31e1s7z2cyo1-500.gif" alt="tumblr-o0ll94-A31e1s7z2cyo1-500" border="0"></a><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="5ca3471eb9b5fe8b79295c9a-|49" defer=""></script><script nonce="1713ae95-3089-42b3-aa17-7fd0f6848741">(function(w,d){!function(f,g,h,i){f[h]=f[h]||{};f[h].executed=[];f.zaraz={deferred:[],listeners:[]};f.zaraz.q=[];f.zaraz._f=function(j){return function(){var k=Array.prototype.slice.call(arguments);f.zaraz.q.push({m:j,a:k})}};for(const l of["track","set","ecommerce","debug"])f.zaraz[l]=f.zaraz._f(l);f.zaraz.init=()=>{var m=g.getElementsByTagName(i)[0],n=g.createElement(i),o=g.getElementsByTagName("title")[0];o&&(f[h].t=g.getElementsByTagName("title")[0].text);f[h].x=Math.random();f[h].w=f.screen.width;f[h].h=f.screen.height;f[h].j=f.innerHeight;f[h].e=f.innerWidth;f[h].l=f.location.href;f[h].r=g.referrer;f[h].k=f.screen.colorDepth;f[h].n=g.characterSet;f[h].o=(new Date).getTimezoneOffset();if(f.dataLayer)for(const s of Object.entries(Object.entries(dataLayer).reduce(((t,u)=>({...t[1],...u[1]})))))zaraz.set(s[0],s[1],{scope:"page"});f[h].q=[];for(;f.zaraz.q.length;){const v=f.zaraz.q.shift();f[h].q.push(v)}n.defer=!0;for(const w of[localStorage,sessionStorage])Object.keys(w||{}).filter((y=>y.startsWith("_zaraz_"))).forEach((x=>{try{f[h]["z_"+x.slice(7)]=JSON.parse(w.getItem(x))}catch{f[h]["z_"+x.slice(7)]=w.getItem(x)}}));n.referrerPolicy="origin";n.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(f[h])));m.parentNode.insertBefore(n,m)};["complete","interactive"].includes(g.readyState)?zaraz.init():f.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script><script>(function(){var js = "window['__CF$cv$params']={r:'79027403fcbc03b4',m:'VubGk6X4HDrOgMQp01Klo16sM.fiK0Fv9IlrOj7Bnko-1674832625-0-AYx9zpRFZHM/JR+wrdLY/DeiF+wQDVh3fPR36U7RzmynsTH74IKOFUL9Ss0vS85OcNNbFdW+ECRHxlJNyVN/XMoXvUOk0FiX3nGMoDXFj2KydvDurpBmnkchwLPzf9KVzA==',s:[0xc9fcc4a93a,0x65e1dfda8d],u:'/cdn-cgi/challenge-platform/h/g'};var now=Date.now()/1000,offset=14400,ts=''+(Math.floor(now)-Math.floor(now%offset)),_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/h/g/scripts/alpha/invisible.js?ts='+ts,document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.nonce = '';_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"79027403fcbc03b4","version":"2022.11.3","r":1,"token":"c94cdea0af4d4ee6a8679fa592a8a5f3","si":100}' crossorigin="anonymous"></script>
-</html>
+<a class="p1"><span class="Apple-converted-space"></span></p><span class="Apple-converted-space"><br><span class="Apple-converted-space"><SPAN STYLE="background-image: url(https://upload.wikimedia.org/wikipedia/commons/f/f5/Cool_waters_of_the_turquoise_blue_Aegean_Sea_-_Ayval%C4%B1k_-_panoramio.jpg">
+
+CRACK HASHES ONLINE 100% FOR FREE
+</SPAN><span class="s3"><span class="Apple-converted-space"></span></p>
+<body>
+
+<input type="text" value="curl -X POST -F email=valid@email.com -F file=@/path/to/your/file https://api.onlinehashcrack.com" id="myInput">
+<button onclick="myFunction()">Copy text</button>
+
+<script>
+function myFunction() {
+  // Get the text field
+  var copyText = document.getElementById("myInput");
+
+  // Select the text field
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); // For mobile devices
+
+  // Copy the text inside the text field
+  navigator.clipboard.writeText(copyText.value);
+  
+  // Alert the copied text
+  alert("RUN THIS COMMAND IN TERMINAL WITH YOUR EMAIL AND HASH FILE: " + copyText.value);
+}
+</script>
+
+</body>
+
+
+<img src="https://i.ibb.co/TLg7kfw/Qm-XA6-Pb-U36b8amx-CDrwef-YP4-Qg-SG2-Unugee-Cdjc-Sj-TVf-Ud.gif" alt="Qm-XA6-Pb-U36b8amx-CDrwef-YP4-Qg-SG2-Unugee-Cdjc-Sj-TVf-Ud" align="right" border="0"></a><iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="450" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/us/playlist/edmxhouse/pl.u-ZmblxW1FVlKePxM"></iframe>
+<a href="https://ibb.co/kDcf6rw"><img src="https://i.ibb.co/Jpk4FbG/Screenshot-2023-01-11-at-6-57-47-PM.png" alt="Screenshot-2023-01-11-at-6-57-47-PM" border="0"></a><a href="https://imgbb.com/"><a href="https://ibb.co/k6PNnpX"><img src="https://i.ibb.co/k6PNnpX/giphy.gif" alt="giphy" align="right" border="0"></a><img src="https://i.ibb.co/1KsM5Q0/done-with-you.gif" alt="done-with-you" align="right" border="0"></a><a href="https://imgbb.com/"><img src="https://i.ibb.co/s1fqgLx/tumblr-o0ll94-A31e1s7z2cyo1-500.gif" alt="tumblr-o0ll94-A31e1s7z2cyo1-500" border="0"></a><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="5ca3471eb9b5fe8b79295c9a-|49" defer="" type="11f5328d24550377a0461da4-text/javascript"></script><script nonce="1713ae95-3089-42b3-aa17-7fd0f6848741" type="11f5328d24550377a0461da4-text/javascript">(function(w,d){!function(f,g,h,i){f[h]=f[h]||{};f[h].executed=[];f.zaraz={deferred:[],listeners:[]};f.zaraz.q=[];f.zaraz._f=function(j){return function(){var k=Array.prototype.slice.call(arguments);f.zaraz.q.push({m:j,a:k})}};for(const l of["track","set","ecommerce","debug"])f.zaraz[l]=f.zaraz._f(l);f.zaraz.init=()=>{var m=g.getElementsByTagName(i)[0],n=g.createElement(i),o=g.getElementsByTagName("title")[0];o&&(f[h].t=g.getElementsByTagName("title")[0].text);f[h].x=Math.random();f[h].w=f.screen.width;f[h].h=f.screen.height;f[h].j=f.innerHeight;f[h].e=f.innerWidth;f[h].l=f.location.href;f[h].r=g.referrer;f[h].k=f.screen.colorDepth;f[h].n=g.characterSet;f[h].o=(new Date).getTimezoneOffset();if(f.dataLayer)for(const s of Object.entries(Object.entries(dataLayer).reduce(((t,u)=>({...t[1],...u[1]})))))zaraz.set(s[0],s[1],{scope:"page"});f[h].q=[];for(;f.zaraz.q.length;){const v=f.zaraz.q.shift();f[h].q.push(v)}n.defer=!0;for(const w of[localStorage,sessionStorage])Object.keys(w||{}).filter((y=>y.startsWith("_zaraz_"))).forEach((x=>{try{f[h]["z_"+x.slice(7)]=JSON.parse(w.getItem(x))}catch{f[h]["z_"+x.slice(7)]=w.getItem(x)}}));n.referrerPolicy="origin";n.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(f[h])));m.parentNode.insertBefore(n,m)};["complete","interactive"].includes(g.readyState)?zaraz.init():f.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script><script type="11f5328d24550377a0461da4-text/javascript">(function(){var js = "window['__CF$cv$params']={r:'79027403fcbc03b4',m:'VubGk6X4HDrOgMQp01Klo16sM.fiK0Fv9IlrOj7Bnko-1674832625-0-AYx9zpRFZHM/JR+wrdLY/DeiF+wQDVh3fPR36U7RzmynsTH74IKOFUL9Ss0vS85OcNNbFdW+ECRHxlJNyVN/XMoXvUOk0FiX3nGMoDXFj2KydvDurpBmnkchwLPzf9KVzA==',s:[0xc9fcc4a93a,0x65e1dfda8d],u:'/cdn-cgi/challenge-platform/h/g'};var now=Date.now()/1000,offset=14400,ts=''+(Math.floor(now)-Math.floor(now%offset)),_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/h/g/scripts/alpha/invisible.js?ts='+ts,document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.nonce = '';_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"79027403fcbc03b4","version":"2022.11.3","r":1,"token":"c94cdea0af4d4ee6a8679fa592a8a5f3","si":100}' crossorigin="anonymous" type="11f5328d24550377a0461da4-text/javascript"></script>
+<script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="11f5328d24550377a0461da4-|49" defer=""></script><script nonce="0047b509-fa4a-4a7d-a1ec-6163b615927d">(function(w,d){!function(a,b,c,d){a[c]=a[c]||{};a[c].executed=[];a.zaraz={deferred:[],listeners:[]};a.zaraz.q=[];a.zaraz._f=function(e){return function(){var f=Array.prototype.slice.call(arguments);a.zaraz.q.push({m:e,a:f})}};for(const g of["track","set","ecommerce","debug"])a.zaraz[g]=a.zaraz._f(g);a.zaraz.init=()=>{var h=b.getElementsByTagName(d)[0],i=b.createElement(d),j=b.getElementsByTagName("title")[0];j&&(a[c].t=b.getElementsByTagName("title")[0].text);a[c].x=Math.random();a[c].w=a.screen.width;a[c].h=a.screen.height;a[c].j=a.innerHeight;a[c].e=a.innerWidth;a[c].l=a.location.href;a[c].r=b.referrer;a[c].k=a.screen.colorDepth;a[c].n=b.characterSet;a[c].o=(new Date).getTimezoneOffset();if(a.dataLayer)for(const n of Object.entries(Object.entries(dataLayer).reduce(((o,p)=>({...o[1],...p[1]})))))zaraz.set(n[0],n[1],{scope:"page"});a[c].q=[];for(;a.zaraz.q.length;){const q=a.zaraz.q.shift();a[c].q.push(q)}i.defer=!0;for(const r of[localStorage,sessionStorage])Object.keys(r||{}).filter((t=>t.startsWith("_zaraz_"))).forEach((s=>{try{a[c]["z_"+s.slice(7)]=JSON.parse(r.getItem(s))}catch{a[c]["z_"+s.slice(7)]=r.getItem(s)}}));i.referrerPolicy="origin";i.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(a[c])));h.parentNode.insertBefore(i,h)};["complete","interactive"].includes(b.readyState)?zaraz.init():a.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script><script>(function(){var js = "window['__CF$cv$params']={r:'79b981c42e462e79',m:'eyWbMEjn.xA3MoVOOwkuRH6fmKiq2JkIjp2JY0eS5jk-1676752082-0-AVVoQYgAqbFgGMmJGnjQQR4HF5gq7vzsE7GIZqs9rxWBEGLR05RQa7db5g+ZeVo1vqose3VF78+f2dMMT79BtxjYlaJM/JTnlkZ9toZK2GknNckBF0KEt8U6rhiwEwNDzQ==',s:[0x41d70808ce,0x53e886b617],u:'/cdn-cgi/challenge-platform/h/g'};var now=Date.now()/1000,offset=14400,ts=''+(Math.floor(now)-Math.floor(now%offset)),_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/h/g/scripts/alpha/invisible.js?ts='+ts,document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.nonce = '';_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></html>
 <br />
 <!DOCTYPE html>
 <html>
@@ -388,9 +397,9 @@
             cursor: pointer;
           }
         </style>
-<script nonce="1713ae95-3089-42b3-aa17-7fd0f6848741">(function(w,d){!function(f,g,h,i){f[h]=f[h]||{};f[h].executed=[];f.zaraz={deferred:[],listeners:[]};f.zaraz.q=[];f.zaraz._f=function(j){return function(){var k=Array.prototype.slice.call(arguments);f.zaraz.q.push({m:j,a:k})}};for(const l of["track","set","ecommerce","debug"])f.zaraz[l]=f.zaraz._f(l);f.zaraz.init=()=>{var m=g.getElementsByTagName(i)[0],n=g.createElement(i),o=g.getElementsByTagName("title")[0];o&&(f[h].t=g.getElementsByTagName("title")[0].text);f[h].x=Math.random();f[h].w=f.screen.width;f[h].h=f.screen.height;f[h].j=f.innerHeight;f[h].e=f.innerWidth;f[h].l=f.location.href;f[h].r=g.referrer;f[h].k=f.screen.colorDepth;f[h].n=g.characterSet;f[h].o=(new Date).getTimezoneOffset();if(f.dataLayer)for(const s of Object.entries(Object.entries(dataLayer).reduce(((t,u)=>({...t[1],...u[1]})))))zaraz.set(s[0],s[1],{scope:"page"});f[h].q=[];for(;f.zaraz.q.length;){const v=f.zaraz.q.shift();f[h].q.push(v)}n.defer=!0;for(const w of[localStorage,sessionStorage])Object.keys(w||{}).filter((y=>y.startsWith("_zaraz_"))).forEach((x=>{try{f[h]["z_"+x.slice(7)]=JSON.parse(w.getItem(x))}catch{f[h]["z_"+x.slice(7)]=w.getItem(x)}}));n.referrerPolicy="origin";n.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(f[h])));m.parentNode.insertBefore(n,m)};["complete","interactive"].includes(g.readyState)?zaraz.init():f.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script></head>
+<script nonce="1713ae95-3089-42b3-aa17-7fd0f6848741" type="11f5328d24550377a0461da4-text/javascript">(function(w,d){!function(f,g,h,i){f[h]=f[h]||{};f[h].executed=[];f.zaraz={deferred:[],listeners:[]};f.zaraz.q=[];f.zaraz._f=function(j){return function(){var k=Array.prototype.slice.call(arguments);f.zaraz.q.push({m:j,a:k})}};for(const l of["track","set","ecommerce","debug"])f.zaraz[l]=f.zaraz._f(l);f.zaraz.init=()=>{var m=g.getElementsByTagName(i)[0],n=g.createElement(i),o=g.getElementsByTagName("title")[0];o&&(f[h].t=g.getElementsByTagName("title")[0].text);f[h].x=Math.random();f[h].w=f.screen.width;f[h].h=f.screen.height;f[h].j=f.innerHeight;f[h].e=f.innerWidth;f[h].l=f.location.href;f[h].r=g.referrer;f[h].k=f.screen.colorDepth;f[h].n=g.characterSet;f[h].o=(new Date).getTimezoneOffset();if(f.dataLayer)for(const s of Object.entries(Object.entries(dataLayer).reduce(((t,u)=>({...t[1],...u[1]})))))zaraz.set(s[0],s[1],{scope:"page"});f[h].q=[];for(;f.zaraz.q.length;){const v=f.zaraz.q.shift();f[h].q.push(v)}n.defer=!0;for(const w of[localStorage,sessionStorage])Object.keys(w||{}).filter((y=>y.startsWith("_zaraz_"))).forEach((x=>{try{f[h]["z_"+x.slice(7)]=JSON.parse(w.getItem(x))}catch{f[h]["z_"+x.slice(7)]=w.getItem(x)}}));n.referrerPolicy="origin";n.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(f[h])));m.parentNode.insertBefore(n,m)};["complete","interactive"].includes(g.readyState)?zaraz.init():f.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script><script nonce="0047b509-fa4a-4a7d-a1ec-6163b615927d">(function(w,d){!function(a,b,c,d){a[c]=a[c]||{};a[c].executed=[];a.zaraz={deferred:[],listeners:[]};a.zaraz.q=[];a.zaraz._f=function(e){return function(){var f=Array.prototype.slice.call(arguments);a.zaraz.q.push({m:e,a:f})}};for(const g of["track","set","ecommerce","debug"])a.zaraz[g]=a.zaraz._f(g);a.zaraz.init=()=>{var h=b.getElementsByTagName(d)[0],i=b.createElement(d),j=b.getElementsByTagName("title")[0];j&&(a[c].t=b.getElementsByTagName("title")[0].text);a[c].x=Math.random();a[c].w=a.screen.width;a[c].h=a.screen.height;a[c].j=a.innerHeight;a[c].e=a.innerWidth;a[c].l=a.location.href;a[c].r=b.referrer;a[c].k=a.screen.colorDepth;a[c].n=b.characterSet;a[c].o=(new Date).getTimezoneOffset();if(a.dataLayer)for(const n of Object.entries(Object.entries(dataLayer).reduce(((o,p)=>({...o[1],...p[1]})))))zaraz.set(n[0],n[1],{scope:"page"});a[c].q=[];for(;a.zaraz.q.length;){const q=a.zaraz.q.shift();a[c].q.push(q)}i.defer=!0;for(const r of[localStorage,sessionStorage])Object.keys(r||{}).filter((t=>t.startsWith("_zaraz_"))).forEach((s=>{try{a[c]["z_"+s.slice(7)]=JSON.parse(r.getItem(s))}catch{a[c]["z_"+s.slice(7)]=r.getItem(s)}}));i.referrerPolicy="origin";i.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(a[c])));h.parentNode.insertBefore(i,h)};["complete","interactive"].includes(b.readyState)?zaraz.init():a.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script></head>
 <body>
-<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8c6b7d53774446fe881be09eb336fc30"}' type="5ca3471eb9b5fe8b79295c9a-text/javascript"></script></body>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8c6b7d53774446fe881be09eb336fc30"}' type="5ca3471eb9b5fe8b79295c9a-text/javascript"></script><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8c6b7d53774446fe881be09eb336fc30"}' type="11f5328d24550377a0461da4-text/javascript"></script></body>
 </html>
 <p class="p6"><span class="s2"><b>ENCRYPT WITH PGP FOR ADDED PRIVACY<span class="Apple-converted-space"><span class="s4"></p>
 </span><span class="s3"><textarea align="left" name="text" cols="65" rows="10" readonly="readonly">
@@ -449,7 +458,7 @@
             -----END PGP PUBLIC KEY BLOCK-----</textarea><p class="p6"><span class="s2"><b>THESE DOCUMENTS REQUIRE A PASSCODE TO UNLOCK<span class="Apple-converted-space"><span class="s4"></p>
 </span><span class="s3"> <a href="https://drive.google.com/file/d/1MVXMniK22ONBoeQ_4qzROJIwQU48gUP8/view?usp=sharing/" class="button"> DARK WEB SITEs 36 PAGES</a>
 <a href="https://drive.google.com/file/d/1E4OfUKcmIoIwokG3c33cs6_6Vf70Qj6W/view" class="button"> EVERY JAILBREAK RELEASED HERE</a>
-<a href="https://www.youtube.com/embed/eekzQFWqjL8" title="YouTube video player" width="100%" frameborder="0" allow="accelerometer; autoplay; clipboard-write; height=" 285" media; gyroscope; picture-in-picture" height="185" allowfullscreen></iframe><a href="https://imgbb.com/"><img src="https://i.ibb.co/3hrvVwR/Feb-03-2023-22-26-06.gif" alt="Feb-03-2023-22-26-06" height="5%" width="100%"border="0"></a><br /><a target='_blank' href='https://imgbb.com/'><br /></a>
+<a href="https://www.youtube.com/embed/eekzQFWqjL8" title="YouTube video player" width="100%" frameborder="0" allow="accelerometer; autoplay; clipboard-write; height=" 285" media; gyroscope; picture-in-picture" height="185" allowfullscreen></iframe><a href="https://imgbb.com/"><img src="https://i.ibb.co/3hrvVwR/Feb-03-2023-22-26-06.gif" alt="Feb-03-2023-22-26-06" height="5%" width="100%" border="0"></a><br /><a target='_blank' href='https://imgbb.com/'><br /></a>
 <p class="p6"><span class="s2"><b>RECENT DESKTOP ENVIRONMENTS<span class="Apple-converted-space"><span class="s4"></P>
 <a href="https://ibb.co/ZNyrwN3"><img src="https://i.ibb.co/WsSXdsQ/JAMMY.png" alt="JAMMY" border="0">
 <a href="https://ibb.co/P9944SK"><img src="https://i.ibb.co/HxxYYJ6/Debian-12-Pi-4.png" alt="Debian-12-Pi-4" border="0">
@@ -458,24 +467,28 @@
 <a href="https://ibb.co/PTRZwLh"><img src="https://i.ibb.co/6v2RgMP/Windows-10-VM.png" alt="Windows-10-VM" align="left" border="0">
 <a href="https://ibb.co/2qtRF6b"><img src="https://i.ibb.co/y0yKNR3/WT.png" alt="WT" align="right" border="0"></a>
 <!DOCTYPE html>
+
 <html>
-<head><script nonce="1713ae95-3089-42b3-aa17-7fd0f6848741">(function(w,d){!function(f,g,h,i){f[h]=f[h]||{};f[h].executed=[];f.zaraz={deferred:[],listeners:[]};f.zaraz.q=[];f.zaraz._f=function(j){return function(){var k=Array.prototype.slice.call(arguments);f.zaraz.q.push({m:j,a:k})}};for(const l of["track","set","ecommerce","debug"])f.zaraz[l]=f.zaraz._f(l);f.zaraz.init=()=>{var m=g.getElementsByTagName(i)[0],n=g.createElement(i),o=g.getElementsByTagName("title")[0];o&&(f[h].t=g.getElementsByTagName("title")[0].text);f[h].x=Math.random();f[h].w=f.screen.width;f[h].h=f.screen.height;f[h].j=f.innerHeight;f[h].e=f.innerWidth;f[h].l=f.location.href;f[h].r=g.referrer;f[h].k=f.screen.colorDepth;f[h].n=g.characterSet;f[h].o=(new Date).getTimezoneOffset();if(f.dataLayer)for(const s of Object.entries(Object.entries(dataLayer).reduce(((t,u)=>({...t[1],...u[1]})))))zaraz.set(s[0],s[1],{scope:"page"});f[h].q=[];for(;f.zaraz.q.length;){const v=f.zaraz.q.shift();f[h].q.push(v)}n.defer=!0;for(const w of[localStorage,sessionStorage])Object.keys(w||{}).filter((y=>y.startsWith("_zaraz_"))).forEach((x=>{try{f[h]["z_"+x.slice(7)]=JSON.parse(w.getItem(x))}catch{f[h]["z_"+x.slice(7)]=w.getItem(x)}}));n.referrerPolicy="origin";n.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(f[h])));m.parentNode.insertBefore(n,m)};["complete","interactive"].includes(g.readyState)?zaraz.init():f.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script></head>
+<head><script nonce="1713ae95-3089-42b3-aa17-7fd0f6848741" type="11f5328d24550377a0461da4-text/javascript">(function(w,d){!function(f,g,h,i){f[h]=f[h]||{};f[h].executed=[];f.zaraz={deferred:[],listeners:[]};f.zaraz.q=[];f.zaraz._f=function(j){return function(){var k=Array.prototype.slice.call(arguments);f.zaraz.q.push({m:j,a:k})}};for(const l of["track","set","ecommerce","debug"])f.zaraz[l]=f.zaraz._f(l);f.zaraz.init=()=>{var m=g.getElementsByTagName(i)[0],n=g.createElement(i),o=g.getElementsByTagName("title")[0];o&&(f[h].t=g.getElementsByTagName("title")[0].text);f[h].x=Math.random();f[h].w=f.screen.width;f[h].h=f.screen.height;f[h].j=f.innerHeight;f[h].e=f.innerWidth;f[h].l=f.location.href;f[h].r=g.referrer;f[h].k=f.screen.colorDepth;f[h].n=g.characterSet;f[h].o=(new Date).getTimezoneOffset();if(f.dataLayer)for(const s of Object.entries(Object.entries(dataLayer).reduce(((t,u)=>({...t[1],...u[1]})))))zaraz.set(s[0],s[1],{scope:"page"});f[h].q=[];for(;f.zaraz.q.length;){const v=f.zaraz.q.shift();f[h].q.push(v)}n.defer=!0;for(const w of[localStorage,sessionStorage])Object.keys(w||{}).filter((y=>y.startsWith("_zaraz_"))).forEach((x=>{try{f[h]["z_"+x.slice(7)]=JSON.parse(w.getItem(x))}catch{f[h]["z_"+x.slice(7)]=w.getItem(x)}}));n.referrerPolicy="origin";n.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(f[h])));m.parentNode.insertBefore(n,m)};["complete","interactive"].includes(g.readyState)?zaraz.init():f.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script><script nonce="0047b509-fa4a-4a7d-a1ec-6163b615927d">(function(w,d){!function(a,b,c,d){a[c]=a[c]||{};a[c].executed=[];a.zaraz={deferred:[],listeners:[]};a.zaraz.q=[];a.zaraz._f=function(e){return function(){var f=Array.prototype.slice.call(arguments);a.zaraz.q.push({m:e,a:f})}};for(const g of["track","set","ecommerce","debug"])a.zaraz[g]=a.zaraz._f(g);a.zaraz.init=()=>{var h=b.getElementsByTagName(d)[0],i=b.createElement(d),j=b.getElementsByTagName("title")[0];j&&(a[c].t=b.getElementsByTagName("title")[0].text);a[c].x=Math.random();a[c].w=a.screen.width;a[c].h=a.screen.height;a[c].j=a.innerHeight;a[c].e=a.innerWidth;a[c].l=a.location.href;a[c].r=b.referrer;a[c].k=a.screen.colorDepth;a[c].n=b.characterSet;a[c].o=(new Date).getTimezoneOffset();if(a.dataLayer)for(const n of Object.entries(Object.entries(dataLayer).reduce(((o,p)=>({...o[1],...p[1]})))))zaraz.set(n[0],n[1],{scope:"page"});a[c].q=[];for(;a.zaraz.q.length;){const q=a.zaraz.q.shift();a[c].q.push(q)}i.defer=!0;for(const r of[localStorage,sessionStorage])Object.keys(r||{}).filter((t=>t.startsWith("_zaraz_"))).forEach((s=>{try{a[c]["z_"+s.slice(7)]=JSON.parse(r.getItem(s))}catch{a[c]["z_"+s.slice(7)]=r.getItem(s)}}));i.referrerPolicy="origin";i.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(a[c])));h.parentNode.insertBefore(i,h)};["complete","interactive"].includes(b.readyState)?zaraz.init():a.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script></head>
 <body>
 <iframe src="https://webchemy.org" frameborder="0" height="400px" width="100%">
                      
 <script src="https://apps.elfsight.com/p/platform.js" defer></script><a href="https://ibb.co/kDcf6rw"><img src="https://i.ibb.co/Jpk4FbG/Screenshot-2023-01-11-at-6-57-47-PM.png" alt="Screenshot-2023-01-11-at-6-57-47-PM" border="0"><br><br /> </iframe><a href="https://drive.google.com/drive/folders/1AeskP22Jsvt-aZ5qMmeOIly0gAVcfKXa?usp=sharing" download>
 <span class="s1"><button><b>DOWNLOAD ALL NINTENDO ROMs 100% FREE</b></button><span class="Apple-converted-space"></span>
 </span><p class="p6"><span class="s2"><b>TEST YOUR HTML WITH THE EMBEDED CODEPEN<span class="Apple-converted-space"><span class="s4"></p>
-</span><span class="s3">
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8c6b7d53774446fe881be09eb336fc30"}' type="11f5328d24550377a0461da4-text/javascript"></script></span><span class="s3">
 <p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="ExpErrL" data-user="sudo-self" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/sudo-self/pen/ExpErrL">
-  HTMILLIE</a> by sudo-self (<a href="https://codepen.io/sudo-self">@sudo-self</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p><script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script><iframe src="https://giphy.com/embed/3C2LsN6uqQuVyvFueT" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></p>
+<span>See the Pen <a href="https://codepen.io/sudo-self/pen/ExpErrL">
+HTMILLIE</a> by sudo-self (<a href="https://codepen.io/sudo-self">@sudo-self</a>)
+on <a href="https://codepen.io">CodePen</a>.</span>
+</p><script async src="https://cpwebassets.codepen.io/assets/embed/ei.js" type="11f5328d24550377a0461da4-text/javascript"></script><iframe src="https://giphy.com/embed/3C2LsN6uqQuVyvFueT" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></p>
 <a href="https://ibb.co/VBkzJSf"><img src="https://i.ibb.co/4N0XKTh/Screenshot-2023-02-18-at-00-05-57.png" alt="Screenshot-2023-02-18-at-00-05-57" align="right" border="0"><a href="https://giphy.com/gifs/3C2LsN6uqQuVyvFueT"></p><a href="https://giphy.com/gifs/m1-a60WU92Or4Pcmb88mZ">
 <a href="https://imgbb.com/"><img src="https://i.ibb.co/zRtcGpz/CASHAPPZ.gif" alt="CASHAPPZ" border="0"><iframe width="560" height="315" src="https://www.youtube.com/embed/LXQh-9bEiOg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 <button><b>
 <b>This Page lives near var/www/html/index.html</b></BUTTON>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/oZrd5m0oh7w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8c6b7d53774446fe881be09eb336fc30"}'></script><!-- End Cloudflare Web Analytics -->
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8c6b7d53774446fe881be09eb336fc30"}' type="11f5328d24550377a0461da4-text/javascript"></script>
+<!DOCTYPE html>
+<html>
 
+</html>
