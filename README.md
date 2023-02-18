@@ -1,2 +1,2 @@
-# Static
-#Jesse.Jessenet.us
+#static HTML DNS CF & Github.io
+
