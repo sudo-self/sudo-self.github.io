@@ -626,7 +626,7 @@ SNAKE.Board = SNAKE.Board || (function() {
     */
     function getClientWidth(){
         var myWidth = 0;
-        if( typeof window.innerWidth === "400" ) {
+        if( typeof window.innerWidth === "number" ) {
             myWidth = window.innerWidth;//Non-IE
         } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
             myWidth = document.documentElement.clientWidth;//IE 6+ in 'standards compliant mode'
@@ -640,7 +640,7 @@ SNAKE.Board = SNAKE.Board || (function() {
     */
     function getClientHeight(){
         var myHeight = 0;
-        if( typeof window.innerHeight === "400" ) {
+        if( typeof window.innerHeight === "number" ) {
             myHeight = window.innerHeight;//Non-IE
         } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
             myHeight = document.documentElement.clientHeight;//IE 6+ in 'standards compliant mode'
