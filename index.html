@@ -1,4 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
 
+
+Source code is available here: https://github.com/patorjk/JavaScript-Snake
+
+-->
+    <meta charset="utf-8">
+    <title>JavaScript Snake</title>
+    <link rel=stylesheet id="style" type="text/css" href="./css/main-snake.css" />
+    <link rel="shortcut icon" href="css/images/favicon.png" />
+    <style>
+      .snake-toolbar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index:10000;
+        padding: 5px;
+      }
+    </style>
+<script>
+
+function getTheme () {
+    function changeTheme(themeUrl) {
+      var elm = document.getElementById("style");
+      elm && elm.remove();
+
+      var newCss = document.createElement("link");
+      newCss.id = "style";
+      newCss.rel = "stylesheet";
+      newCss.type = "text/css";
+      newCss.href = themeUrl;
+      document.head.appendChild(newCss);
+    }
+    var index = document.getElementById("select").selectedIndex;
+    switch (index) {
+        case 0:
+          changeTheme('css/light-snake.css?' + Math.random());
+          break;
+        case 1:
+          changeTheme('css/main-snake.css?' + Math.random());
+          break;
+        case 2:
+          changeTheme('css/dark-snake.css?' + Math.random());
+          break;
+        case 3:
+          changeTheme('css/green-snake.css?' + Math.random());
+          break;
+        case 4:
+          changeTheme('css/matrix-snake.css?' + Math.random());
+          break;
+        case 5:
+          changeTheme('css/Senura-snake.css?' + Math.random());
+          break;
+          case 6:
+          changeTheme('css/head-snake.css?' + Math.random());
+          break;
+        default:
+          changeTheme('css/main-snake.css?' + Math.random());
+          break;
+    }
+    setTimeout(function() {
+        document.getElementById('game-area').focus();
+    }, 10);
+}
+
+if (navigator.onLine && window.location.hostname === 'patorjk.com') {
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3312460-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+}
+</script>
+</head>
+<body>
+    <div class="snake-toolbar">
+      <div style="display:inline-block;margin-right:10px;">
+        <span>Theme:</span>
+        <select autocomplete="off" onchange="getTheme()" id="select">
+            <option>Light</option>
+            <option selected>FS Theme by Jesse</option>
+            <option>Dark</option>
+            <option>Green</option>
+            <option>Matrix</option>
+        </select>
+      </div>
+      <div style="display:inline-block;margin-right:10px;">
+        <span>Mode:</span>
+        <select id="selectMode">
+            <option value="100">Easy</option>
+            <option value="75" selected>Medium</option>
+            <option value="50">Hard</option>
+            <option value="25">Impossible</option>
+            <option value="110">Rush</option>
+        </select>
+      </div>
+      <button onclick="go_full_screen()">Full Screen</button><br />
+    </div>
+
+    <!--
+      <h2>CHOOSE A DIFFICULTY</h2>
+      <button id="Easy">Easy</button><br />
+      <button id="Medium">Medium</button><br />
+      <button id="Difficult">Difficult</button>
+
+<button id="high-score">Get your current high score for this game.</button>
+-->
+    <div id="mode-wrapper" style="display: inline; width: auto;">
+    </div>
+
+    <div id="game-area" tabindex="0">
+    </div>
+    <script type="text/javascript" src="./js/snake.js"></script>
+    <script type="text/javascript" src="./js/init.js"></script>
+    <script type="text/javascript">
+      function go_full_screen() {
+        var elem = document.documentElement;
+        try {
+            if (elem.requestFullscreen) {
+              elem.requestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+              elem.msRequestFullscreen();
+            } else if (elem.mozRequestFullScreen) {
+              elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) {
+              elem.webkitRequestFullscreen();
+            }
+        } catch(err) {
+          console.error(err);
+          alert("Sorry, fullscreen won't work in this setup.");
+        }
+      }
+  </script>
+</body>
+</html>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <project name="sno" default="compile" basedir=".">
@@ -332,140 +473,8 @@
 </style><applet code="edu.fit.cs.sno.applet.SNOApplet.class" archive="sno.jar" width="512" height="496">
 <param name="sno.applet.width" value="512"><param name="sno.applet.height" value="496"><p class="p1"><span class="s1"><b>PI IS A PLACE FOR PIRATES, CODING, AND HIIDEN TREASURES<span class="Apple-converted-space"></applet><p class="p3"><span class="s2"><b><span class="Apple-converted-space"></span></applet><p class="p3"><span class="s2"><p class="p3"><span class="s2"><b>I believe that HTML and CSS and eventually JAVA were always the foundation of the internet and have been since the early 1980s<span class="Apple-converted-space"><span class="s3"><img src="https://i.ibb.co/Mnp8TRb/Alison-Wonderland-New-Day-Official-Video-V9dp-Rn-IP9r0-0002.png" alt="Alison-Wonderland-New-Day-Official-Video-V9dp-Rn-IP9r0-0002" boarder=“0” align="right">
 <a href="https://imgbb.com/"><img src="https://i.ibb.co/RvCzhKP/wb.gif" alt="wb" align="left" border="0"></a><span class="Apple-converted-space"></span></p></span><span class="s1"><b><p class="p6"><span class="s2"><b>All i could find was this broken keyboard that was missing the letter X. So i wrote this with HTML & CSS. <b>BOLD and BRAVE<b> Pirates having traveled the LAN were ready to adventure through https:// world wide web possiblly finding purpose beyond the localhost. Legend has it one of the treasure seeking pirates found Apache Web Server in the farthest depths of the internet and used it to harvest the power of the server traveling farther than any WAN had ever gone before.<p class="p1"><span class="s4"><p class="p3"><span class="s2"><p class="p3"><span class="s2"><b>Skilled Developer that created this site on Raspberry Pi using only HTML, CSS, and a blank word document. Diverse networking background including an IT degree and several linux certifications. Military experiences such as problem solving and conflict resolution. A warrior spirit that can adapt and overcome challenges while working alongside others in a team or project environment.<span class="Apple-converted-space"><span class="s3"></b>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-    <!--
-
-    JavaScript Snake
-    By Patrick Gillespie
-    http://patorjk.com/games/snake
-
-    Source code is available here: https://github.com/patorjk/JavaScript-Snake
-
-    -->
-        <meta charset="utf-8">
-        <title>JavaScript Snake</title>
-        <link rel=stylesheet id="style" type="text/css" href="./css/main-snake.css" />
-        <link rel="shortcut icon" href="css/images/favicon.png" />
-        <style>
-          .snake-toolbar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index:10000;
-            padding: 5px;
-          }
-        </style>
-    <script>
-
-    function getTheme () {
-        function changeTheme(themeUrl) {
-          var elm = document.getElementById("style");
-          elm && elm.remove();
-
-          var newCss = document.createElement("link");
-          newCss.id = "style";
-          newCss.rel = "stylesheet";
-          newCss.type = "text/css";
-          newCss.href = themeUrl;
-          document.head.appendChild(newCss);
-        }
-        var index = document.getElementById("select").selectedIndex;
-        switch (index) {
-            case 0:
-              changeTheme('css/light-snake.css?' + Math.random());
-              break;
-            case 1:
-              changeTheme('css/main-snake.css?' + Math.random());
-              break;
-            case 2:
-              changeTheme('css/dark-snake.css?' + Math.random());
-              break;
-            case 3:
-              changeTheme('css/green-snake.css?' + Math.random());
-              break;
-            case 4:
-              changeTheme('css/matrix-snake.css?' + Math.random());
-              break;
-            case 5:
-              changeTheme('css/Senura-snake.css?' + Math.random());
-              break;
-              case 6:
-              changeTheme('css/head-snake.css?' + Math.random());
-              break;
-            default:
-              changeTheme('css/main-snake.css?' + Math.random());
-              break;
-        }
-        setTimeout(function() {
-            document.getElementById('game-area').focus();
-        }, 10);
-    }
-
-    if (navigator.onLine && window.location.hostname === 'patorjk.com') {
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-3312460-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function() {
-          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-    }
-    </script>
-    </head>
-    <body>
-       </div>
-          <div style="display:inline-block;margin-right:10px;">
-            <span>Mode:</span>
-            <select id="selectMode">
-                <option value="100">Easy</option>
-                <option value="75" selected>Medium</option>
-                <option value="50">Hard</option>
-                <option value="25">Impossible</option>
-                <option value="110">Rush</option>
-            </select>
-          </div>
-          <button onclick="go_full_screen()">Full Screen</button><br />
-        </div>
-
-        <!--
-          <h2>Select which mode you would like to play in.</h2>
-          <button id="Easy">Easy</button><br />
-          <button id="Medium">Medium</button><br />
-          <button id="Difficult">Difficult</button>
-
-    <button id="high-score">Get your current high score for this game.</button>
-    -->
-        <div id="mode-wrapper" style="display: inline; width: auto;">
-        </div>
-
-        <div id="game-area" tabindex="0">
-        </div>
-        <script type="text/javascript" src="./js/snake.js"></script>
-        <script type="text/javascript" src="./js/init.js"></script>
-        <script type="text/javascript">
-          function go_full_screen() {
-            var elem = document.documentElement;
-            try {
-                if (elem.requestFullscreen) {
-                  elem.requestFullscreen();
-                } else if (elem.msRequestFullscreen) {
-                  elem.msRequestFullscreen();
-                } else if (elem.mozRequestFullScreen) {
-                  elem.mozRequestFullScreen();
-                } else if (elem.webkitRequestFullscreen) {
-                  elem.webkitRequestFullscreen();
-                }
-            } catch(err) {
-              console.error(err);
-              alert("Sorry, fullscreen won't work in this setup.");
-            }
-          }
-      </script>
     </body>
+    </html>
     </html>
     <a href="https://ibb.co/J3JfMbQ"><img src="https://i.ibb.co/1zWDwp6/Screenshot-2023-01-13-at-3-04-35-PM.png" alt="Screenshot-2023-01-13-at-3-04-35-PM" width="100%" border="0"></a><br /><br /><p class="p1"><span class="s1"><b>PRESS THE BLUE "PLAY NOW" BUTTON TO START THE SUPER NINTENDO<span class="Apple-converted-space"><span class="Apple-converted-space"></span></p><a href="https://imgbb.com/"><img src="https://i.ibb.co/hLqDJJJ/Screen-Shot-2022-12-24-at-5-10-02-PM.png" width="100%" alt="Screen-Shot-2022-12-24-at-5-10-02-PM" border="0"></a></span>
 </span><p class="p6"><span class="s2"><b>SNES | ROMS | MUSIC | BUILDS | ART | HTML CSS JAVA | YOUTUBE | LINUX | APACHE | GIFS | DEVELOPMENT<span class="Apple-converted-space"><span class="s4"></p><a target='_blank' href='https://imgbb.com/'></a>
@@ -742,3 +751,4 @@ CRACK HASHES ONLINE 100% FOR FREE
           </script>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b360226e3add44dc8b0d528dccc8cfb3"}' type="dafdad697ba0d48d4900b9f9-text/javascript"></script> <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b360226e3add44dc8b0d528dccc8cfb3"}' type="dafdad697ba0d48d4900b9f9-text/javascript"></script><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8c6b7d53774446fe881be09eb336fc30"}' type="dafdad697ba0d48d4900b9f9-text/javascript"></script></body>
 <h3><button><b>Thanks to Apache this page was served as localhost on port 80 forwarded to WAN from /opt/homebrew/var/www/html/index.html</b></BUTTON><h3
+   

@@ -1,5 +1,7 @@
-var mySnakeBoard = new SNAKE.Board({
-  boardContainer: "game-area",
-  fullScreen: true,
-  premoveOnPause: false
-});
+var mySnakeBoard = new SNAKE.Board( {
+                                        boardContainer: "game-area",
+                                        fullScreen: false,
+                                        width: 700,
+                                        height:300
+                                
+                                    });

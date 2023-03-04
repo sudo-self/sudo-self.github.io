@@ -213,7 +213,7 @@ SNAKE.Snake = SNAKE.Snake || (function() {
         function recordScore() {
             var highScore = localStorage.jsSnakeHighScore;
             if (me.snakeLength > highScore) {
-                alert('Congratulations! You have beaten your previous high score, which was ' + highScore + '.');
+                alert('Congratulations! Now get back to work!, best score so far ' + highScore + '.');
                 localStorage.setItem('jsSnakeHighScore', me.snakeLength);
             }
         }
@@ -695,8 +695,7 @@ SNAKE.Board = SNAKE.Board || (function() {
 
             elmAboutPanel = document.createElement("div");
             elmAboutPanel.className = "snake-panel-component";
-            elmAboutPanel.innerHTML = "<a href='http://patorjk.com/blog/software/' class='snake-link'>more patorjk.com apps</a> - <a href='https://github.com/patorjk/JavaScript-Snake' class='snake-link'>source code</a> - <a href='https://www.youtube.com/channel/UCpcCLm9y6CsjHUrCvJHYHUA' class='snake-link'>pat's youtube</a>";
-
+        
             elmLengthPanel = document.createElement("div");
             elmLengthPanel.className = "snake-panel-component";
             elmLengthPanel.innerHTML = "Length: 1";
@@ -749,9 +748,9 @@ SNAKE.Board = SNAKE.Board || (function() {
             var welcomeTxt = document.createElement("div");
             var fullScreenText = "";
             if (config.fullScreen) {
-                fullScreenText = "On Windows, press F11 to play in Full Screen mode.";
+                fullScreenText = "show off your skillz";
             }
-            welcomeTxt.innerHTML = "JavaScript Snake<p></p>Use the <strong>arrow keys</strong> on your keyboard to play the game. " + fullScreenText + "<p></p>";
+            welcomeTxt.innerHTML = "Jesse's Javascript snake!<p></p>Using the <strong>arrow keys</strong> on your keyboard to play the game. " + fullScreenText + "<p>F11</p>";
             var welcomeStart = document.createElement("button");
             welcomeStart.appendChild(document.createTextNode("Play Game"));
             var loadGame = function() {
