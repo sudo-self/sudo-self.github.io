@@ -750,7 +750,7 @@ SNAKE.Board = SNAKE.Board || (function() {
             if (config.fullScreen) {
                 fullScreenText = "show off your skillz";
             }
-            welcomeTxt.innerHTML = "Jesse's Javascript snake!<p></p>Using the <strong>arrow keys</strong> on your keyboard to play the game. " + fullScreenText + "<p>F11</p>";
+            welcomeTxt.innerHTML = "Jesse's JavaSnake<p></p>Using the <strong>arrow keys</strong> on your keyboard to play the game. " + fullScreenText + "<p>F11</p>";
             var welcomeStart = document.createElement("button");
             welcomeStart.appendChild(document.createTextNode("Play Game"));
             var loadGame = function() {
