@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!--
-
-
-Source code is available here: https://github.com/patorjk/JavaScript-Snake
-
--->
-    <meta charset="utf-8">
-    <title>JavaScript Snake</title>
-    <link rel=stylesheet id="style" type="text/css" href="./css/main-snake.css" />
-    <link rel="shortcut icon" href="css/images/favicon.png" />
-    <style>
+    <a href="https://imgbb.com/"><img src="https://i.ibb.co/b5CRLp6/giphy-2.gif" alt="giphy-2" align="right"border="0"></a><meta charset="utf-8">
+<title>JavaScript Snake</title>
+<script src="/cdn-cgi/apps/head/htpPPWvcI9BDx7R-NwqZemwom4o.js"></script><link rel=stylesheet id="style" type="text/css" href="./css/main-snake.css" />
+<link rel="shortcut icon" href="css/images/favicon.png" />
+<style>
       .snake-toolbar {
         position: absolute;
         top: 0;
@@ -78,48 +72,39 @@ if (navigator.onLine && window.location.hostname === 'patorjk.com') {
     })();
 }
 </script>
-</head>
+<script nonce="b9789785-0d10-4cf7-95ae-79c4f825e6ca">(function(w,d){!function(a,b,c,d){a[c]=a[c]||{};a[c].executed=[];a.zaraz={deferred:[],listeners:[]};a.zaraz.q=[];a.zaraz._f=function(e){return function(){var f=Array.prototype.slice.call(arguments);a.zaraz.q.push({m:e,a:f})}};for(const g of["track","set","ecommerce","debug"])a.zaraz[g]=a.zaraz._f(g);a.zaraz.init=()=>{var h=b.getElementsByTagName(d)[0],i=b.createElement(d),j=b.getElementsByTagName("title")[0];j&&(a[c].t=b.getElementsByTagName("title")[0].text);a[c].x=Math.random();a[c].w=a.screen.width;a[c].h=a.screen.height;a[c].j=a.innerHeight;a[c].e=a.innerWidth;a[c].l=a.location.href;a[c].r=b.referrer;a[c].k=a.screen.colorDepth;a[c].n=b.characterSet;a[c].o=(new Date).getTimezoneOffset();if(a.dataLayer)for(const n of Object.entries(Object.entries(dataLayer).reduce(((o,p)=>({...o[1],...p[1]})))))zaraz.set(n[0],n[1],{scope:"page"});a[c].q=[];for(;a.zaraz.q.length;){const q=a.zaraz.q.shift();a[c].q.push(q)}i.defer=!0;for(const r of[localStorage,sessionStorage])Object.keys(r||{}).filter((t=>t.startsWith("_zaraz_"))).forEach((s=>{try{a[c]["z_"+s.slice(7)]=JSON.parse(r.getItem(s))}catch{a[c]["z_"+s.slice(7)]=r.getItem(s)}}));i.referrerPolicy="origin";i.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(a[c])));h.parentNode.insertBefore(i,h)};["complete","interactive"].includes(b.readyState)?zaraz.init():a.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script></head>
 <body>
-    <div class="snake-toolbar">
-      <div style="display:inline-block;margin-right:10px;">
-        <span>Theme:</span>
-        <select autocomplete="off" onchange="getTheme()" id="select">
-            <option>Light</option>
-            <option selected>Jesse Purple Drip</option>
-            <option>Dark</option>
-            <option>Green</option>
-            <option>Matrix</option>
-        </select>
-      </div>
-      <div style="display:inline-block;margin-right:10px;">
-        <span>Mode:</span>
-        <select id="selectMode">
-            <option value="100">Easy</option>
-            <option value="75" selected>Medium</option>
-            <option value="50">Hard</option>
-            <option value="25">Impossible</option>
-            <option value="110">Rush</option>
-        </select>
-      </div>
-      <button onclick="go_full_screen()">Full Screen</button><br />
-    </div>
+<div class="snake-toolbar">
+<div style="display:inline-block;margin-right:10px;">
+<span>Theme:</span>
+<select autocomplete="off" onchange="getTheme()" id="select">
+<option>Light</option>
+<option selected>Jesse Purple Drip</option>
+<option>Dark</option>
+<option>Green</option>
+<option>Matrix</option>
+</select>
+</div>
+<div style="display:inline-block;margin-right:10px;">
+<span>Mode:</span>
+<select id="selectMode">
+<option value="100">Easy</option>
+<option value="75" selected>Medium</option>
+<option value="50">Hard</option>
+<option value="25">Impossible</option>
+<option value="110">Rush</option>
+</select>
+</div>
+<button onclick="go_full_screen()">Full Screen</button><br />
+</div>
 
-    <!--
-      <h2>CHOOSE A DIFFICULTY</h2>
-      <button id="Easy">Easy</button><br />
-      <button id="Medium">Medium</button><br />
-      <button id="Difficult">Difficult</button>
-
-<button id="high-score">Get your current high score for this game.</button>
--->
-    <div id="mode-wrapper" style="display: inline; width: auto;">
-    </div>
-
-    <div id="game-area" tabindex="0">
-    </div>
-    <script type="text/javascript" src="./js/snake.js"></script>
-    <script type="text/javascript" src="./js/init.js"></script>
-    <script type="text/javascript">
+<div id="mode-wrapper" style="display: inline; width: auto;">
+</div>
+<div id="game-area" tabindex="0">
+</div>
+<script type="text/javascript" src="./js/snake.js"></script>
+<script type="text/javascript" src="./js/init.js"></script>
+<script type="text/javascript">
       function go_full_screen() {
         var elem = document.documentElement;
         try {
@@ -138,30 +123,24 @@ if (navigator.onLine && window.location.hostname === 'patorjk.com') {
         }
       }
   </script>
-</body>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8c6b7d53774446fe881be09eb336fc30"}'></script><script>(function(){var js = "window['__CF$cv$params']={r:'7a31c94a690d3aac',m:'r6sPkPQabgFlnZluqyHiffIk2xs2tlotnOEeH4IJOO0-1678013303-0-AXcY0h0TSoXyfJ2D9M7HbACHGfJPHc2C/680MF8InX3XLlBavWnQFLGpqj5FeY6w6YsYV9qhdlvYqAVUtfZsn5VYKzHlld6i1m5IVAIKfDdzib41XJj30SXfk6h4WznWcw==',s:[0x95eb0a8f12,0x90bc13038d],u:'/cdn-cgi/challenge-platform/h/g'};var now=Date.now()/1000,offset=14400,ts=''+(Math.floor(now)-Math.floor(now%offset)),_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/h/g/scripts/alpha/invisible.js?ts='+ts,document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.nonce = '';_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
 </html>
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <project name="sno" default="compile" basedir=".">
 <description>
 </description>
-
 <property name="src" location="src" />
 <property name="build" location="bin" />
 <property name="reports" location="reports" />
 <property name="docs" location="docs" />
 <property name="lib" location="lib" />
 <property name="test.romdir" location="roms" />
-
 <property name="emma.dir" location="emma" />
 <property name="emma.instr" location="${emma.dir}/instr" />
 <property name="emma.coverage" location="${emma.dir}/coverage" />
-
 <property name="profile.properties" value="${lib}/sno.profile.properties" />
 <property name="profile.jar" value="${lib}/profile.jar" />
-
 <path id="classpath.base">
 <pathelement location="${build}" />
 </path>
@@ -173,7 +152,6 @@ if (navigator.onLine && window.location.hostname === 'patorjk.com') {
 <include name="**/*.zip" />
 <include name="**/*.smc" />
 </fileset>
-
 <path id="junit.lib">
 <pathelement path="${lib}/junit.jar" />
 <pathelement path="${lib}/hamcrest.jar" />
@@ -184,22 +162,18 @@ if (navigator.onLine && window.location.hostname === 'patorjk.com') {
 </path>
 <taskdef name="junit" classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask" classpathref="ant-junit.lib" />
 <taskdef name="junitreport" classname="org.apache.tools.ant.taskdefs.optional.junit.XMLResultAggregator" classpathref="ant-junit.lib" />
-
 <path id="emma.lib">
 <pathelement path="${lib}/emma_ant.jar" />
 <pathelement path="${lib}/emma.jar" />
 </path>
 <taskdef resource="emma_ant.properties" classpathref="emma.lib" />
-
 <target name="init">
 <tstamp />
 <mkdir dir="${build}" />
 <mkdir dir="${emma.instr}" />
 <mkdir dir="${reports}" />
 </target>
-
 <target name="compile" depends="init" description="compile the source ">
-
 <javac srcdir="${src}" destdir="${build}" debug="true" includeantruntime="false">
 <classpath refid="classpath.test" />
 </javac>
@@ -209,21 +183,18 @@ if (navigator.onLine && window.location.hostname === 'patorjk.com') {
 <attribute name="Build-Date" value="${TODAY}" />
 </manifest>
 </jar>
-
 <signjar alias="sno" jar="${build}/sno.jar" keystore="${lib}/sno.jks" storepass="snoapplet" />
 </target>
-
 <target name="test" depends="compile" description="Run the Unit Tests">
 <mkdir dir="${reports}" />
 <emma>
 <instr instrpathref="classpath.base" destdir="${emma.instr}" metadatafile="${emma.coverage}/metadata.emma" merge="true" />
 </emma>
-
 <junit fork="yes" forkmode="once" dir=".">
 <jvmarg value="-Demma.coverage.out.file=${emma.coverage}/coverage.emma" />
 <jvmarg value="-Demma.coverage.out.merge=true" />
 <classpath>
- <pathelement location="${emma.instr}" />
+<pathelement location="${emma.instr}" />
 <path refid="classpath.test" />
 <path refid="emma.lib" />
 </classpath>
@@ -232,25 +203,21 @@ if (navigator.onLine && window.location.hostname === 'patorjk.com') {
 <fileset dir="${emma.instr}" includes="**/*Test.class" />
 </batchtest>
 </junit>
-
 <junitreport todir="${reports}">
 <fileset dir="${reports}">
 <include name="TEST-*.xml" />
 </fileset>
 <report format="frames" todir="${reports}/html" />
 </junitreport>
-
 <emma verbosity="verbose">
 <report sourcepath="${src}">
 <fileset dir="${emma.coverage}">
 <include name="*.emma" />
 </fileset>
-
 <html outfile="${emma.coverage}/coverage.html" />
 </report>
 </emma>
 </target>
-
 <taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" classpath="${lib}/findbugs-ant.jar" />
 <taskdef name="convertXmlToText" classname="edu.umd.cs.findbugs.anttask.ConvertXmlToTextTask" classpath="${lib}/findbugs-ant.jar" />
 <property name="findbugs.home" value="${lib}/findbugs/" />
@@ -264,11 +231,9 @@ if (navigator.onLine && window.location.hostname === 'patorjk.com') {
 </findbugs>
 <convertXmlToText home="${findbugs.home}" input="${reports}/findbugs.xml" output="${reports}/findbugs.html" />
 </target>
-
 <target name="javadoc" description="Create javadocs">
 <javadoc sourcepath="${src}" destdir="${docs}/" classpathref="classpath.test" useexternalfile="yes" linksource="true" />
 </target>
-
 <target name="profile" depends="compile">
 <java classpathref="classpath.base" classname="edu.fit.cs.sno.snes.Core" fork="yes">
 <jvmarg value="-Dprofile.properties=${profile.properties}" />
@@ -276,13 +241,11 @@ if (navigator.onLine && window.location.hostname === 'patorjk.com') {
 <arg value="${test.romdir}/${toString:test.rom}" />
 </java>
 </target>
-
 <target name="run" depends="compile">
 <java classpathref="classpath.base" classname="edu.fit.cs.sno.snes.Core" fork="yes">
 <arg value="${test.romdir}/${toString:test.rom}" />
 </java>
 </target>
-
 <target name="clean" description="Clean">
 <delete dir="${build}" />
 <delete dir="${docs}" />
@@ -494,9 +457,9 @@ if (navigator.onLine && window.location.hostname === 'patorjk.com') {
             span.s6 {text-decoration: font-kerning: none}
 </style><applet code="edu.fit.cs.sno.applet.SNOApplet.class" archive="sno.jar" width="512" height="496">
 <param name="sno.applet.width" value="512"><param name="sno.applet.height" value="496"><p class="p1"><span class="s1"><b>PI IS A PLACE FOR PIRATES, CODING, AND HIIDEN TREASURES<span class="Apple-converted-space"></applet><p class="p3"><span class="s2"><b><span class="Apple-converted-space"></span></applet><p class="p3"><span class="s2"><p class="p3"><span class="s2"><b>I believe that HTML and CSS were always the foundation of the internet and have been since the early 1980s<span class="Apple-converted-space"><span class="s3"><img src="https://i.ibb.co/Mnp8TRb/Alison-Wonderland-New-Day-Official-Video-V9dp-Rn-IP9r0-0002.png" alt="Alison-Wonderland-New-Day-Official-Video-V9dp-Rn-IP9r0-0002" boarder=“0” align="right">
-    <a href="https://imgbb.com/"><img src="https://i.ibb.co/RvCzhKP/wb.gif" alt="wb" align="left" border="0"></a><span class="Apple-converted-space"></span></p></span><span class="s1"><b><p class="p6"><span class="s2"><b>All i could find was this broken keyboard that was missing the letter X. So i wrote this with HTML & CSS. <b>BOLD and BRAVE<b> Pirates having traveled the LAN were ready to adventure through https:// world wide web possiblly finding purpose beyond the localhost. Legend has it one of the treasure seeking pirates found Apache Web Server in the farthest depths of the internet and used it to harvest the power of the server traveling farther than any WAN had ever gone before.<p class="p1"><span class="s4"><p class="p3"><span class="s2"><p class="p3"><span class="s2"><b>Skilled Developer that created this site on Raspberry Pi using only HTML, CSS, and a blank word document. Diverse networking background including an IT degree and several linux certifications. Military experiences such as problem solving and conflict resolution. A warrior spirit that can adapt and overcome challenges while working alongside others in a team or project environment.<span class="Apple-converted-space"><span class="s3"></b><a href="https://ibb.co/J3JfMbQ"><img src="https://i.ibb.co/1zWDwp6/Screenshot-2023-01-13-at-3-04-35-PM.png" alt="Screenshot-2023-01-13-at-3-04-35-PM" width="100%" border="0"></a><br /><br /><p class="p1"><span class="s1"><b>PRESS THE BLUE "PLAY NOW" BUTTON TO START THE SUPER NINTENDO<span class="Apple-converted-space"><span class="Apple-converted-space"></span></p><a href="https://imgbb.com/"><img src="https://i.ibb.co/hLqDJJJ/Screen-Shot-2022-12-24-at-5-10-02-PM.png" width="100%" alt="Screen-Shot-2022-12-24-at-5-10-02-PM" border="0"></a><br /><a target='_blank' href='https://imgbb.com/'></a>
-<iframe width="300" height="600" src="https://www.youtube.com/embed/ODwrhVEoxzM" title="checkra1n iPhone 7" frameborder="0" align="right" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p></a><iframe width="389" height="692" src="https://www.youtube.com/embed/FVEKANAzn5k" title="IOS 16 JB palera1n on Apple silly" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><iframe src="https://www.retrogames.cc/embed/43940-super-mario-bros-advance-2-super-mario-bros-3.html" width="800" height="600" align="left" frameborder="no" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe><p class="p3"><span class="s2"></span><span class="s3"><span class="Apple-converted-space">
-    <p class="p5"><span class="s2"></span></p><iframe align="right" width="300" height="600" align="right" src="https://www.youtube.com/embed/Ydnlxkj0DqU" align="right" iPhone Jailbreak" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" loop=1; allowfullscreen></iframe><span class="Apple-converted-space"></span>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/RvCzhKP/wb.gif" alt="wb" align="left" border="0"></a><span class="Apple-converted-space"></span></p></span><span class="s1"><b><p class="p6"><span class="s2"><b>All i could find was this broken keyboard that was missing the letter X. So i wrote this with HTML & CSS. <b>BOLD and BRAVE<b> Pirates having traveled the LAN were ready to adventure through https:// world wide web possiblly finding purpose beyond the localhost. Legend has it one of the treasure seeking pirates found Apache Web Server in the farthest depths of the internet and used it to harvest the power of the server traveling farther than any WAN had ever gone before.<p class="p1"><span class="s4"><p class="p3"><span class="s2"><p class="p3"><span class="s2"><b>Skilled Developer that created this site on Raspberry Pi using only HTML, CSS, and a blank word document. Diverse networking background including an IT degree and several linux certifications. Military experiences such as problem solving and conflict resolution. A warrior spirit that can adapt and overcome challenges while working alongside others in a team or project environment.<span class="Apple-converted-space"><span class="s3"></b><a href="https://ibb.co/J3JfMbQ"><img src="https://i.ibb.co/1zWDwp6/Screenshot-2023-01-13-at-3-04-35-PM.png" alt="Screenshot-2023-01-13-at-3-04-35-PM" width="100%" border="0"></a><br /><br /><p class="p1"><span class="s1"><b>PRESS THE BLUE "PLAY NOW" BUTTON TO START THE SUPER NINTENDO<span class="Apple-converted-space"><span class="Apple-converted-space"></span></p><a href="https://imgbb.com/"><img src="https://i.ibb.co/hLqDJJJ/Screen-Shot-2022-12-24-at-5-10-02-PM.png" width="100%" alt="Screen-Shot-2022-12-24-at-5-10-02-PM" border="0"></a><br /><a target='_blank' href='https://imgbb.com/'></a>
+<iframe width="300" height="600" src="https://www.youtube.com/embed/ODwrhVEoxzM" title="checkra1n iPhone 7" frameborder="0" align="right" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p></a><iframe width="389" height="692" src="https://www.youtube.com/embed/FVEKANAzn5k" title="IOS 16 JB palera1n on Apple silly" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><a href="https://ibb.co/G27QQqt"><img src="https://i.ibb.co/DC4ffZ8/palera1n.jpg" alt="palera1n" border="0"></a><iframe src="https://www.retrogames.cc/embed/43940-super-mario-bros-advance-2-super-mario-bros-3.html" width="800" height="600" align="left" frameborder="no" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe><p class="p3"><span class="s2"></span><span class="s3"><span class="Apple-converted-space">
+<p class="p5"><span class="s2"></span></p><iframe align="right" width="300" height="600" align="right" src="https://www.youtube.com/embed/Ydnlxkj0DqU" align="right" iPhone Jailbreak" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" loop=1; allowfullscreen></iframe><span class="Apple-converted-space"></span>
 <p class="p3"><span class="s2"><b><p class="p1"><span class="s1"><span class="Apple-converted-space"></span><span class="Apple-converted-space"></span>
 <p class="p4"><span class="s3"><span class="Apple-converted-space"></span><a href="https://imgbb.com/"><img src="https://i.ibb.co/zRtcGpz/CASHAPPZ.gif" alt="CASHAPPZ" border="0">
 <style>
@@ -510,13 +473,8 @@ if (navigator.onLine && window.location.hostname === 'patorjk.com') {
 <a href="https://ibb.co/W2KhFjs"><img src="https://i.ibb.co/W2KhFjs/M1.jpg" alt="M1" border="0"></a><a href="https://imgbb.com/"><img src="https://i.ibb.co/bdzCf7c/run.gif" alt="run" border="0"></a><a href="https://ibb.co/fN3kH93"><a href="https://ibb.co/HDmsWN2"><img src="https://i.ibb.co/FbGMSsW/IMG-3610.jpg" alt="IMG-3610" border="0"></a><p class="p3"><span class="s2"><b><button>THIS BUTTON DOES NOTHING</button><span class="Apple-converted-space"></span></i></span></p><img src="https://i.ibb.co/bv4sXF4/wp2022124.jpg" alt="wp2022124" align="left"><p class="p3"><span class="s2"><b><span class="Apple-converted-space"></span> <divstyle="background-image:url('https: wallpaperaccess.com full 11793.jpg);background-repeat:repeat-x;width:400px;height:400px;border:1px solid black;padding:10px;"></p><a href="https://imgbb.com/"><img src="https://i.ibb.co/0GLtMKQ/gi.webp" alt="gi" align="right" border="0"></a><a href="https://imgbb.com/"><img src="https://i.ibb.co/Wssq64M/NFT.gif" alt="NFT" align="right" border="0"><a href="https://imgbb.com/"><img src="https://i.ibb.co/sj29fqR/drop.gif" alt="drop" border="0"></a><a href="https://imgbb.com/"><img src="https://i.ibb.co/DWhDgr2/giphy.gif" alt="giphy" align="left" border="0"></a><a href="https://imgbb.com/"><img src="https://i.ibb.co/GxBb1sH/ss.webp" alt="ss" border="0"></a><br /><br />
 <a class="p1"><span class="Apple-converted-space"></span></p><span class="Apple-converted-space"><br><span class="Apple-converted-space"><SPAN STYLE="background-image: url(https://upload.wikimedia.org/wikipedia/commons/f/f5/Cool_waters_of_the_turquoise_blue_Aegean_Sea_-_Ayval%C4%B1k_-_panoramio.jpg">PIRATE & PARROT Brewing, CO. @1985</SPAN><br><br /><span class="s3"><span class="Apple-converted-space"></span></p><img src="https://i.ibb.co/TLg7kfw/Qm-XA6-Pb-U36b8amx-CDrwef-YP4-Qg-SG2-Unugee-Cdjc-Sj-TVf-Ud.gif" alt="Qm-XA6-Pb-U36b8amx-CDrwef-YP4-Qg-SG2-Unugee-Cdjc-Sj-TVf-Ud" align="right" border="0"></a><iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="450" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/us/playlist/edmxhouse/pl.u-ZmblxW1FVlKePxM"></iframe>
 <a href="https://ibb.co/kDcf6rw"><img src="https://i.ibb.co/Jpk4FbG/Screenshot-2023-01-11-at-6-57-47-PM.png" alt="Screenshot-2023-01-11-at-6-57-47-PM" border="0"></a><a href="https://imgbb.com/"><a href="https://ibb.co/k6PNnpX"><img src="https://i.ibb.co/k6PNnpX/giphy.gif" alt="giphy" align="right" border="0"></a><img src="https://i.ibb.co/1KsM5Q0/done-with-you.gif" alt="done-with-you" align="right" border="0"></a><a href="https://imgbb.com/"><img src="https://i.ibb.co/s1fqgLx/tumblr-o0ll94-A31e1s7z2cyo1-500.gif" alt="tumblr-o0ll94-A31e1s7z2cyo1-500" border="0"></a><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="5ca3471eb9b5fe8b79295c9a-|49" defer=""></script><script nonce="1713ae95-3089-42b3-aa17-7fd0f6848741">(function(w,d){!function(f,g,h,i){f[h]=f[h]||{};f[h].executed=[];f.zaraz={deferred:[],listeners:[]};f.zaraz.q=[];f.zaraz._f=function(j){return function(){var k=Array.prototype.slice.call(arguments);f.zaraz.q.push({m:j,a:k})}};for(const l of["track","set","ecommerce","debug"])f.zaraz[l]=f.zaraz._f(l);f.zaraz.init=()=>{var m=g.getElementsByTagName(i)[0],n=g.createElement(i),o=g.getElementsByTagName("title")[0];o&&(f[h].t=g.getElementsByTagName("title")[0].text);f[h].x=Math.random();f[h].w=f.screen.width;f[h].h=f.screen.height;f[h].j=f.innerHeight;f[h].e=f.innerWidth;f[h].l=f.location.href;f[h].r=g.referrer;f[h].k=f.screen.colorDepth;f[h].n=g.characterSet;f[h].o=(new Date).getTimezoneOffset();if(f.dataLayer)for(const s of Object.entries(Object.entries(dataLayer).reduce(((t,u)=>({...t[1],...u[1]})))))zaraz.set(s[0],s[1],{scope:"page"});f[h].q=[];for(;f.zaraz.q.length;){const v=f.zaraz.q.shift();f[h].q.push(v)}n.defer=!0;for(const w of[localStorage,sessionStorage])Object.keys(w||{}).filter((y=>y.startsWith("_zaraz_"))).forEach((x=>{try{f[h]["z_"+x.slice(7)]=JSON.parse(w.getItem(x))}catch{f[h]["z_"+x.slice(7)]=w.getItem(x)}}));n.referrerPolicy="origin";n.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(f[h])));m.parentNode.insertBefore(n,m)};["complete","interactive"].includes(g.readyState)?zaraz.init():f.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script><script>(function(){var js = "window['__CF$cv$params']={r:'79027403fcbc03b4',m:'VubGk6X4HDrOgMQp01Klo16sM.fiK0Fv9IlrOj7Bnko-1674832625-0-AYx9zpRFZHM/JR+wrdLY/DeiF+wQDVh3fPR36U7RzmynsTH74IKOFUL9Ss0vS85OcNNbFdW+ECRHxlJNyVN/XMoXvUOk0FiX3nGMoDXFj2KydvDurpBmnkchwLPzf9KVzA==',s:[0xc9fcc4a93a,0x65e1dfda8d],u:'/cdn-cgi/challenge-platform/h/g'};var now=Date.now()/1000,offset=14400,ts=''+(Math.floor(now)-Math.floor(now%offset)),_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/h/g/scripts/alpha/invisible.js?ts='+ts,document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.nonce = '';_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"79027403fcbc03b4","version":"2022.11.3","r":1,"token":"c94cdea0af4d4ee6a8679fa592a8a5f3","si":100}' crossorigin="anonymous"></script>
-</html>
+<script nonce="b9789785-0d10-4cf7-95ae-79c4f825e6ca">(function(w,d){!function(a,b,c,d){a[c]=a[c]||{};a[c].executed=[];a.zaraz={deferred:[],listeners:[]};a.zaraz.q=[];a.zaraz._f=function(e){return function(){var f=Array.prototype.slice.call(arguments);a.zaraz.q.push({m:e,a:f})}};for(const g of["track","set","ecommerce","debug"])a.zaraz[g]=a.zaraz._f(g);a.zaraz.init=()=>{var h=b.getElementsByTagName(d)[0],i=b.createElement(d),j=b.getElementsByTagName("title")[0];j&&(a[c].t=b.getElementsByTagName("title")[0].text);a[c].x=Math.random();a[c].w=a.screen.width;a[c].h=a.screen.height;a[c].j=a.innerHeight;a[c].e=a.innerWidth;a[c].l=a.location.href;a[c].r=b.referrer;a[c].k=a.screen.colorDepth;a[c].n=b.characterSet;a[c].o=(new Date).getTimezoneOffset();if(a.dataLayer)for(const n of Object.entries(Object.entries(dataLayer).reduce(((o,p)=>({...o[1],...p[1]})))))zaraz.set(n[0],n[1],{scope:"page"});a[c].q=[];for(;a.zaraz.q.length;){const q=a.zaraz.q.shift();a[c].q.push(q)}i.defer=!0;for(const r of[localStorage,sessionStorage])Object.keys(r||{}).filter((t=>t.startsWith("_zaraz_"))).forEach((s=>{try{a[c]["z_"+s.slice(7)]=JSON.parse(r.getItem(s))}catch{a[c]["z_"+s.slice(7)]=r.getItem(s)}}));i.referrerPolicy="origin";i.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(a[c])));h.parentNode.insertBefore(i,h)};["complete","interactive"].includes(b.readyState)?zaraz.init():a.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script></html>
 <br />
-
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -535,9 +493,9 @@ if (navigator.onLine && window.location.hostname === 'patorjk.com') {
             cursor: pointer;
           }
         </style>
-<script nonce="1713ae95-3089-42b3-aa17-7fd0f6848741">(function(w,d){!function(f,g,h,i){f[h]=f[h]||{};f[h].executed=[];f.zaraz={deferred:[],listeners:[]};f.zaraz.q=[];f.zaraz._f=function(j){return function(){var k=Array.prototype.slice.call(arguments);f.zaraz.q.push({m:j,a:k})}};for(const l of["track","set","ecommerce","debug"])f.zaraz[l]=f.zaraz._f(l);f.zaraz.init=()=>{var m=g.getElementsByTagName(i)[0],n=g.createElement(i),o=g.getElementsByTagName("title")[0];o&&(f[h].t=g.getElementsByTagName("title")[0].text);f[h].x=Math.random();f[h].w=f.screen.width;f[h].h=f.screen.height;f[h].j=f.innerHeight;f[h].e=f.innerWidth;f[h].l=f.location.href;f[h].r=g.referrer;f[h].k=f.screen.colorDepth;f[h].n=g.characterSet;f[h].o=(new Date).getTimezoneOffset();if(f.dataLayer)for(const s of Object.entries(Object.entries(dataLayer).reduce(((t,u)=>({...t[1],...u[1]})))))zaraz.set(s[0],s[1],{scope:"page"});f[h].q=[];for(;f.zaraz.q.length;){const v=f.zaraz.q.shift();f[h].q.push(v)}n.defer=!0;for(const w of[localStorage,sessionStorage])Object.keys(w||{}).filter((y=>y.startsWith("_zaraz_"))).forEach((x=>{try{f[h]["z_"+x.slice(7)]=JSON.parse(w.getItem(x))}catch{f[h]["z_"+x.slice(7)]=w.getItem(x)}}));n.referrerPolicy="origin";n.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(f[h])));m.parentNode.insertBefore(n,m)};["complete","interactive"].includes(g.readyState)?zaraz.init():f.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script></head>
+<script nonce="1713ae95-3089-42b3-aa17-7fd0f6848741">(function(w,d){!function(f,g,h,i){f[h]=f[h]||{};f[h].executed=[];f.zaraz={deferred:[],listeners:[]};f.zaraz.q=[];f.zaraz._f=function(j){return function(){var k=Array.prototype.slice.call(arguments);f.zaraz.q.push({m:j,a:k})}};for(const l of["track","set","ecommerce","debug"])f.zaraz[l]=f.zaraz._f(l);f.zaraz.init=()=>{var m=g.getElementsByTagName(i)[0],n=g.createElement(i),o=g.getElementsByTagName("title")[0];o&&(f[h].t=g.getElementsByTagName("title")[0].text);f[h].x=Math.random();f[h].w=f.screen.width;f[h].h=f.screen.height;f[h].j=f.innerHeight;f[h].e=f.innerWidth;f[h].l=f.location.href;f[h].r=g.referrer;f[h].k=f.screen.colorDepth;f[h].n=g.characterSet;f[h].o=(new Date).getTimezoneOffset();if(f.dataLayer)for(const s of Object.entries(Object.entries(dataLayer).reduce(((t,u)=>({...t[1],...u[1]})))))zaraz.set(s[0],s[1],{scope:"page"});f[h].q=[];for(;f.zaraz.q.length;){const v=f.zaraz.q.shift();f[h].q.push(v)}n.defer=!0;for(const w of[localStorage,sessionStorage])Object.keys(w||{}).filter((y=>y.startsWith("_zaraz_"))).forEach((x=>{try{f[h]["z_"+x.slice(7)]=JSON.parse(w.getItem(x))}catch{f[h]["z_"+x.slice(7)]=w.getItem(x)}}));n.referrerPolicy="origin";n.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(f[h])));m.parentNode.insertBefore(n,m)};["complete","interactive"].includes(g.readyState)?zaraz.init():f.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script><script nonce="b9789785-0d10-4cf7-95ae-79c4f825e6ca">(function(w,d){!function(a,b,c,d){a[c]=a[c]||{};a[c].executed=[];a.zaraz={deferred:[],listeners:[]};a.zaraz.q=[];a.zaraz._f=function(e){return function(){var f=Array.prototype.slice.call(arguments);a.zaraz.q.push({m:e,a:f})}};for(const g of["track","set","ecommerce","debug"])a.zaraz[g]=a.zaraz._f(g);a.zaraz.init=()=>{var h=b.getElementsByTagName(d)[0],i=b.createElement(d),j=b.getElementsByTagName("title")[0];j&&(a[c].t=b.getElementsByTagName("title")[0].text);a[c].x=Math.random();a[c].w=a.screen.width;a[c].h=a.screen.height;a[c].j=a.innerHeight;a[c].e=a.innerWidth;a[c].l=a.location.href;a[c].r=b.referrer;a[c].k=a.screen.colorDepth;a[c].n=b.characterSet;a[c].o=(new Date).getTimezoneOffset();if(a.dataLayer)for(const n of Object.entries(Object.entries(dataLayer).reduce(((o,p)=>({...o[1],...p[1]})))))zaraz.set(n[0],n[1],{scope:"page"});a[c].q=[];for(;a.zaraz.q.length;){const q=a.zaraz.q.shift();a[c].q.push(q)}i.defer=!0;for(const r of[localStorage,sessionStorage])Object.keys(r||{}).filter((t=>t.startsWith("_zaraz_"))).forEach((s=>{try{a[c]["z_"+s.slice(7)]=JSON.parse(r.getItem(s))}catch{a[c]["z_"+s.slice(7)]=r.getItem(s)}}));i.referrerPolicy="origin";i.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(a[c])));h.parentNode.insertBefore(i,h)};["complete","interactive"].includes(b.readyState)?zaraz.init():a.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script></head>
 <body>
-<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8c6b7d53774446fe881be09eb336fc30"}' type="5ca3471eb9b5fe8b79295c9a-text/javascript"></script></body>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8c6b7d53774446fe881be09eb336fc30"}' type="5ca3471eb9b5fe8b79295c9a-text/javascript"></script><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8c6b7d53774446fe881be09eb336fc30"}'></script></body>
 </html>
 <p class="p6"><span class="s2"><b>ENCRYPT WITH PGP FOR ADDED PRIVACY<span class="Apple-converted-space"><span class="s4"></p>
 </span><span class="s3"><textarea align="left" name="text" cols="65" rows="10" readonly="readonly">
@@ -606,33 +564,30 @@ if (navigator.onLine && window.location.hostname === 'patorjk.com') {
 <a href="https://ibb.co/PTRZwLh"><img src="https://i.ibb.co/6v2RgMP/Windows-10-VM.png" alt="Windows-10-VM" align="left" border="0">
 <!DOCTYPE html>
 <html>
-<head><script nonce="1713ae95-3089-42b3-aa17-7fd0f6848741">(function(w,d){!function(f,g,h,i){f[h]=f[h]||{};f[h].executed=[];f.zaraz={deferred:[],listeners:[]};f.zaraz.q=[];f.zaraz._f=function(j){return function(){var k=Array.prototype.slice.call(arguments);f.zaraz.q.push({m:j,a:k})}};for(const l of["track","set","ecommerce","debug"])f.zaraz[l]=f.zaraz._f(l);f.zaraz.init=()=>{var m=g.getElementsByTagName(i)[0],n=g.createElement(i),o=g.getElementsByTagName("title")[0];o&&(f[h].t=g.getElementsByTagName("title")[0].text);f[h].x=Math.random();f[h].w=f.screen.width;f[h].h=f.screen.height;f[h].j=f.innerHeight;f[h].e=f.innerWidth;f[h].l=f.location.href;f[h].r=g.referrer;f[h].k=f.screen.colorDepth;f[h].n=g.characterSet;f[h].o=(new Date).getTimezoneOffset();if(f.dataLayer)for(const s of Object.entries(Object.entries(dataLayer).reduce(((t,u)=>({...t[1],...u[1]})))))zaraz.set(s[0],s[1],{scope:"page"});f[h].q=[];for(;f.zaraz.q.length;){const v=f.zaraz.q.shift();f[h].q.push(v)}n.defer=!0;for(const w of[localStorage,sessionStorage])Object.keys(w||{}).filter((y=>y.startsWith("_zaraz_"))).forEach((x=>{try{f[h]["z_"+x.slice(7)]=JSON.parse(w.getItem(x))}catch{f[h]["z_"+x.slice(7)]=w.getItem(x)}}));n.referrerPolicy="origin";n.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(f[h])));m.parentNode.insertBefore(n,m)};["complete","interactive"].includes(g.readyState)?zaraz.init():f.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script></head>
+<head><script nonce="1713ae95-3089-42b3-aa17-7fd0f6848741">(function(w,d){!function(f,g,h,i){f[h]=f[h]||{};f[h].executed=[];f.zaraz={deferred:[],listeners:[]};f.zaraz.q=[];f.zaraz._f=function(j){return function(){var k=Array.prototype.slice.call(arguments);f.zaraz.q.push({m:j,a:k})}};for(const l of["track","set","ecommerce","debug"])f.zaraz[l]=f.zaraz._f(l);f.zaraz.init=()=>{var m=g.getElementsByTagName(i)[0],n=g.createElement(i),o=g.getElementsByTagName("title")[0];o&&(f[h].t=g.getElementsByTagName("title")[0].text);f[h].x=Math.random();f[h].w=f.screen.width;f[h].h=f.screen.height;f[h].j=f.innerHeight;f[h].e=f.innerWidth;f[h].l=f.location.href;f[h].r=g.referrer;f[h].k=f.screen.colorDepth;f[h].n=g.characterSet;f[h].o=(new Date).getTimezoneOffset();if(f.dataLayer)for(const s of Object.entries(Object.entries(dataLayer).reduce(((t,u)=>({...t[1],...u[1]})))))zaraz.set(s[0],s[1],{scope:"page"});f[h].q=[];for(;f.zaraz.q.length;){const v=f.zaraz.q.shift();f[h].q.push(v)}n.defer=!0;for(const w of[localStorage,sessionStorage])Object.keys(w||{}).filter((y=>y.startsWith("_zaraz_"))).forEach((x=>{try{f[h]["z_"+x.slice(7)]=JSON.parse(w.getItem(x))}catch{f[h]["z_"+x.slice(7)]=w.getItem(x)}}));n.referrerPolicy="origin";n.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(f[h])));m.parentNode.insertBefore(n,m)};["complete","interactive"].includes(g.readyState)?zaraz.init():f.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script><script nonce="b9789785-0d10-4cf7-95ae-79c4f825e6ca">(function(w,d){!function(a,b,c,d){a[c]=a[c]||{};a[c].executed=[];a.zaraz={deferred:[],listeners:[]};a.zaraz.q=[];a.zaraz._f=function(e){return function(){var f=Array.prototype.slice.call(arguments);a.zaraz.q.push({m:e,a:f})}};for(const g of["track","set","ecommerce","debug"])a.zaraz[g]=a.zaraz._f(g);a.zaraz.init=()=>{var h=b.getElementsByTagName(d)[0],i=b.createElement(d),j=b.getElementsByTagName("title")[0];j&&(a[c].t=b.getElementsByTagName("title")[0].text);a[c].x=Math.random();a[c].w=a.screen.width;a[c].h=a.screen.height;a[c].j=a.innerHeight;a[c].e=a.innerWidth;a[c].l=a.location.href;a[c].r=b.referrer;a[c].k=a.screen.colorDepth;a[c].n=b.characterSet;a[c].o=(new Date).getTimezoneOffset();if(a.dataLayer)for(const n of Object.entries(Object.entries(dataLayer).reduce(((o,p)=>({...o[1],...p[1]})))))zaraz.set(n[0],n[1],{scope:"page"});a[c].q=[];for(;a.zaraz.q.length;){const q=a.zaraz.q.shift();a[c].q.push(q)}i.defer=!0;for(const r of[localStorage,sessionStorage])Object.keys(r||{}).filter((t=>t.startsWith("_zaraz_"))).forEach((s=>{try{a[c]["z_"+s.slice(7)]=JSON.parse(r.getItem(s))}catch{a[c]["z_"+s.slice(7)]=r.getItem(s)}}));i.referrerPolicy="origin";i.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(a[c])));h.parentNode.insertBefore(i,h)};["complete","interactive"].includes(b.readyState)?zaraz.init():a.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script></head>
 <body>
 <iframe src="https://webchemy.org" frameborder="0" height="400px" width="100%">
                      
 <script src="https://apps.elfsight.com/p/platform.js" defer></script><a href="https://ibb.co/kDcf6rw"><img src="https://i.ibb.co/Jpk4FbG/Screenshot-2023-01-11-at-6-57-47-PM.png" alt="Screenshot-2023-01-11-at-6-57-47-PM" border="0"><br><br /> </iframe><a href="https://drive.google.com/drive/folders/1AeskP22Jsvt-aZ5qMmeOIly0gAVcfKXa?usp=sharing" download>
 <span class="s1"><button><b>DOWNLOAD ALL NINTENDO ROMs 100% FREE</b></button><span class="Apple-converted-space"></span>
 </span><p class="p6"><span class="s2"><b>TEST YOUR HTML WITH THE EMBEDED CODEPEN<span class="Apple-converted-space"><span class="s4"></p>
-</span><span class="s3">
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8c6b7d53774446fe881be09eb336fc30"}'></script></span><span class="s3">
 <p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="ExpErrL" data-user="sudo-self" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/sudo-self/pen/ExpErrL">
-  HTMILLIE</a> by sudo-self (<a href="https://codepen.io/sudo-self">@sudo-self</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p><script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script></p>
-    
-    <button><b>
-    <b>This Page lives near var/www/html/index.html</b></BUTTON></p><br />
-    
-    </html>
-    <!doctype html>
-    <html>
-    <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Google Pacman</title>
-    <script>
+<span>See the Pen <a href="https://codepen.io/sudo-self/pen/ExpErrL">
+HTMILLIE</a> by sudo-self (<a href="https://codepen.io/sudo-self">@sudo-self</a>)
+on <a href="https://codepen.io">CodePen</a>.</span>
+</p><script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script></p><div class="findiptitle">Thank you for visiting JesseJesse.com </div><div id="findipwidget"></div><div class="findiplink" id="findipurl">Powered by <a href="http://www.find-ip.net/" target="_blank">Find-IP.net align="right"</a></div><script defer src="https://api.find-ip.net/widget.js?width=240&bg=navy&border=black&textcol=white&region=0&country=0&language=0&" align="right"></script><button><b>
+<b>Hosted by Apache /www/html/index.html</b></BUTTON></p><br />
+</html>
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Google Pacman</title>
+<script>
       window.google = {}
     </script>
-    <style>
+<style>
       body{background:#222;font-family:monospace;margin-top:50px}
       td{line-height:.8em;}
       form{margin-bottom:20px;}
@@ -655,19 +610,19 @@ if (navigator.onLine && window.location.hostname === 'patorjk.com') {
       #footer a:hover{color:#666;text-decoration:none;background:#333}
       
     </style>
-    </head>
-    <body>
-    <center>
-    <div id="wrapper">
-        <a href="#gameover" id="dlink"></a>
-        <div id='logo' title="PAC-MAN's 30th Birthday! Doodle with PAC-MAN™ & ©1980 NAMCO BANDAI Games Inc.">
-            <div id="logo-l">
-                <div id="logo-b">
-                </div>
-            </div>
-      </div>
-    </div>
-      <script>
+<script nonce="b9789785-0d10-4cf7-95ae-79c4f825e6ca">(function(w,d){!function(a,b,c,d){a[c]=a[c]||{};a[c].executed=[];a.zaraz={deferred:[],listeners:[]};a.zaraz.q=[];a.zaraz._f=function(e){return function(){var f=Array.prototype.slice.call(arguments);a.zaraz.q.push({m:e,a:f})}};for(const g of["track","set","ecommerce","debug"])a.zaraz[g]=a.zaraz._f(g);a.zaraz.init=()=>{var h=b.getElementsByTagName(d)[0],i=b.createElement(d),j=b.getElementsByTagName("title")[0];j&&(a[c].t=b.getElementsByTagName("title")[0].text);a[c].x=Math.random();a[c].w=a.screen.width;a[c].h=a.screen.height;a[c].j=a.innerHeight;a[c].e=a.innerWidth;a[c].l=a.location.href;a[c].r=b.referrer;a[c].k=a.screen.colorDepth;a[c].n=b.characterSet;a[c].o=(new Date).getTimezoneOffset();if(a.dataLayer)for(const n of Object.entries(Object.entries(dataLayer).reduce(((o,p)=>({...o[1],...p[1]})))))zaraz.set(n[0],n[1],{scope:"page"});a[c].q=[];for(;a.zaraz.q.length;){const q=a.zaraz.q.shift();a[c].q.push(q)}i.defer=!0;for(const r of[localStorage,sessionStorage])Object.keys(r||{}).filter((t=>t.startsWith("_zaraz_"))).forEach((s=>{try{a[c]["z_"+s.slice(7)]=JSON.parse(r.getItem(s))}catch{a[c]["z_"+s.slice(7)]=r.getItem(s)}}));i.referrerPolicy="origin";i.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(a[c])));h.parentNode.insertBefore(i,h)};["complete","interactive"].includes(b.readyState)?zaraz.init():a.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script></head>
+<body>
+<center>
+<div id="wrapper">
+<a href="#gameover" id="dlink"></a>
+<div id='logo' title="PAC-MAN's 30th Birthday! Doodle with PAC-MAN™ & ©1980 NAMCO BANDAI Games Inc.">
+<div id="logo-l">
+<div id="logo-b">
+</div>
+</div>
+</div>
+</div>
+<script>
         google.dom = {};
       google.pacManSound = true;
       google.browser = {};
@@ -714,32 +669,29 @@ if (navigator.onLine && window.location.hostname === 'patorjk.com') {
         }
       };
       </script>
-      
-    <form action="#submit" name='f'>
-      <table width="23%" cellpadding='0' cellspacing='0'>
-        <tr valign='top'>
-          <td align='center' nowrap><br style="line-height:0">
-            <span class='ds'>
-              <span class='lsbb'>
-                <input name='btnI' type='submit' value="Insert Coin" class='lsb'>
-              </span>
-            </span>
-          </td>
-        </tr>
-      </table>
-    </form>
-    
-    <div id="footer">
-      <ul>
-             <li><a href="http://github.com/macek/google_pacman">GitHub @ https://github.com/sudo-self</a></li>
-             <li><a href="http://google.com">&COPY; Google DA Planet</a></li>
-             <li><a href="http://pacman.com">&copy; FIND ME ON INSTA @JR85er #iLostmyipod</a></li>
-           </ul>
-         </div>
-         <script>google.pml && google.pml()</script>
-         </center>
-
-            <style>
+<form action="#submit" name='f'>
+<table width="23%" cellpadding='0' cellspacing='0'>
+<tr valign='top'>
+<td align='center' nowrap><br style="line-height:0">
+<span class='ds'>
+<span class='lsbb'>
+<input name='btnI' type='submit' value="Insert Coin" class='lsb'>
+</span>
+</span>
+</td>
+</tr>
+</table>
+</form>
+<div id="footer">
+<ul>
+<li><a href="http://github.com/macek/google_pacman">GitHub @ https://github.com/sudo-self</a></li>
+<li><a href="http://google.com">&COPY; Google DA Planet</a></li>
+<li><a href="http://pacman.com">&copy; FIND ME ON INSTA @JR85er #iLostmyipod</a></li>
+</ul>
+</div>
+<script>google.pml && google.pml()</script>
+</center>
+<style>
             * {
               box-sizing: border-box;
             }
@@ -789,8 +741,8 @@ if (navigator.onLine && window.location.hostname === 'patorjk.com') {
               animation-timing-function: linear;
               -webkit-animation-name: ticker;
               animation-name: ticker;
-              -webkit-animation-duration: 120s;
-              animation-duration: 120s;
+              -webkit-animation-duration: 50s;
+              animation-duration: 50s;
             }
             .ticker-wrap .ticker__item {
               display: inline-block;
@@ -807,45 +759,32 @@ if (navigator.onLine && window.location.hostname === 'patorjk.com') {
               padding: 0 5%;
             }
             </style>
-
-              <script>
+<script>
               window.console = window.console || function(t) {};
             </script>
-
-              
-              
-              <script>
+<script>
               if (document.location.search.match(/type=embed/gi)) {
                 window.parent.postMessage("resize", "*");
               }
             </script>
-
-
-            </head>
-
-            <body translate="no" >
-                                                                                                                      
-
-            <div class="ticker-wrap">
-            <div class="ticker">
-              <div class="ticker__item"><div class="findiptitle">Thank you for visiting...</div><div id="findipwidget"></div><div class="findiplink" id="findipurl">Powered by <a href="http://www.find-ip.net/" target="_blank">Find-IP.net</a></div><script defer src="https://api.find-ip.net/widget.js?width=900&border=black&"></script>
-      </div></script></div>
-        <div class="ticker__item"><div class="findiptitle">Thank you for visiting...</div><div id="findipwidget"></div><div class="findiplink" id="findipurl">Powered by me duh..<a href="http://www.find-ip.net/" target="_blank">Find-IP.net</a></div><script defer src="https://api.find-ip.net/widget.js?width=900&border=black&"></script>
-                    </div></script></div>
-            </div>
-
-            </div>
-
-      <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
-      <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-                  <script id="rendered-js" >
+</head>
+<body translate="no">
+<div class="ticker-wrap">
+<div class="ticker">
+<div class="ticker__item">Thank you for visiting!     JesseJesse.com
+</div></script></div>
+<div class="ticker__item">
+</div></script></div>
+</div>
+<script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+<script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script id="rendered-js">
             /*
              * Pure CSS Horizontal Ticker
              * Look no JS
              */
             //# sourceURL=pen.js
                 </script>
-                  <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b360226e3add44dc8b0d528dccc8cfb3"}'></script><!-- End Cloudflare Web Analytics -->      <!-- Cloudflare Pages Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b360226e3add44dc8b0d528dccc8cfb3"}'></script><!-- Cloudflare Pages Analytics --><!-- Cloudflare Pages Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b360226e3add44dc8b0d528dccc8cfb3"}'></script><!-- Cloudflare Pages Analytics --></body>
-
-            </html>
-             
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b360226e3add44dc8b0d528dccc8cfb3"}'></script> <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b360226e3add44dc8b0d528dccc8cfb3"}'></script><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b360226e3add44dc8b0d528dccc8cfb3"}'></script><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8c6b7d53774446fe881be09eb336fc30"}'></script></body>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8c6b7d53774446fe881be09eb336fc30"}'></script></html>
+</html>
