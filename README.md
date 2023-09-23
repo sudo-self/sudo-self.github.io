@@ -1,5 +1,6 @@
 # Jekyll site hosted with Github-Pages
-## https://sudo-self.github.io [![Deploy Jekyll with GitHub Pages dependencies preinstalled](https://github.com/sudo-self/sudo-self.github.io/actions/workflows/jekyll-gh-pages.yml/badge.svg)](https://github.com/sudo-self/sudo-self.github.io/actions/workflows/jekyll-gh-pages.yml)[![pages-build-deployment](https://github.com/sudo-self/sudo-self.github.io/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/sudo-self/sudo-self.github.io/actions/workflows/pages/pages-build-deployment)
+
+## https://sudo-self.github.io
 
 ### Clone the repo
 ```s
