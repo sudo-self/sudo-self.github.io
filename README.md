@@ -8,7 +8,6 @@ $ cd sudo-self.github.io
 
 ```
 
-<img width="700" alt="Screenshot 2023-07-28 at 10 21 47 AM" src="https://github.com/sudo-self/sudo-self.github.io/assets/119916323/2db6b8c6-cd0f-408a-bb46-9770e3296459">
 
 ### Install Ruby
 
