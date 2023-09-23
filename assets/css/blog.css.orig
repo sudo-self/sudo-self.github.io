@@ -1,4 +1,4 @@
-@import url("../../../fonts.googleapis.com/css2@family=JetBrains+Mono%253Aital,wght@0,100%3B0,300%3B0,400%3B0,800%3B1,100%3B1,300%3B1,400%3B1,800&display=swap.css");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,300;0,400;0,800;1,100;1,300;1,400;1,800&display=swap");
 
 :root {
   --gray-1: #3f3f3f;
