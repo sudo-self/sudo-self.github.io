@@ -1,4 +1,4 @@
-# <a href="https://sudo-self.github.io">Jekyll site hosted with Github-Pages</a>
+# <a href="https://sudo-self.github.io">Jekyll GH Pages</a>
 ### Clone the repo
 ```s
 $ git clone https://github.com/sudo-self/sudo-self.github.io
