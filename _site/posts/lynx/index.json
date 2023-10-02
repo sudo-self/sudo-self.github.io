@@ -1,0 +1,338 @@
+{
+    "archive_path": "archive/1695452658.030267",
+    "base_url": "links-9avtyb19e-sudo-self.vercel.app",
+    "basename": "",
+    "bookmarked_date": "2023-09-23 07:04",
+    "canonical": {
+        "archive_org_path": "https://web.archive.org/web/links-9avtyb19e-sudo-self.vercel.app",
+        "dom_path": "output.html",
+        "favicon_path": "favicon.ico",
+        "git_path": "git/",
+        "google_favicon_path": "https://www.google.com/s2/favicons?domain=links-9avtyb19e-sudo-self.vercel.app",
+        "headers_path": "headers.json",
+        "index_path": "index.html",
+        "media_path": "media/",
+        "mercury_path": "mercury/content.html",
+        "pdf_path": "output.pdf",
+        "readability_path": "readability/content.html",
+        "screenshot_path": "screenshot.png",
+        "singlefile_path": "singlefile.html",
+        "warc_path": "warc/",
+        "wget_path": "links-9avtyb19e-sudo-self.vercel.app/index.html"
+    },
+    "domain": "links-9avtyb19e-sudo-self.vercel.app",
+    "extension": "",
+    "hash": "FEPXN4JKC4KW9VN2B9WJ",
+    "history": {
+        "archive_org": [
+            {
+                "cmd": [
+                    "curl",
+                    "--silent",
+                    "--location",
+                    "--compressed",
+                    "--head",
+                    "--max-time",
+                    "60",
+                    "--user-agent",
+                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.61 Safari/537.36 ArchiveBox/0.6.2 (+https://github.com/ArchiveBox/ArchiveBox/) curl/curl 8.1.2 (x86_64-apple-darwin22.0)",
+                    "https://web.archive.org/save/https://links-9avtyb19e-sudo-self.vercel.app"
+                ],
+                "cmd_version": "curl 8.1.2 (x86_64-apple-darwin22.0)",
+                "end_ts": "2023-09-23T07:05:04.625038+00:00",
+                "index_texts": null,
+                "output": "https://web.archive.org/web/20230923070454/https://links-9avtyb19e-sudo-self.vercel.app/",
+                "pwd": "/Users/admin/Desktop/Archivebox/archive/1695452658.030267",
+                "schema": "ArchiveResult",
+                "start_ts": "2023-09-23T07:04:51.596081+00:00",
+                "status": "succeeded"
+            }
+        ],
+        "dom": [
+            {
+                "cmd": [
+                    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+                    "--headless",
+                    "--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.61 Safari/537.36 ArchiveBox/{VERSION} (+https://github.com/ArchiveBox/ArchiveBox/)",
+                    "--window-size=1440,2000",
+                    "--timeout=60000",
+                    "--dump-dom",
+                    "https://links-9avtyb19e-sudo-self.vercel.app"
+                ],
+                "cmd_version": "Google Chrome 116.0.5845.187",
+                "end_ts": "2023-09-23T07:04:35.865455+00:00",
+                "index_texts": null,
+                "output": "output.html",
+                "pwd": "/Users/admin/Desktop/Archivebox/archive/1695452658.030267",
+                "schema": "ArchiveResult",
+                "start_ts": "2023-09-23T07:04:34.945933+00:00",
+                "status": "succeeded"
+            }
+        ],
+        "favicon": [
+            {
+                "cmd": [
+                    "curl",
+                    "--silent",
+                    "--location",
+                    "--compressed",
+                    "--max-time",
+                    "60",
+                    "--output",
+                    "favicon.ico",
+                    "--user-agent",
+                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.61 Safari/537.36 ArchiveBox/0.6.2 (+https://github.com/ArchiveBox/ArchiveBox/) curl/curl 8.1.2 (x86_64-apple-darwin22.0)",
+                    "https://www.google.com/s2/favicons?domain=links-9avtyb19e-sudo-self.vercel.app"
+                ],
+                "cmd_version": "curl 8.1.2 (x86_64-apple-darwin22.0)",
+                "end_ts": "2023-09-23T07:04:25.509017+00:00",
+                "index_texts": null,
+                "output": "favicon.ico",
+                "pwd": "/Users/admin/Desktop/Archivebox/archive/1695452658.030267",
+                "schema": "ArchiveResult",
+                "start_ts": "2023-09-23T07:04:18.595323+00:00",
+                "status": "succeeded"
+            }
+        ],
+        "git": [],
+        "headers": [
+            {
+                "cmd": [
+                    "curl",
+                    "--silent",
+                    "--location",
+                    "--compressed",
+                    "--head",
+                    "--max-time",
+                    "60",
+                    "--user-agent",
+                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.61 Safari/537.36 ArchiveBox/0.6.2 (+https://github.com/ArchiveBox/ArchiveBox/) curl/curl 8.1.2 (x86_64-apple-darwin22.0)",
+                    "https://links-9avtyb19e-sudo-self.vercel.app"
+                ],
+                "cmd_version": "curl 8.1.2 (x86_64-apple-darwin22.0)",
+                "end_ts": "2023-09-23T07:04:25.690474+00:00",
+                "index_texts": null,
+                "output": "headers.json",
+                "pwd": "/Users/admin/Desktop/Archivebox/archive/1695452658.030267",
+                "schema": "ArchiveResult",
+                "start_ts": "2023-09-23T07:04:25.514229+00:00",
+                "status": "succeeded"
+            }
+        ],
+        "media": [
+            {
+                "cmd": [
+                    "youtube-dl",
+                    "--write-description",
+                    "--write-info-json",
+                    "--write-annotations",
+                    "--write-thumbnail",
+                    "--no-call-home",
+                    "--write-sub",
+                    "--all-subs",
+                    "--write-auto-sub",
+                    "--convert-subs=srt",
+                    "--yes-playlist",
+                    "--continue",
+                    "--ignore-errors",
+                    "--geo-bypass",
+                    "--add-metadata",
+                    "--max-filesize=750m",
+                    "https://links-9avtyb19e-sudo-self.vercel.app"
+                ],
+                "cmd_version": "2021.12.17",
+                "end_ts": "2023-09-23T07:04:51.594179+00:00",
+                "index_texts": [],
+                "output": "media",
+                "pwd": "/Users/admin/Desktop/Archivebox/archive/1695452658.030267",
+                "schema": "ArchiveResult",
+                "start_ts": "2023-09-23T07:04:50.553245+00:00",
+                "status": "succeeded"
+            }
+        ],
+        "mercury": [
+            {
+                "cmd": [
+                    "/Users/admin/Desktop/Archivebox/node_modules/@postlight/mercury-parser/cli.js",
+                    "https://links-9avtyb19e-sudo-self.vercel.app"
+                ],
+                "cmd_version": "1.0.0",
+                "end_ts": "2023-09-23T07:04:50.551682+00:00",
+                "index_texts": null,
+                "output": "mercury",
+                "pwd": "/Users/admin/Desktop/Archivebox/archive/1695452658.030267",
+                "schema": "ArchiveResult",
+                "start_ts": "2023-09-23T07:04:49.193354+00:00",
+                "status": "succeeded"
+            }
+        ],
+        "pdf": [
+            {
+                "cmd": [
+                    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+                    "--headless",
+                    "--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.61 Safari/537.36 ArchiveBox/{VERSION} (+https://github.com/ArchiveBox/ArchiveBox/)",
+                    "--window-size=1440,2000",
+                    "--timeout=60000",
+                    "--print-to-pdf",
+                    "https://links-9avtyb19e-sudo-self.vercel.app"
+                ],
+                "cmd_version": "Google Chrome 116.0.5845.187",
+                "end_ts": "2023-09-23T07:04:33.634684+00:00",
+                "index_texts": null,
+                "output": "output.pdf",
+                "pwd": "/Users/admin/Desktop/Archivebox/archive/1695452658.030267",
+                "schema": "ArchiveResult",
+                "start_ts": "2023-09-23T07:04:32.590272+00:00",
+                "status": "succeeded"
+            }
+        ],
+        "readability": [
+            {
+                "cmd": [
+                    "/Users/admin/Desktop/Archivebox/node_modules/readability-extractor/readability-extractor",
+                    "/var/folders/kr/8kvbdrp11q19vb1t7kpgtzvr0000gn/T/tmp2748y7_b"
+                ],
+                "cmd_version": "0.0.6",
+                "end_ts": "2023-09-23T07:04:49.186761+00:00",
+                "index_texts": [
+                    "Jedi Lynx\n\n        \n        A JediJekyllFramework.\n\n        \n\n        \n        LittleLink\n\n        \n        Amazon Wishlist\n\n        \n        Listen on Amazon Music       \n        \n        \n        Apple App Store\n\n        \n        Listen on Apple Music            \n       \n  \n        \n        Bandcamp \n\n        \n        Behance \n\n        \n        Bluesky \n\n        \n        Buy Me A Coffee\n\n        \n        Schedule with Cal.com\n\n        \n        Schedule with Calendly\n\n        \n        Cash App\n\n        \n        Clubhouse\n\n        \n        Dev.to\n\n        \n        Discord\n\n        \n        Dribbble\n\n        \n        Shop on Etsy\n\n        \n        Find us on Facebook\n\n        \n        Chat on Messenger\n\n        \n        Figma Community\n\n        \n        Fiverr Gig\n\n        \n        Flickr\n\n        \n        GitHub\n\n        \n        GitLab\n\n        \n        GoFundMe\n\n        \n        Goodreads\n\n        \n        View in Google Drive\n\n        \n        Google Play Store\n\n        \n        Listen on Google Podcasts\n\n        \n        Google Scholar\n\n        \n        Guilded\n\n        \n        Hashnode\n\n        \n        Instagram\n\n        \n        Kick\n\n        \n        Kick\n        \n        \n        Kickstarter\n\n        \n        Kit\n\n        \n        Ko-fi\n\n        \n        Last.fm\n\n        \n        Letterboxd\n\n        \n        Line\n\n        \n        LinkedIn\n\n        \n        Mailchimp\n\n        \n        Mastodon\n\n        \n        Medium\n        \n        \n        NGL\n        \n        \n        Notion\n\n        \n        OnlyFans (18+)\n\n        \n        Patreon\n\n        \n        PayPal\n\n        \n        Pinterest\n\n        \n        Post.news\n\n        \n        Product Hunt\n\n        \n        Read.cv\n\n        \n        Redbubble\n\n        \n        Reddit\n\n        \n        Buy with Shop\n\n        \n        Signal\n\n        \n        Skoob\n\n        \n        Join Slack\n\n        \n        Snapchat\n\n        \n        SoundCloud\n\n        \n        Listen on Spotify\n\n        \n        Listen on Spotify\n\n        \n        Buy with Square\n\n        \n        Steam\n\n        \n        Strava\n\n        \n        Substack\n\n        \n        Telegram\n\n        \n        Threads\n\n        \n        Threema\n\n        \n        TikTok\n\n        \n        Trello\n\n        \n        Tumblr\n\n        \n        Twitch\n\n        \n        Twitter\n\n        \n        Unsplash\n\n        \n        Untappd\n\n        \n        Upwork\n\n        \n        Venmo\n\n        \n        Vimeo\n\n        \n        VRChat\n\n        \n        VSCO\n\n        \n        WhatsApp\n\n        \n        WordPress\n\n        \n        Follow on X\n\n        \n        Xing\n\n        \n        YouTube        \n\n        \n        Listen on YouTube Music\n\n        \n        Join Zoom Webinar  \n\n        \n        Read our blog\n\n        \n        Event RSVP\n\n        \n        Download File\n\n        \n        View the code\n\n        \n        Homelab Setup\n\n        \n        Email Us\n\n        \n        Email Us\n\n        \n        Visit Homepage\n\n        \n        Get Directions\n\n        \n        Call Us\n\n        \n        Leave us a review\n\n        \n        RSS Subscribe\n\n        \n        Visit Our Shop\n                \n        \n        10% Discount\n\n        \n        Send us a message\n\n        \n        Visit WebsitePrivacy Policy | Build your own by forking LittleLink."
+                ],
+                "output": "readability",
+                "pwd": "/Users/admin/Desktop/Archivebox/archive/1695452658.030267",
+                "schema": "ArchiveResult",
+                "start_ts": "2023-09-23T07:04:43.871193+00:00",
+                "status": "succeeded"
+            }
+        ],
+        "screenshot": [
+            {
+                "cmd": [
+                    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+                    "--headless",
+                    "--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.61 Safari/537.36 ArchiveBox/{VERSION} (+https://github.com/ArchiveBox/ArchiveBox/)",
+                    "--window-size=1440,2000",
+                    "--timeout=60000",
+                    "--screenshot",
+                    "https://links-9avtyb19e-sudo-self.vercel.app"
+                ],
+                "cmd_version": "Google Chrome 116.0.5845.187",
+                "end_ts": "2023-09-23T07:04:34.944471+00:00",
+                "index_texts": null,
+                "output": "screenshot.png",
+                "pwd": "/Users/admin/Desktop/Archivebox/archive/1695452658.030267",
+                "schema": "ArchiveResult",
+                "start_ts": "2023-09-23T07:04:33.636105+00:00",
+                "status": "succeeded"
+            }
+        ],
+        "singlefile": [
+            {
+                "cmd": [
+                    "/Users/admin/Desktop/Archivebox/node_modules/single-file/cli/single-file",
+                    "--browser-executable-path=/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+                    "--browser-args=[\"--headless\", \"--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.61 Safari/537.36 ArchiveBox/{VERSION} (+https://github.com/ArchiveBox/ArchiveBox/)\", \"--window-size=1440,2000\"]",
+                    "https://links-9avtyb19e-sudo-self.vercel.app",
+                    "singlefile.html"
+                ],
+                "cmd_version": "1.0.55",
+                "end_ts": "2023-09-23T07:04:32.588769+00:00",
+                "index_texts": null,
+                "output": "singlefile.html",
+                "pwd": "/Users/admin/Desktop/Archivebox/archive/1695452658.030267",
+                "schema": "ArchiveResult",
+                "start_ts": "2023-09-23T07:04:25.694385+00:00",
+                "status": "succeeded"
+            }
+        ],
+        "title": [
+            {
+                "cmd": [
+                    "curl",
+                    "--silent",
+                    "--location",
+                    "--compressed",
+                    "--max-time",
+                    "60",
+                    "--user-agent",
+                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.61 Safari/537.36 ArchiveBox/0.6.2 (+https://github.com/ArchiveBox/ArchiveBox/) curl/curl 8.1.2 (x86_64-apple-darwin22.0)",
+                    "https://links-9avtyb19e-sudo-self.vercel.app"
+                ],
+                "cmd_version": "curl 8.1.2 (x86_64-apple-darwin22.0)",
+                "end_ts": "2023-09-23T07:04:18.592247+00:00",
+                "index_texts": null,
+                "output": "Jedi Lynx",
+                "pwd": "/Users/admin/Desktop/Archivebox/archive/1695452658.030267",
+                "schema": "ArchiveResult",
+                "start_ts": "2023-09-23T07:04:18.082430+00:00",
+                "status": "succeeded"
+            }
+        ],
+        "wget": [
+            {
+                "cmd": [
+                    "wget",
+                    "--no-verbose",
+                    "--adjust-extension",
+                    "--convert-links",
+                    "--force-directories",
+                    "--backup-converted",
+                    "--span-hosts",
+                    "--no-parent",
+                    "-e",
+                    "robots=off",
+                    "--timeout=60",
+                    "--restrict-file-names=windows",
+                    "--warc-file=/Users/admin/Desktop/Archivebox/archive/1695452658.030267/warc/1695452675",
+                    "--page-requisites",
+                    "--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.61 Safari/537.36 ArchiveBox/0.6.2 (+https://github.com/ArchiveBox/ArchiveBox/) wget/GNU Wget 1.21.4",
+                    "--compression=auto",
+                    "https://links-9avtyb19e-sudo-self.vercel.app"
+                ],
+                "cmd_version": "GNU Wget 1.21.4",
+                "end_ts": "2023-09-23T07:04:43.868002+00:00",
+                "index_texts": null,
+                "output": "links-9avtyb19e-sudo-self.vercel.app/index.html",
+                "pwd": "/Users/admin/Desktop/Archivebox/archive/1695452658.030267",
+                "schema": "ArchiveResult",
+                "start_ts": "2023-09-23T07:04:35.872858+00:00",
+                "status": "succeeded"
+            }
+        ]
+    },
+    "icons": null,
+    "is_archived": true,
+    "is_static": false,
+    "latest": {
+        "archive_org": "https://web.archive.org/web/20230923070454/https://links-9avtyb19e-sudo-self.vercel.app/",
+        "dom": "output.html",
+        "favicon": "favicon.ico",
+        "git": null,
+        "media": "media",
+        "pdf": "output.pdf",
+        "screenshot": "screenshot.png",
+        "singlefile": "singlefile.html",
+        "title": "Jedi Lynx",
+        "warc": null,
+        "wget": "links-9avtyb19e-sudo-self.vercel.app/index.html"
+    },
+    "link_dir": "/Users/admin/Desktop/Archivebox/archive/1695452658.030267",
+    "newest_archive_date": "2023-09-23T07:04:51.596081+00:00",
+    "num_failures": 0,
+    "num_outputs": 12,
+    "oldest_archive_date": "2023-09-23T07:04:18.082430+00:00",
+    "path": "",
+    "schema": "Link",
+    "scheme": "https",
+    "snapshot_id": "ab788e04-07bc-467d-925c-7e1ef9dd38f6",
+    "sources": [
+        "/Users/admin/Desktop/Archivebox/sources/1695452658-import.txt"
+    ],
+    "tags": null,
+    "tags_str": "",
+    "timestamp": "1695452658.030267",
+    "title": "Jedi Lynx",
+    "updated": "2023-09-23T07:04:18.082381+00:00",
+    "updated_date": "2023-09-23 07:04",
+    "url": "https://links-9avtyb19e-sudo-self.vercel.app"
+}

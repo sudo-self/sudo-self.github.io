@@ -1,0 +1,35 @@
+<h2 id="adding-multiple-categories-in-posts">Adding Multiple Categories in Posts</h2>
+
+<p>To add categories in blog posts all you have to do is add a <strong>category</strong> key with category values in frontmatter of the post :</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">category</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">jekyll'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">guides'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">sample_category'</span><span class="pi">]</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<p>Then to render this category using link and pages. All we need to do is,</p>
+
+<ol>
+  <li>
+    <p>Create a new file with [your_category_name].md inside categories folder.</p>
+  </li>
+  <li>
+    <p>Copy categories/sample_category.md file and replace the content in [your_category_name].md in that. (Please don’t copy the code below its just sample, since it renders the jekyll syntax dynamically)</p>
+  </li>
+</ol>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">---</span>
+<span class="nx">layout</span><span class="p">:</span> <span class="nx">page</span>
+<span class="nx">title</span><span class="p">:</span> <span class="nx">Guides</span>
+<span class="nx">permalink</span><span class="p">:</span> <span class="o">/</span><span class="nx">blog</span><span class="o">/</span><span class="nx">categories</span><span class="o">/</span><span class="nx">your_category_name</span><span class="o">/</span>
+<span class="o">---</span>
+
+<span class="p">&lt;</span><span class="nt">h5</span><span class="p">&gt;</span> Posts by Category : Adding Multiple Categories in Posts <span class="p">&lt;/</span><span class="nt">h5</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="p">=</span><span class="s">"card"</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<p>Using the category, all the posts associated with the category will be listed on
+<code class="language-plaintext highlighter-rouge">http://localhost:4000/blog/categories/your_category_name</code></p>
