@@ -1,15 +1,10 @@
-# Jekyll site hosted with Github-Pages
-
-## https://sudo-self.github.io
-
+# <a href="https://sudo-self.github.io">Jekyll site hosted with Github-Pages</a>
 ### Clone the repo
 ```s
 $ git clone https://github.com/sudo-self/sudo-self.github.io
 $ cd sudo-self.github.io
 
 ```
-
-
 ### Install Ruby
 
 ```s
@@ -67,7 +62,7 @@ git push
 
 `ruby-install ruby`
 
-<img src="https://i.imgur.com/T2UAGUD.png" width="49%" alt="grass"/>
+<img src="https://i.imgur.com/T2UAGUD.png" width="100%" alt="grass"/>
 
 
 
