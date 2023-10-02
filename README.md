@@ -67,7 +67,7 @@ git push
 
 `ruby-install ruby`
 
-
+<img src="https://i.imgur.com/T2UAGUD.png" width="49%" alt="grass"/>
 
 
 
