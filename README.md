@@ -1,4 +1,5 @@
-# <a href="https://sudo-self.github.io">Jekyll GH Pages</a>
+## <a href="https://sudo-self.github.io">Github Pages</a>
+[![Deploy Jekyll with GitHub Pages dependencies preinstalled](https://github.com/sudo-self/sudo-self.github.io/actions/workflows/jekyll-gh-pages.yml/badge.svg)](https://github.com/sudo-self/sudo-self.github.io/actions/workflows/jekyll-gh-pages.yml)
 ### Clone the repo
 ```s
 $ git clone https://github.com/sudo-self/sudo-self.github.io
