@@ -1,4 +1,4 @@
-## <a href="https://sudo-self.github.io">Github Pages</a>&nbsp;[![Deploy Jekyll with GitHub Pages dependencies preinstalled](https://github.com/sudo-self/sudo-self.github.io/actions/workflows/jekyll-gh-pages.yml/badge.svg)](https://github.com/sudo-self/sudo-self.github.io/actions/workflows/jekyll-gh-pages.yml)
+## &nbsp;[![Deploy Jekyll with GitHub Pages dependencies preinstalled](https://github.com/sudo-self/sudo-self.github.io/actions/workflows/jekyll-gh-pages.yml/badge.svg)](https://github.com/sudo-self/sudo-self.github.io/actions/workflows/jekyll-gh-pages.yml)
 ![Screenshot 2024-01-10 at 5 00 31 PM](https://github.com/sudo-self/sudo-self.github.io/assets/119916323/fc2101f3-7842-4e7b-afbd-a5fc2540b587)
 
 ```s
