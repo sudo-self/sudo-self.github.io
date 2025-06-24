@@ -28,13 +28,16 @@ jobs:
 
       - name: Clean old site files except workflow and config files
         run: |
-          # Remove everything in root except:
-          # - .github folder (workflows)
-          # - .git folder
-          # - .gitignore
-          # - package.json & package-lock.json (optional, remove if you want)
-          # - README.md (optional, remove if you want)
-          find . -maxdepth 1 ! -name 'dist' ! -name '.github' ! -name '.git' ! -name '.gitignore' ! -name 'package.json' ! -name 'package-lock.json' ! -name 'README.md' -exec rm -rf {} +
+          find . -maxdepth 1 \
+            ! -name '.' \
+            ! -name 'dist' \
+            ! -name '.github' \
+            ! -name '.git' \
+            ! -name '.gitignore' \
+            ! -name 'package.json' \
+            ! -name 'package-lock.json' \
+            ! -name 'README.md' \
+            -exec rm -rf {} +
 
       - name: Copy dist files to repo root
         run: cp -a dist/. .
