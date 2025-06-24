@@ -1,3 +1,4 @@
-# https://www.robotstxt.org/robotstxt.html
+
 User-agent: *
 Disallow:
+sitemap: https://sudo-self.github.io/sitemap.xml
