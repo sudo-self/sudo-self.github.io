@@ -1,0 +1,53 @@
+name: Build and Deploy to GitHub Pages (Main branch root)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build with Vite
+        run: npx vite build
+
+      - name: Clean old site files except workflow and config files
+        run: |
+          # Remove everything in root except:
+          # - .github folder (workflows)
+          # - .git folder
+          # - .gitignore
+          # - package.json & package-lock.json (optional, remove if you want)
+          # - README.md (optional, remove if you want)
+          find . -maxdepth 1 ! -name 'dist' ! -name '.github' ! -name '.git' ! -name '.gitignore' ! -name 'package.json' ! -name 'package-lock.json' ! -name 'README.md' -exec rm -rf {} +
+
+      - name: Copy dist files to repo root
+        run: cp -a dist/. .
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Deploy updated site [skip ci]"
+            git push origin main
+          fi
+
