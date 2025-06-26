@@ -68,13 +68,13 @@ const CONFIG = {
       'https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/Jesse%20Roper%20–%20Resume.pdf',
   },
   skills: [
-    'Fiber Internet',
+    'Fiber',
     'RF',
     'VOIP',
     'IPTV',
     'Node.js',
     'Next.js',
-    'Cloudflared Workers',
+    'Workers',
     'API',
     'MS 365',
     'macOS',
@@ -86,7 +86,7 @@ const CONFIG = {
   experiences: [
     {
       company: 'Sparklight',
-      position: 'Fiber Technician',
+      position: 'Technician',
       from: 'September 2021',
       to: 'September 2024',
       companyLink: 'https://sparklighttv.app',
@@ -121,24 +121,38 @@ const CONFIG = {
       to: 'present',
     },
   ],
-  publications: [
-    {
-      title: 'Dark Mode Anything',
-      journalName: 'dev.to',
-      authors: 'sudo-self',
-      link: 'https://dev.to/sudo-self/dark-mode-23dd',
-      description:
-        'Life is already complicated but dark mode does not have to be. Add a class to an SVG to use as a toggle. class="dark mode" SVG onclick="toggle dark mode" The dark mode style changes background color to dark gray and text color to gray The SVG toggle style sets fill and color to dark gray width and height and cursor to pointer, Clicking the SVG will toggle dark mode on and off. Demo https://codepen.io/sudo-self/pen/zxxpdPB',
-    },
-    {
-      title: 'Sweet Sitemap Generator',
-      journalName: 'npm -i sweet-sitemap-generator',
-      Usage: 'npx sweet-sitemap-generator [url]',
-      authors: 'sudo-self',
-      link: 'https://www.npmjs.com/package/sweet-sitemap-generator',
-      description:
-        'A quick local server first clone the repository from GitHub by running git clone followed by the URL Then change into the project folder by running cd sweet sitemap generator Next start the server by running node server.js After that you can create sitemaps using curl with a POST request to localhost on port 3000 or you can install the tool globally with npm and run it using npx followed by the URL you want to generate the sitemap.',
-    },
+    publications: [
+      {
+        title: 'Dark Mode Anything',
+        journalName: 'dev.to',
+        authors: 'sudo-self',
+        link: 'https://dev.to/sudo-self/dark-mode-23dd',
+        description:
+          'Life is often complicated but dark mode does not have to be. Adding a class to an SVG to use as a toggle. class="dark mode" SVG onclick="toggle dark mode" The dark mode style changes background color to dark gray and text color to gray The SVG toggle style sets fill and color to dark gray width and height and cursor to pointer, Clicking the SVG will toggle dark mode on and off. Demo https://codepen.io/sudo-self/pen/zxxpdPB',
+      },
+      {
+        title: 'Web Server',
+        journalName: 'Node.js',
+        authors: 'sudo-self',
+        link: '',
+        description: `
+//server.js
+     touch server.js
+
+//code
+    echo "const http = require('http');
+    const server = http.createServer((req, res) => {
+    res.end('Hello World');
+        });
+    server.listen(3000, () => {
+    console.log('Server running at http://localhost:3000');
+        });" > server.js
+
+//Run
+    node server.js`,
+      }
+
+
   ],
   blog: {
     source: 'dev',
@@ -195,7 +209,7 @@ const CONFIG = {
       '--rounded-btn': '3rem',
     },
   },
-  footer: `🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a 
+  footer: `<a 
       class="text-primary" href="https://sudo-self.com"
       target="_blank"
       rel="noreferrer"

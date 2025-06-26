@@ -51,7 +51,7 @@ export const getSanitizedConfig = (
           },
         },
         external: {
-          header: config?.projects?.external?.header || 'My Projects',
+          header: config?.projects?.external?.header || 'Publications',
           projects: config?.projects?.external?.projects || [],
         },
       },
@@ -219,7 +219,7 @@ export const setupHotjar = (hotjarConfig: SanitizedHotjar): void => {
 export const ga = {
   event(action: string, params: EventParams): void {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
       (window as any)?.gtag('event', action, params);
     } catch (error) {
       console.error(error);

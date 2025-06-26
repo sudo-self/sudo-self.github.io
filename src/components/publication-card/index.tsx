@@ -26,41 +26,15 @@ const PublicationCard = ({
                         className: 'mb-2 mx-auto',
                       })}
                     </h2>
-                    <div>
-                      {skeleton({
-                        widthCls: 'w-20',
-                        heightCls: 'h-4',
-                        className: 'mb-2 mx-auto',
-                      })}
-                    </div>
-                    <div>
-                      {skeleton({
-                        widthCls: 'w-20',
-                        heightCls: 'h-4',
-                        className: 'mb-2 mx-auto',
-                      })}
-                    </div>
-                    <div>
-                      {skeleton({
-                        widthCls: 'w-full',
-                        heightCls: 'h-4',
-                        className: 'mb-2 mx-auto',
-                      })}
-                    </div>
-                    <div>
-                      {skeleton({
-                        widthCls: 'w-full',
-                        heightCls: 'h-4',
-                        className: 'mb-2 mx-auto',
-                      })}
-                    </div>
-                    <div>
-                      {skeleton({
-                        widthCls: 'w-full',
-                        heightCls: 'h-4',
-                        className: 'mb-2 mx-auto',
-                      })}
-                    </div>
+                    {[...Array(5)].map((_, i) => (
+                      <div key={i}>
+                        {skeleton({
+                          widthCls: 'w-full',
+                          heightCls: 'h-4',
+                          className: 'mb-2 mx-auto',
+                        })}
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -78,7 +52,7 @@ const PublicationCard = ({
       <a
         className="card shadow-lg compact bg-base-100 cursor-pointer"
         key={index}
-        href={item.link}
+        href={item.link || '#'}
         target="_blank"
         rel="noreferrer"
       >
@@ -100,13 +74,19 @@ const PublicationCard = ({
                   )}
                   {item.authors && (
                     <p className="text-base-content opacity-50 text-sm">
-                      Author: {item.authors}
+                      author: {item.authors}
                     </p>
                   )}
                   {item.description && (
-                    <p className="mt-2 text-base-content text-opacity-60 text-sm text-justify">
-                      {item.description}
-                    </p>
+                    item.description.includes('\n') ? (
+                      <pre className="bg-base-200 text-base-content text-opacity-70 text-left text-sm mt-2 p-3 rounded-box whitespace-pre-wrap font-mono overflow-x-auto">
+                        <code>{item.description}</code>
+                      </pre>
+                    ) : (
+                      <p className="mt-2 text-base-content text-opacity-60 text-sm text-justify">
+                        {item.description}
+                      </p>
+                    )
                   )}
                 </div>
               </div>
