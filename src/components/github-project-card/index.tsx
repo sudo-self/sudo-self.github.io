@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Fragment } from 'react';
 import { AiOutlineFork, AiOutlineStar } from 'react-icons/ai';
 import { MdInsertLink } from 'react-icons/md';
@@ -19,6 +20,22 @@ const GithubProjectCard = ({
   username: string;
   googleAnalyticsId?: string;
 }) => {
+  useEffect(() => {
+    // Load GitHub buttons script once
+    const existingScript = document.getElementById('github-buttons-script');
+    if (!existingScript) {
+      const script = document.createElement('script');
+      script.src = 'https://buttons.github.io/buttons.js';
+      script.async = true;
+      script.defer = true;
+      script.id = 'github-buttons-script';
+      document.body.appendChild(script);
+    } else {
+      // Re-render GitHub buttons if script is already loaded
+      (window as any).GitHubButtons?.render?.();
+    }
+  }, []);
+
   if (!loading && githubProjects.length === 0) return;
 
   const renderSkeleton = () => {
@@ -123,16 +140,18 @@ const GithubProjectCard = ({
                   {loading ? (
                     skeleton({ widthCls: 'w-40', heightCls: 'h-8' })
                   ) : (
-                    <a
-                      className="github-button"
-                      href="https://github.com/sudo-self"
-                      data-color-scheme="no-preference: light_high_contrast; light: light_high_contrast; dark: dark_high_contrast;"
-                      data-size="large"
-                      data-show-count="true"
-                      aria-label="Follow @sudo-self on GitHub"
-                    >
-                      Follow @sudo-self
-                    </a>
+                    <div>
+                      <a
+                        className="github-button"
+                        href="https://github.com/sudo-self"
+                        data-color-scheme="no-preference: light_high_contrast; light: light_high_contrast; dark: dark_high_contrast;"
+                        data-size="large"
+                        data-show-count="true"
+                        aria-label="Follow @sudo-self on GitHub"
+                      >
+                        Follow @sudo-self
+                      </a>
+                    </div>
                   )}
                 </div>
                 <div className="col-span-2">
@@ -150,5 +169,6 @@ const GithubProjectCard = ({
 };
 
 export default GithubProjectCard;
+
 
 
