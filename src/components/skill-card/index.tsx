@@ -13,7 +13,11 @@ const SkillCard = ({
             {loading ? (
               skeleton({ widthCls: 'w-32', heightCls: 'h-8' })
             ) : (
-              <span className="text-base-content opacity-70">Code</span>
+              <img
+                src="https://img.shields.io/badge/Web-Languages-pink"
+                alt="Badge Preview"
+                className="h-6"
+              />
             )}
           </h5>
         </div>
@@ -34,4 +38,5 @@ const SkillCard = ({
 };
 
 export default SkillCard;
+
 
