@@ -131,6 +131,8 @@ const GithubProjectCard = ({
           <div className="col-span-2">
             <div className="card compact bg-base-100 shadow bg-opacity-40">
               <div className="card-body">
+                <!-- star button -->
+                 <script async defer src="https://buttons.github.io/buttons.js"></script>
                 <div className="mx-3 flex items-center justify-between mb-2">
                   {loading ? (
                     skeleton({ widthCls: 'w-40', heightCls: 'h-8' })
