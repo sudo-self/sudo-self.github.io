@@ -52,7 +52,7 @@ const ThemeChanger = ({
               })
             ) : (
               <span className="text-base-content opacity-70 flex items-center space-x-2">
-                🌼UI
+                🌼UI&nbsp;&nbsp;&nbsp;
                 <a
                   href="https://vercel.com/new/clone?repository-url=https://github.com/sudo-self/sudo-self.github.io"
                   target="_blank"
@@ -131,4 +131,5 @@ const ThemeChanger = ({
 };
 
 export default ThemeChanger;
+
 
