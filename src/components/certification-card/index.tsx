@@ -38,26 +38,32 @@ const CertificationCard = ({
   const badgeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const existingScript = document.querySelector(
-      'script[src*="credly.com/assets/utilities/embed.js"]'
-    );
+    const loadCredlyScript = () => {
+      const existingScript = document.querySelector(
+        'script[src*="credly.com/assets/utilities/embed.js"]'
+      );
 
-    if (!existingScript) {
-      const script = document.createElement('script');
-      script.src = 'https://cdn.credly.com/assets/utilities/embed.js';
-      script.async = true;
-      script.onload = () => {
+      if (!existingScript) {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.credly.com/assets/utilities/embed.js';
+        script.async = true;
+        script.onload = () => {
+          if ((window as any).__CredlyBadge__) {
+            (window as any).__CredlyBadge__.renderBadge();
+          }
+        };
+        document.body.appendChild(script);
+      } else {
         if ((window as any).__CredlyBadge__) {
           (window as any).__CredlyBadge__.renderBadge();
         }
-      };
-      document.body.appendChild(script);
-    } else {
-      if ((window as any).__CredlyBadge__) {
-        (window as any).__CredlyBadge__.renderBadge();
       }
+    };
+
+    if (!loading) {
+      loadCredlyScript();
     }
-  }, []);
+  }, [loading]);
 
   const renderSkeleton = () => {
     const array = [];
@@ -65,15 +71,8 @@ const CertificationCard = ({
       array.push(
         <ListItem
           key={index}
-          year={skeleton({
-            widthCls: 'w-5/12',
-            heightCls: 'h-4',
-          })}
-          name={skeleton({
-            widthCls: 'w-6/12',
-            heightCls: 'h-4',
-            className: 'my-1.5',
-          })}
+          year={skeleton({ widthCls: 'w-5/12', heightCls: 'h-4' })}
+          name={skeleton({ widthCls: 'w-6/12', heightCls: 'h-4', className: 'my-1.5' })}
           body={skeleton({ widthCls: 'w-6/12', heightCls: 'h-3' })}
         />
       );
@@ -89,37 +88,29 @@ const CertificationCard = ({
             {loading ? (
               skeleton({ widthCls: 'w-32', heightCls: 'h-8' })
             ) : (
-              <span className="text-base-content opacity-70">
-                CompTia Tech+
-              </span>
+              <span className="text-base-content opacity-70">CompTia Tech+</span>
             )}
           </h5>
         </div>
         <div className="text-base-content text-opacity-60">
           <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-4">
-            {loading ? (
-              renderSkeleton()
-            ) : (
-              <>
-                {certifications.map((certification, index) => (
-                  <ListItem
-                    key={index}
-                    year={certification.year}
-                    name={certification.name}
-                    body={certification.body}
-                    link={certification.link}
-                  />
-                ))}
-              </>
-            )}
+            {loading ? renderSkeleton() : certifications.map((certification, index) => (
+              <ListItem
+                key={index}
+                year={certification.year}
+                name={certification.name}
+                body={certification.body}
+                link={certification.link}
+              />
+            ))}
           </ol>
         </div>
 
-        {/* Credly Badge Embed */}
+        {/* Comptia tech+ */}
         {!loading && (
-          <div className="flex justify-center mt-6" ref={badgeRef}>
+          <div className="flex justify-center mt-6">
             <div
-              className="credly-badge"
+              ref={badgeRef}
               data-iframe-width="150"
               data-iframe-height="270"
               data-share-badge-id="c8de13c5-ae1d-42c3-8d2e-96cb8a0b2bc7"
@@ -133,3 +124,4 @@ const CertificationCard = ({
 };
 
 export default CertificationCard;
+
