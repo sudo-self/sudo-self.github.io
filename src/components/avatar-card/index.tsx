@@ -27,6 +27,23 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
   return (
     <div className="card shadow-lg compact bg-base-100">
       <div className="grid place-items-center py-8">
+
+        {/* Top GIFs */}
+        <div className="flex gap-3 mb-4">
+          <img
+            src="https://user-images.githubusercontent.com/65187002/144930161-2f783401-8d27-4fdf-a2f7-cc0ba32f1f1f.gif"
+            width="80"
+            alt="GIF 1"
+            className="rounded"
+          />
+          <img
+            src="https://user-images.githubusercontent.com/65187002/144930161-2f783401-8d27-4fdf-a2f7-cc0ba32f1f1f.gif"
+            width="80"
+            alt="GIF 2"
+            className="rounded"
+          />
+        </div>
+
         {loading || !profile ? (
           <div className="avatar opacity-90">
             <div className="mb-8 rounded-full w-32 h-32">
@@ -58,6 +75,7 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
             </div>
           </div>
         )}
+
         <div className="text-center mx-auto px-8">
           <h5 className="font-bold text-2xl">
             {loading || !profile ? (
@@ -72,6 +90,7 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
               : profile.bio}
           </div>
         </div>
+
         {resumeFileUrl &&
           (loading ? (
             <div className="mt-6">
@@ -89,7 +108,6 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
             </a>
           ))}
 
-        {/* GitHub Stats */}
         {!loading && (
           <div className="mt-6 px-6 w-full flex justify-center">
             <img
@@ -105,6 +123,7 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
 };
 
 export default AvatarCard;
+
 
 
 
