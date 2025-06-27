@@ -38,7 +38,9 @@ const CertificationCard = ({
   const badgeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const existingScript = document.querySelector('script[src*="credly.com/assets/utilities/embed.js"]');
+    const existingScript = document.querySelector(
+      'script[src*="credly.com/assets/utilities/embed.js"]'
+    );
 
     if (!existingScript) {
       const script = document.createElement('script');
@@ -73,10 +75,9 @@ const CertificationCard = ({
             className: 'my-1.5',
           })}
           body={skeleton({ widthCls: 'w-6/12', heightCls: 'h-3' })}
-        />,
+        />
       );
     }
-
     return array;
   };
 
@@ -89,7 +90,7 @@ const CertificationCard = ({
               skeleton({ widthCls: 'w-32', heightCls: 'h-8' })
             ) : (
               <span className="text-base-content opacity-70">
-                Certification
+                CompTia Tech+
               </span>
             )}
           </h5>
@@ -118,6 +119,7 @@ const CertificationCard = ({
         {!loading && (
           <div className="flex justify-center mt-6" ref={badgeRef}>
             <div
+              className="credly-badge"
               data-iframe-width="150"
               data-iframe-height="270"
               data-share-badge-id="c8de13c5-ae1d-42c3-8d2e-96cb8a0b2bc7"
