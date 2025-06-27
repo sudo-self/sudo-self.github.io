@@ -51,7 +51,7 @@ const ThemeChanger = ({
                 className: 'mb-1',
               })
             ) : (
-              <span className="text-base-content opacity-70">UI</span>
+              <span className="text-base-content opacity-70">🌼UI</span>
             )}
           </h5>
           <span className="text-base-content text-opacity-40 capitalize text-sm">
