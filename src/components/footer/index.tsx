@@ -10,14 +10,19 @@ const Footer = ({
   if (!content) return null;
 
   return (
-    <div className="card-body">
+    <div className="card-body text-center">
       {loading ? (
         skeleton({ widthCls: 'w-52', heightCls: 'h-6' })
       ) : (
-        <div dangerouslySetInnerHTML={{ __html: content }} />
+        <div
+          dangerouslySetInnerHTML={{
+            __html: content,
+          }}
+        />
       )}
     </div>
   );
 };
 
 export default Footer;
+
