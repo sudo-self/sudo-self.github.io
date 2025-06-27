@@ -19,6 +19,18 @@ const GithubProjectCard = ({
   username: string;
   googleAnalyticsId?: string;
 }) => {
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.setAttribute('async', '');
+    script.setAttribute('defer', '');
+    script.src = 'https://buttons.github.io/buttons.js';
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   if (!loading && githubProjects.length === 0) return null;
 
   const renderSkeleton = () => {
@@ -123,15 +135,11 @@ const GithubProjectCard = ({
                   {loading ? (
                     skeleton({ widthCls: 'w-40', heightCls: 'h-8' })
                   ) : (
-                    <GitHubButton
-                      href="https://github.com/sudo-self"
-                      data-color-scheme="no-preference: light_high_contrast; light: light_high_contrast; dark: dark_high_contrast"
-                      data-size="large"
-                      data-show-count="true"
-                      aria-label="Follow @sudo-self on GitHub"
-                    >
-                      Follow @sudo-self
-                    </GitHubButton>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: `<a class="github-button" href="https://github.com/buttons/github-buttons" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star buttons/github-buttons on GitHub">Star</a>`,
+                      }}
+                    />
                   )}
                 </div>
                 <div className="col-span-2">
@@ -149,6 +157,7 @@ const GithubProjectCard = ({
 };
 
 export default GithubProjectCard;
+
 
 
 
