@@ -80,7 +80,7 @@ const CertificationCard = ({
         {!loading && (
           <div className="flex justify-center mt-6">
             <img
-              src="/tech plus.png"
+              src="/techplus.png"
               alt="Tech Plus Badge"
               className="w-[150px] h-auto rounded shadow"
             />
