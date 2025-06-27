@@ -125,13 +125,13 @@ const GithubProjectCard = ({
                   ) : (
                     <a
                       className="github-button"
-                      href="https://github.com/sudo-self/sudo-self.github.io"
+                      href="https://github.com/sudo-self"
                       data-color-scheme="no-preference: light_high_contrast; light: light_high_contrast; dark: dark_high_contrast;"
                       data-size="large"
                       data-show-count="true"
-                      aria-label="Star sudo-self/sudo-self.github.io on GitHub"
+                      aria-label="Follow @sudo-self on GitHub"
                     >
-                      Star
+                      Follow @sudo-self
                     </a>
                   )}
                 </div>
@@ -150,4 +150,5 @@ const GithubProjectCard = ({
 };
 
 export default GithubProjectCard;
+
 
