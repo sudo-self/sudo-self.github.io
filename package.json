@@ -1,16 +1,16 @@
 {
-  "name": "@arifszn/gitprofile",
-  "description": "Create an automatic portfolio based on GitHub profile",
+  "name": "sudo-self.github.io",
+  "description": "A Jekyll themed git portfolio of sudo-self",
   "version": "3.1.0",
   "type": "module",
   "license": "MIT",
   "author": "arifszn",
   "repository": {
     "type": "git",
-    "url": "https://github.com/arifszn/gitprofile.git"
+    "url": "https://github.com/sudo-self/sudo-self.github.io"
   },
   "bugs": {
-    "url": "https://github.com/arifszn/gitprofile/issues"
+    "url": "https://github.com/sudo-self/sudo-self.github.io/issues"
   },
   "scripts": {
     "dev": "vite",

@@ -11,12 +11,17 @@ const ListItem = ({
   degree?: React.ReactNode;
   institution?: React.ReactNode;
 }) => (
+<<<<<<< HEAD
   <li className="mb-5 ml-4 relative">
+=======
+  <li className="mb-5 ml-4">
+>>>>>>> 269c628a0ba3c8245e6abc1f73587f1be97728f7
     <div
       className="absolute w-2 h-2 bg-base-300 rounded-full border border-base-300 mt-1.5"
       style={{ left: '-4.5px' }}
     ></div>
     <div className="my-0.5 text-xs">{time}</div>
+<<<<<<< HEAD
     <h3 className="font-semibold flex items-center gap-2">
       <img
         src="/degree.png"
@@ -25,6 +30,9 @@ const ListItem = ({
       />
       <span>{degree}</span>
     </h3>
+=======
+    <h3 className="font-semibold">{degree}</h3>
+>>>>>>> 269c628a0ba3c8245e6abc1f73587f1be97728f7
     <div className="mb-4 font-normal">{institution}</div>
   </li>
 );
@@ -95,4 +103,7 @@ const EducationCard = ({
 };
 
 export default EducationCard;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 269c628a0ba3c8245e6abc1f73587f1be97728f7

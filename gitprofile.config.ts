@@ -15,7 +15,11 @@ const CONFIG = {
         limit: 8,
         exclude: {
           forks: false,
+<<<<<<< HEAD
           projects: [],
+=======
+          projects: [], // Example: ['sudo-self/my-project1']
+>>>>>>> 269c628a0ba3c8245e6abc1f73587f1be97728f7
         },
       },
       manual: {
@@ -23,6 +27,7 @@ const CONFIG = {
       },
     },
     external: {
+<<<<<<< HEAD
       header: 'Google Play Developers',
       projects: [
         {
@@ -40,6 +45,25 @@ const CONFIG = {
           imageUrl:
             'https://play-lh.googleusercontent.com/s74hZMI5Id0NWSdqO3Ua4Kd10LMV02B5XM7UmsMoz5Ca9ZXZZOSN2Q5u8d-FQwe9kcw=s188',
           link: 'https://play.google.com/store/apps/dev?id=5617955831297880975&hl=en-US',
+=======
+      header: 'Projects',
+      projects: [
+        {
+          title: 'Project Name',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut.',
+          imageUrl:
+            'https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg',
+          link: 'https://example.com',
+        },
+        {
+          title: 'Project Name',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut.',
+          imageUrl:
+            'https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg',
+          link: 'https://example.com',
+>>>>>>> 269c628a0ba3c8245e6abc1f73587f1be97728f7
         },
       ],
     },
@@ -72,7 +96,12 @@ const CONFIG = {
     email: 'me@JesseJesse.xyz',
   },
   resume: {
+<<<<<<< HEAD
     fileUrl: 'https://me.jessejesse.com/',
+=======
+    fileUrl:
+      'https://me.jessejesse.com/',
+>>>>>>> 269c628a0ba3c8245e6abc1f73587f1be97728f7
   },
   skills: [
     'PHP',
@@ -128,6 +157,7 @@ const CONFIG = {
       to: 'Present',
     },
   ],
+<<<<<<< HEAD
     publications: [
       {
         title: 'npm i sudo-3d',
@@ -148,6 +178,28 @@ const CONFIG = {
           'Node.js is an open-source, cross-platform JavaScript runtime environment that allows developers to execute JavaScript code outside of a web browser. Traditionally, JavaScript was primarily used for client-side (frontend) web development to create interactive web pages. Node.js extends JavaScript scapabilities by enabling it to be used for server-side (backend) development, command-line tools, and other applications.',
       },
     ],
+=======
+  publications: [
+    {
+      title: 'Publication Title',
+      conferenceName: '',
+      journalName: 'Journal Name',
+      authors: 'John Doe, Jane Smith',
+      link: 'https://example.com',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    },
+    {
+      title: 'Publication Title',
+      conferenceName: 'Conference Name',
+      journalName: '',
+      authors: 'John Doe, Jane Smith',
+      link: 'https://example.com',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    },
+  ],
+>>>>>>> 269c628a0ba3c8245e6abc1f73587f1be97728f7
   blog: {
     source: 'dev',
     username: 'sudo-self',
@@ -215,9 +267,16 @@ const CONFIG = {
       target="_blank"
       rel="noreferrer"
     >sudo-self.github.io</a>`,
+<<<<<<< HEAD
+=======
+
+>>>>>>> 269c628a0ba3c8245e6abc1f73587f1be97728f7
   enablePWA: true,
 };
 
 export default CONFIG;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 269c628a0ba3c8245e6abc1f73587f1be97728f7
