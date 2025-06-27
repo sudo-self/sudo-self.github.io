@@ -19,18 +19,6 @@ const GithubProjectCard = ({
   username: string;
   googleAnalyticsId?: string;
 }) => {
-  useEffect(() => {
-    const scriptId = 'github-buttons-script';
-    if (!document.getElementById(scriptId)) {
-      const script = document.createElement('script');
-      script.setAttribute('async', '');
-      script.setAttribute('defer', '');
-      script.src = 'https://buttons.github.io/buttons.js';
-      script.id = scriptId;
-      document.body.appendChild(script);
-    }
-  }, []);
-
   if (!loading && githubProjects.length === 0) return null;
 
   const renderSkeleton = () => {
@@ -131,16 +119,14 @@ const GithubProjectCard = ({
           <div className="col-span-2">
             <div className="card compact bg-base-100 shadow bg-opacity-40">
               <div className="card-body">
-                <!-- star button -->
-                 <script async defer src="https://buttons.github.io/buttons.js"></script>
                 <div className="mx-3 flex items-center justify-between mb-2">
                   {loading ? (
                     skeleton({ widthCls: 'w-40', heightCls: 'h-8' })
                   ) : (
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: `<a class="github-button" href="https://github.com/buttons/github-buttons" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star buttons/github-buttons on GitHub">Star</a>`,
-                      }}
+                    <img
+                      src="https://komarev.com/ghpvc/?username=sudo-self&style=flat-square&color=blue"
+                      alt="Profile Views Counter"
+                      className="h-6"
                     />
                   )}
                 </div>
@@ -159,6 +145,7 @@ const GithubProjectCard = ({
 };
 
 export default GithubProjectCard;
+
 
 
 
