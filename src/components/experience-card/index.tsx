@@ -133,12 +133,11 @@ const GithubSnakeGame = () => {
   return (
     <div className="card shadow-lg compact bg-base-100">
       <div className="card-body flex flex-col items-center">
-        <h5 className="card-title text-xl text-base-content opacity-70 mb-4">🐍 GitHub Snake Game</h5>
         <div className="bg-white border border-base-300 rounded-lg p-4 w-full flex flex-col items-center">
           <div className="w-full flex justify-between mb-2">
-            <span className="text-sm font-medium text-base-content">Score: {score}</span>
+            <span className="text-sm font-medium text-base-content">🐍 {score}</span>
             <button
-              className="bg-green-500 hover:bg-green-600 text-white text-sm font-bold px-3 py-1 rounded"
+              className="bg-green-700 hover:bg-indigo-600 text-white text-sm font-bold px-3 py-1 rounded"
               onClick={startGame}
             >
               {gameOver ? 'Restart' : 'Start'}
