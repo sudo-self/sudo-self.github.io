@@ -20,15 +20,15 @@ const GithubProjectCard = ({
   googleAnalyticsId?: string;
 }) => {
   useEffect(() => {
-    const script = document.createElement('script');
-    script.setAttribute('async', '');
-    script.setAttribute('defer', '');
-    script.src = 'https://buttons.github.io/buttons.js';
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
+    const scriptId = 'github-buttons-script';
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement('script');
+      script.setAttribute('async', '');
+      script.setAttribute('defer', '');
+      script.src = 'https://buttons.github.io/buttons.js';
+      script.id = scriptId;
+      document.body.appendChild(script);
+    }
   }, []);
 
   if (!loading && githubProjects.length === 0) return null;
@@ -157,6 +157,7 @@ const GithubProjectCard = ({
 };
 
 export default GithubProjectCard;
+
 
 
 
