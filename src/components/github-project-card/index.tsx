@@ -19,58 +19,41 @@ const GithubProjectCard = ({
   username: string;
   googleAnalyticsId?: string;
 }) => {
-  if (!loading && githubProjects.length === 0) {
-    return;
-  }
+  if (!loading && githubProjects.length === 0) return;
 
   const renderSkeleton = () => {
-    const array = [];
-    for (let index = 0; index < limit; index++) {
-      array.push(
-        <div className="card shadow-lg compact bg-base-100" key={index}>
-          <div className="flex justify-between flex-col p-8 h-full w-full">
-            <div>
-              <div className="flex items-center">
-                <span>
-                  <h5 className="card-title text-lg">
-                    {skeleton({
-                      widthCls: 'w-32',
-                      heightCls: 'h-8',
-                      className: 'mb-1',
-                    })}
-                  </h5>
-                </span>
-              </div>
-              <div className="mb-5 mt-1">
-                {skeleton({
-                  widthCls: 'w-full',
-                  heightCls: 'h-4',
-                  className: 'mb-2',
-                })}
-                {skeleton({ widthCls: 'w-full', heightCls: 'h-4' })}
-              </div>
+    return Array.from({ length: limit }, (_, index) => (
+      <div className="card shadow-lg compact bg-base-100" key={index}>
+        <div className="flex justify-between flex-col p-8 h-full w-full">
+          <div>
+            <div className="flex items-center">
+              <h5 className="card-title text-lg">
+                {skeleton({ widthCls: 'w-32', heightCls: 'h-8', className: 'mb-1' })}
+              </h5>
             </div>
-            <div className="flex justify-between">
-              <div className="flex flex-grow">
-                <span className="mr-3 flex items-center">
-                  {skeleton({ widthCls: 'w-12', heightCls: 'h-4' })}
-                </span>
-                <span className="flex items-center">
-                  {skeleton({ widthCls: 'w-12', heightCls: 'h-4' })}
-                </span>
-              </div>
-              <div>
-                <span className="flex items-center">
-                  {skeleton({ widthCls: 'w-12', heightCls: 'h-4' })}
-                </span>
-              </div>
+            <div className="mb-5 mt-1">
+              {skeleton({ widthCls: 'w-full', heightCls: 'h-4', className: 'mb-2' })}
+              {skeleton({ widthCls: 'w-full', heightCls: 'h-4' })}
             </div>
           </div>
-        </div>,
-      );
-    }
-
-    return array;
+          <div className="flex justify-between">
+            <div className="flex flex-grow">
+              <span className="mr-3 flex items-center">
+                {skeleton({ widthCls: 'w-12', heightCls: 'h-4' })}
+              </span>
+              <span className="flex items-center">
+                {skeleton({ widthCls: 'w-12', heightCls: 'h-4' })}
+              </span>
+            </div>
+            <div>
+              <span className="flex items-center">
+                {skeleton({ widthCls: 'w-12', heightCls: 'h-4' })}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    ));
   };
 
   const renderProjects = () => {
@@ -81,17 +64,13 @@ const GithubProjectCard = ({
         key={index}
         onClick={(e) => {
           e.preventDefault();
-
           try {
             if (googleAnalyticsId) {
-              ga.event('Click project', {
-                project: item.name,
-              });
+              ga.event('Click project', { project: item.name });
             }
           } catch (error) {
             console.error(error);
           }
-
           window?.open(item.html_url, '_blank');
         }}
       >
@@ -141,25 +120,18 @@ const GithubProjectCard = ({
             <div className="card compact bg-base-100 shadow bg-opacity-40">
               <div className="card-body">
                 <div className="mx-3 flex items-center justify-between mb-2">
-                  <h5 className="card-title">
-                    {loading ? (
-                      skeleton({ widthCls: 'w-40', heightCls: 'h-8' })
-                    ) : (
-                      <span className="text-base-content opacity-70">
-                        {header}
-                      </span>
-                    )}
-                  </h5>
                   {loading ? (
-                    skeleton({ widthCls: 'w-10', heightCls: 'h-5' })
+                    skeleton({ widthCls: 'w-40', heightCls: 'h-8' })
                   ) : (
                     <a
-                      href={`https://github.com/${username}?tab=repositories`}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-base-content opacity-50 hover:underline"
+                      className="github-button"
+                      href="https://github.com/sudo-self/sudo-self.github.io"
+                      data-color-scheme="no-preference: light_high_contrast; light: light_high_contrast; dark: dark_high_contrast;"
+                      data-size="large"
+                      data-show-count="true"
+                      aria-label="Star sudo-self/sudo-self.github.io on GitHub"
                     >
-                      See All
+                      Star
                     </a>
                   )}
                 </div>
@@ -178,3 +150,4 @@ const GithubProjectCard = ({
 };
 
 export default GithubProjectCard;
+
