@@ -101,15 +101,34 @@ const GithubSnakeGame = () => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      switch (e.key) {
-        case 'ArrowUp': if (direction !== 'DOWN') setDirection('UP'); break;
-        case 'ArrowDown': if (direction !== 'UP') setDirection('DOWN'); break;
-        case 'ArrowLeft': if (direction !== 'RIGHT') setDirection('LEFT'); break;
-        case 'ArrowRight': if (direction !== 'LEFT') setDirection('RIGHT'); break;
+      const key = e.key.toLowerCase();
+
+      // Prevent page scroll for arrow keys
+      if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+        e.preventDefault();
+      }
+
+      switch (key) {
+        case 'arrowup':
+        case 'w':
+          if (direction !== 'DOWN') setDirection('UP');
+          break;
+        case 'arrowdown':
+        case 's':
+          if (direction !== 'UP') setDirection('DOWN');
+          break;
+        case 'arrowleft':
+        case 'a':
+          if (direction !== 'RIGHT') setDirection('LEFT');
+          break;
+        case 'arrowright':
+        case 'd':
+          if (direction !== 'LEFT') setDirection('RIGHT');
+          break;
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown, { passive: false });
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [direction]);
 
@@ -153,12 +172,15 @@ const GithubSnakeGame = () => {
             <div className="mt-3 text-red-600 font-bold text-base">Game Over!</div>
           )}
         </div>
-        <div className="text-xs text-base-content opacity-40 mt-3">Use Arrow Keys to control the snake</div>
+        <div className="text-xs text-base-content opacity-40 mt-3">
+          Use [Arrow Keys] or [W][A][S][D] to move the snake
+        </div>
       </div>
     </div>
   );
 };
 
 export default GithubSnakeGame;
+
 
 
