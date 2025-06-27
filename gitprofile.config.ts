@@ -1,12 +1,14 @@
+// gitprofile.config.ts
+
 const CONFIG = {
   github: {
     username: 'sudo-self',
   },
-  base: '/',  // <-- changed from '/gitprofile/' to '/' here
+  base: '/',
   projects: {
     github: {
       display: true,
-      header: 'Github Repos',
+      header: 'Github Projects',
       mode: 'automatic',
       automatic: {
         sortBy: 'stars',
@@ -17,36 +19,40 @@ const CONFIG = {
         },
       },
       manual: {
-        projects: ['sudo-self/bg-bye', 'sudo-self/deploy-buttons'],
+        projects: ['sudo-self/gitprofile', 'sudo-self/pandora'],
       },
     },
     external: {
-      header: 'Fullstack Development',
+      header: 'Google Play Developers',
       projects: [
         {
           title: 'NeoMoji',
           description:
-            'A matrix movie themed emoji app. Neomoji redefines how you interact with emojis, blending the futuristic aesthetic of the Matrix with the practicality and simplicity of a modern emoji tool. with 100s of emojis to choose from a Webb App turned Android, NeoMoji is available on Google Play and GitHub.',
+            'Neomoji redefines how you interact with emojis, blending the futuristic aesthetic of the Matrix with the practicality and simplicity of a modern emoji tool',
           imageUrl:
-            'https://play-lh.googleusercontent.com/IQPa0FG8yYrz9YPokFHMdMJ-tksGVx0tKFnE7Jr9xpTVY04Vu50nC8EWZ2pHjJ4QbA=w480-h960',
-          link: 'https://play.google.com/store/apps/details?id=app.vercel.neomoji.twa&hl=en-US&ah=qz3Meh3QU1ecPmy4vV1G6VYh_Gg&pli=1',
+            'https://sudo-self.com/neomoji.png',
+          link: 'https://play.google.com/store/apps/details?id=app.vercel.neomoji.twa&pcampaignid=web_share',
         },
         {
-          title: ' ',
-          description: 'Tap the emoji to copy to clipboard',
-          iframeUrl: 'https://neomoji.vercel.app',
+          title: 'Google Developer',
+          description:
+            'Crafting innovative apps with precision and passion. Jesse delivers exceptional experiences every single time.',
+          imageUrl:
+            'https://play-lh.googleusercontent.com/s74hZMI5Id0NWSdqO3Ua4Kd10LMV02B5XM7UmsMoz5Ca9ZXZZOSN2Q5u8d-FQwe9kcw=s188',
+          link: 'https://play.google.com/store/apps/dev?id=5617955831297880975&hl=en-US',
         },
       ],
     },
   },
   seo: {
-    title: 'Portfolio of sudo-self',
-    description: '',
-    imageURL: '',
+    title: 'sudo-self.github.io',
+    description: 'A Jekyll themed git protfolio sudo-self',
+    imageURL: 'https://avatars.githubusercontent.com/u/119916323?v=4',
   },
   social: {
-    linkedin: 'JRs',
-    x: 'iLostmyipad',
+    linkedin: 'Jrs/developments',
+    x: 'ilostmyipad',
+    mastodon: 'sudo-self',
     researchGate: '',
     facebook: '',
     instagram: '',
@@ -56,7 +62,9 @@ const CONFIG = {
     udemy: '',
     dribbble: '',
     behance: '',
+    medium: 'sudo-self',
     dev: 'sudo-self',
+    stackoverflow: '',
     skype: '',
     telegram: '',
     website: 'https://sudo-self.com',
@@ -64,86 +72,93 @@ const CONFIG = {
     email: 'me@JesseJesse.xyz',
   },
   resume: {
-    fileUrl:
-      'https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/Jesse%20Roper%20–%20Resume.pdf',
+    fileUrl: 'https://me.jessejesse.com/',
   },
   skills: [
-    'Fiber Internet',
-    'RF',
-    'VOIP',
-    'IPTV',
+    'PHP',
+    'Laravel',
+    'JavaScript',
+    'React.js',
     'Node.js',
-    'Next.js',
-    'Cloudflared Workers',
-    'API',
-    'MS 365',
-    'macOS',
-    'Python',
+    'Nest.js',
+    'MySQL',
+    'PostgreSQL',
+    'Git',
+    'Docker',
+    'PHPUnit',
     'CSS',
-    'Android',
-    'iOS',
+    'Antd',
+    'Tailwind',
   ],
   experiences: [
     {
-      company: 'Sparklight',
-      position: 'Fiber Technician',
-      from: 'September 2021',
-      to: 'September 2024',
-      companyLink: 'https://sparklighttv.app',
+      company: 'Cable One (CABO)',
+      position: 'Technical Support',
+      from: 'September 2018',
+      to: 'January 2021',
+      companyLink: 'https://www.cableone.biz',
     },
     {
-      company: 'First Source, LLC',
-      position: 'Account Service Rep.',
-      from: 'July 2018',
-      to: 'August 2021',
-      companyLink: 'https://www.bankofamerica.com',
+      company: 'Apple Inc.',
+      position: 'Genius Bar',
+      from: 'July 2023',
+      to: 'August 2024',
+      companyLink: 'https://apple.com',
     },
   ],
   certifications: [
     {
       name: 'Tech+',
-      body: 'compTia',
-      year: 'April 2025',
-      link: 'https://codepen.io/sudo-self/pen/zxxpdPB',
+      body: 'CompTia',
+      year: 'March 2025',
+      link: 'https://www.credly.com/badges/c8de13c5-ae1d-42c3-8d2e-96cb8a0b2bc7/public_url',
     },
   ],
   educations: [
     {
       institution: 'CTU',
-      degree: 'BS. Information Technology',
-      from: '2021',
-      to: '2024',
+      degree: 'Information Technology',
+      from: '2019',
+      to: '2023',
     },
     {
       institution: 'Intellitec College',
-      degree: 'Comp Service Technician, CST',
+      degree: 'Comp Service Technician',
       from: '2024',
-      to: 'present',
+      to: 'Present',
     },
   ],
-  publications: [
-    {
-      title: 'Dark Mode Anything',
-      journalName: 'dev.to',
-      authors: 'sudo-self',
-      link: 'https://dev.to/sudo-self/dark-mode-23dd',
-      description:
-        'Life is already complicated but dark mode does not have to be. Add a class to an SVG to use as a toggle. class="dark mode" SVG onclick="toggle dark mode" The dark mode style changes background color to dark gray and text color to gray The SVG toggle style sets fill and color to dark gray width and height and cursor to pointer, Clicking the SVG will toggle dark mode on and off. Demo https://codepen.io/sudo-self/pen/zxxpdPB',
-    },
-    {
-      title: 'Sweet Sitemap Generator',
-      journalName: 'npm -i sweet-sitemap-generator',
-      Usage: 'npx sweet-sitemap-generator [url]',
-      authors: 'sudo-self',
-      link: 'https://www.npmjs.com/package/sweet-sitemap-generator',
-      description:
-        'A quick local server first clone the repository from GitHub by running git clone followed by the URL Then change into the project folder by running cd sweet sitemap generator Next start the server by running node server.js After that you can create sitemaps using curl with a POST request to localhost on port 3000 or you can install the tool globally with npm and run it using npx followed by the URL you want to generate the sitemap.',
-    },
-  ],
+    publications: [
+      {
+        title: 'npm i sudo-3d',
+        conferenceName: '',
+        journalName: 'node',
+        authors: 'sudo-self',
+        link: 'https://www.npmjs.com/package/sudo-3d',
+        description:
+          'The package prompts for the URL to your 3D .glb file and if no URL will use the default then start a local dev server. Instant 3D scene setup with one model. cd sudo-3d & vite build',
+      },
+      {
+        title: 'Node.js v22',
+        conferenceName: '',
+        journalName: 'Open-Source',
+        authors: 'sudo-self',
+        link: 'https://nodejs.org/en',
+        description:
+          'Node.js is an open-source, cross-platform JavaScript runtime environment that allows developers to execute JavaScript code outside of a web browser. Traditionally, JavaScript was primarily used for client-side (frontend) web development to create interactive web pages. Node.js extends JavaScript scapabilities by enabling it to be used for server-side (backend) development, command-line tools, and other applications.',
+      },
+    ],
   blog: {
     source: 'dev',
     username: 'sudo-self',
-    limit: 4,
+    limit: 2,
+  },
+  googleAnalytics: {
+    id: '',
+  },
+  hotjar: {
+    id: '',
+    snippetVersion: 6,
   },
   themeConfig: {
     defaultTheme: 'lofi',
@@ -195,12 +210,14 @@ const CONFIG = {
       '--rounded-btn': '3rem',
     },
   },
-  footer: `🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a 
-      class="text-primary" href="https://sudo-self.com"
+  footer: `<a 
+      class="text-primary" href="https://sudo-self.github.io"
       target="_blank"
       rel="noreferrer"
-    >sudo-self.com</a>`,
+    >sudo-self.github.io</a>`,
   enablePWA: true,
 };
 
 export default CONFIG;
+
+

@@ -27,9 +27,9 @@ export default defineConfig({
             },
             includeAssets: ['logo.png'],
             manifest: {
-              name: 'git-ui',
-              short_name: 'git-ui',
-              description: 'Portfolio',
+              name: 'Portfolio',
+              short_name: 'Portfolio',
+              description: 'Personal Portfolio',
               icons: [
                 {
                   src: 'logo.png',

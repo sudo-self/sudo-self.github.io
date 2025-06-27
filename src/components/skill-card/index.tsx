@@ -13,9 +13,10 @@ const SkillCard = ({
       array.push(
         <div key={index}>
           {skeleton({ widthCls: 'w-16', heightCls: 'h-4', className: 'm-1' })}
-        </div>
+        </div>,
       );
     }
+
     return array;
   };
 
@@ -27,7 +28,7 @@ const SkillCard = ({
             {loading ? (
               skeleton({ widthCls: 'w-32', heightCls: 'h-8' })
             ) : (
-              <span className="text-base-content opacity-70">Skills</span>
+              <span className="text-base-content opacity-70">Tech Stack</span>
             )}
           </h5>
         </div>
@@ -51,4 +52,3 @@ const SkillCard = ({
 };
 
 export default SkillCard;
-

@@ -57,6 +57,7 @@ const ExperienceCard = ({
 
     return array;
   };
+
   return (
     <div className="card shadow-lg compact bg-base-100">
       <div className="card-body">
@@ -82,9 +83,7 @@ const ExperienceCard = ({
                     position={experience.position}
                     company={experience.company}
                     companyLink={
-                      experience.companyLink
-                        ? experience.companyLink
-                        : undefined
+                      experience.companyLink ? experience.companyLink : undefined
                     }
                   />
                 ))}
@@ -98,3 +97,4 @@ const ExperienceCard = ({
 };
 
 export default ExperienceCard;
+

@@ -11,13 +11,20 @@ const ListItem = ({
   degree?: React.ReactNode;
   institution?: React.ReactNode;
 }) => (
-  <li className="mb-5 ml-4">
+  <li className="mb-5 ml-4 relative">
     <div
       className="absolute w-2 h-2 bg-base-300 rounded-full border border-base-300 mt-1.5"
       style={{ left: '-4.5px' }}
     ></div>
     <div className="my-0.5 text-xs">{time}</div>
-    <h3 className="font-semibold">{degree}</h3>
+    <h3 className="font-semibold flex items-center gap-2">
+      <img
+        src="/degree.png"
+        alt="Degree Icon"
+        className="w-5 h-5 object-contain"
+      />
+      <span>{degree}</span>
+    </h3>
     <div className="mb-4 font-normal">{institution}</div>
   </li>
 );
@@ -45,7 +52,7 @@ const EducationCard = ({
             className: 'my-1.5',
           })}
           institution={skeleton({ widthCls: 'w-6/12', heightCls: 'h-3' })}
-        />
+        />,
       );
     }
 
@@ -64,28 +71,21 @@ const EducationCard = ({
             )}
           </h5>
         </div>
-        {!loading && (
-          <div className="flex justify-center mb-4">
-            <img
-              src="degree.png"
-              alt="Degree Icon"
-              className="w-32 h-32 object-contain"
-            />
-          </div>
-        )}
         <div className="text-base-content text-opacity-60">
           <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-4">
             {loading ? (
               renderSkeleton()
             ) : (
-              educations.map((item, index) => (
-                <ListItem
-                  key={index}
-                  time={`${item.from} - ${item.to}`}
-                  degree={item.degree}
-                  institution={item.institution}
-                />
-              ))
+              <>
+                {educations.map((item, index) => (
+                  <ListItem
+                    key={index}
+                    time={`${item.from} - ${item.to}`}
+                    degree={item.degree}
+                    institution={item.institution}
+                  />
+                ))}
+              </>
             )}
           </ol>
         </div>

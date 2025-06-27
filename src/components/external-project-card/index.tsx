@@ -16,7 +16,7 @@ const ExternalProjectCard = ({
 }) => {
   const renderSkeleton = () => {
     const array = [];
-    for (let index = 0; index < (externalProjects.length || 2); index++) {
+    for (let index = 0; index < externalProjects.length; index++) {
       array.push(
         <div className="card shadow-lg compact bg-base-100" key={index}>
           <div className="p-8 h-full w-full">
@@ -62,92 +62,65 @@ const ExternalProjectCard = ({
         </div>,
       );
     }
+
     return array;
   };
 
   const renderExternalProjects = () => {
-    return externalProjects.map((item, index) => {
-      // If iframeUrl is provided, render an iframe instead of a card link
-      if (item.iframeUrl) {
-        return (
-          <div
-            key={index}
-            className="card shadow-lg compact bg-base-100 cursor-default p-4"
-            style={{ height: '400px', overflow: 'hidden' }}
-          >
-            <h2 className="font-medium text-center opacity-60 mb-2">{item.title}</h2>
-            <iframe
-              src={item.iframeUrl}
-              title={item.title}
-              className="w-full h-full rounded-lg border border-base-300"
-              frameBorder="0"
-              allowFullScreen
-            />
-            {item.description && (
-              <p className="mt-2 text-base-content text-opacity-60 text-sm text-justify">
-                {item.description}
-              </p>
-            )}
-          </div>
-        );
-      }
+    return externalProjects.map((item, index) => (
+      <a
+        className="card shadow-lg compact bg-base-100 cursor-pointer"
+        key={index}
+        href={item.link}
+        onClick={(e) => {
+          e.preventDefault();
 
-      // Otherwise, render normal clickable project card
-      return (
-        <a
-          className="card shadow-lg compact bg-base-100 cursor-pointer"
-          key={index}
-          href={item.link}
-          onClick={(e) => {
-            e.preventDefault();
-
-            try {
-              if (googleAnalyticId) {
-                ga.event('Click External Project', {
-                  post: item.title,
-                });
-              }
-            } catch (error) {
-              console.error(error);
+          try {
+            if (googleAnalyticId) {
+              ga.event('Click External Project', {
+                post: item.title,
+              });
             }
+          } catch (error) {
+            console.error(error);
+          }
 
-            window?.open(item.link, '_blank');
-          }}
-        >
-          <div className="p-8 h-full w-full">
-            <div className="flex items-center flex-col">
-              <div className="w-full">
-                <div className="px-4">
-                  <div className="text-center w-full">
-                    <h2 className="font-medium text-center opacity-60 mb-2">
-                      {item.title}
-                    </h2>
-                    {item.imageUrl && (
-                      <div className="avatar opacity-90">
-                        <div className="w-24 h-24 mask mask-squircle mx-auto">
-                          <LazyImage
-                            src={item.imageUrl}
-                            alt={'thumbnail'}
-                            placeholder={skeleton({
-                              widthCls: 'w-full',
-                              heightCls: 'h-full',
-                              shape: '',
-                            })}
-                          />
-                        </div>
+          window?.open(item.link, '_blank');
+        }}
+      >
+        <div className="p-8 h-full w-full">
+          <div className="flex items-center flex-col">
+            <div className="w-full">
+              <div className="px-4">
+                <div className="text-center w-full">
+                  <h2 className="font-medium text-center opacity-60 mb-2">
+                    {item.title}
+                  </h2>
+                  {item.imageUrl && (
+                    <div className="avatar opacity-90">
+                      <div className="w-24 h-24 mask mask-squircle">
+                        <LazyImage
+                          src={item.imageUrl}
+                          alt={'thumbnail'}
+                          placeholder={skeleton({
+                            widthCls: 'w-full',
+                            heightCls: 'h-full',
+                            shape: '',
+                          })}
+                        />
                       </div>
-                    )}
-                    <p className="mt-2 text-base-content text-opacity-60 text-sm text-justify">
-                      {item.description}
-                    </p>
-                  </div>
+                    </div>
+                  )}
+                  <p className="mt-2 text-base-content text-opacity-60 text-sm text-justify">
+                    {item.description}
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-        </a>
-      );
-    });
+        </div>
+      </a>
+    ));
   };
 
   return (
@@ -162,7 +135,9 @@ const ExternalProjectCard = ({
                     {loading ? (
                       skeleton({ widthCls: 'w-40', heightCls: 'h-8' })
                     ) : (
-                      <span className="text-base-content opacity-70">{header}</span>
+                      <span className="text-base-content opacity-70">
+                        {header}
+                      </span>
                     )}
                   </h5>
                 </div>

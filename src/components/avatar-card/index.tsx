@@ -46,17 +46,15 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
                   : ''
               }`}
             >
-              {
-                <LazyImage
-                  src={profile.avatar ? profile.avatar : FALLBACK_IMAGE}
-                  alt={profile.name}
-                  placeholder={skeleton({
-                    widthCls: 'w-full',
-                    heightCls: 'h-full',
-                    shape: '',
-                  })}
-                />
-              }
+              <LazyImage
+                src={profile.avatar ? profile.avatar : FALLBACK_IMAGE}
+                alt={profile.name}
+                placeholder={skeleton({
+                  widthCls: 'w-full',
+                  heightCls: 'h-full',
+                  shape: '',
+                })}
+              />
             </div>
           </div>
         )}
@@ -65,9 +63,7 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
             {loading || !profile ? (
               skeleton({ widthCls: 'w-48', heightCls: 'h-8' })
             ) : (
-              <span className="text-base-content opacity-70">
-                {profile.name}
-              </span>
+              <span className="text-base-content opacity-70">{profile.name}</span>
             )}
           </h5>
           <div className="mt-3 text-base-content text-opacity-60 font-mono">
@@ -92,9 +88,23 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
               Download Resume
             </a>
           ))}
+
+        {/* GitHub Stats */}
+        {!loading && (
+          <div className="mt-6 px-6 w-full flex justify-center">
+            <img
+              src="https://github-readme-stats.vercel.app/api?username=sudo-self&show_icons=true&theme=radical"
+              alt="Sudo-self's GitHub stats"
+              className="rounded-lg shadow max-w-full"
+            />
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
 export default AvatarCard;
+
+
+

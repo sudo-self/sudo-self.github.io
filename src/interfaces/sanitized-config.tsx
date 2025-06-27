@@ -24,9 +24,7 @@ export interface SanitizedExternalProject {
   description?: string;
   imageUrl?: string;
   link: string;
-  iframeUrl?: string;
 }
-
 
 export interface SanitizedExternalProjects {
   header: string;
