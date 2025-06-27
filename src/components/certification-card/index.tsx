@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { SanitizedCertification } from '../../interfaces/sanitized-config';
 import { skeleton } from '../../utils';
 
@@ -35,49 +35,19 @@ const CertificationCard = ({
   certifications: SanitizedCertification[];
   loading: boolean;
 }) => {
-  const badgeRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const loadCredlyScript = () => {
-      const existingScript = document.querySelector(
-        'script[src*="credly.com/assets/utilities/embed.js"]'
-      );
-
-      if (!existingScript) {
-        const script = document.createElement('script');
-        script.src = 'https://cdn.credly.com/assets/utilities/embed.js';
-        script.async = true;
-        script.onload = () => {
-          if ((window as any).__CredlyBadge__) {
-            (window as any).__CredlyBadge__.renderBadge();
-          }
-        };
-        document.body.appendChild(script);
-      } else {
-        if ((window as any).__CredlyBadge__) {
-          (window as any).__CredlyBadge__.renderBadge();
-        }
-      }
-    };
-
-    if (!loading) {
-      loadCredlyScript();
-    }
-  }, [loading]);
-
   const renderSkeleton = () => {
-    const array = [];
-    for (let index = 0; index < 2; index++) {
-      array.push(
-        <ListItem
-          key={index}
-          year={skeleton({ widthCls: 'w-5/12', heightCls: 'h-4' })}
-          name={skeleton({ widthCls: 'w-6/12', heightCls: 'h-4', className: 'my-1.5' })}
-          body={skeleton({ widthCls: 'w-6/12', heightCls: 'h-3' })}
-        />
-      );
-    }
-    return array;
+    return Array.from({ length: 2 }, (_, index) => (
+      <ListItem
+        key={index}
+        year={skeleton({ widthCls: 'w-5/12', heightCls: 'h-4' })}
+        name={skeleton({
+          widthCls: 'w-6/12',
+          heightCls: 'h-4',
+          className: 'my-1.5',
+        })}
+        body={skeleton({ widthCls: 'w-6/12', heightCls: 'h-3' })}
+      />
+    ));
   };
 
   return (
@@ -94,28 +64,26 @@ const CertificationCard = ({
         </div>
         <div className="text-base-content text-opacity-60">
           <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-4">
-            {loading ? renderSkeleton() : certifications.map((certification, index) => (
+            {loading ? renderSkeleton() : certifications.map((cert, i) => (
               <ListItem
-                key={index}
-                year={certification.year}
-                name={certification.name}
-                body={certification.body}
-                link={certification.link}
+                key={i}
+                year={cert.year}
+                name={cert.name}
+                body={cert.body}
+                link={cert.link}
               />
             ))}
           </ol>
         </div>
 
-        {/* Comptia tech+ */}
+        {/* Replace embed with image */}
         {!loading && (
           <div className="flex justify-center mt-6">
-            <div
-              ref={badgeRef}
-              data-iframe-width="150"
-              data-iframe-height="270"
-              data-share-badge-id="c8de13c5-ae1d-42c3-8d2e-96cb8a0b2bc7"
-              data-share-badge-host="https://www.credly.com"
-            ></div>
+            <img
+              src="/tech plus.png"
+              alt="Tech Plus Badge"
+              className="w-[150px] h-auto rounded shadow"
+            />
           </div>
         )}
       </div>
@@ -124,4 +92,5 @@ const CertificationCard = ({
 };
 
 export default CertificationCard;
+
 
