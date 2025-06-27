@@ -51,15 +51,28 @@ const ThemeChanger = ({
                 className: 'mb-1',
               })
             ) : (
-              <span className="text-base-content opacity-70">🌼UI</span>
+              <span className="text-base-content opacity-70 flex items-center space-x-2">
+                🌼UI
+                <a
+                  href="https://vercel.com/new/clone?repository-url=https://github.com/sudo-self/sudo-self.github.io"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img
+                    src="https://vercel.com/button"
+                    alt="Deploy with Vercel"
+                    className="h-5"
+                  />
+                </a>
+              </span>
             )}
           </h5>
           <span className="text-base-content text-opacity-40 capitalize text-sm">
             {loading
               ? skeleton({ widthCls: 'w-16', heightCls: 'h-5' })
               : theme === themeConfig.defaultTheme
-                ? 'Default'
-                : theme}
+              ? 'Default'
+              : theme}
           </span>
         </div>
         <div className="flex-0">
@@ -97,7 +110,6 @@ const ThemeChanger = ({
                     ),
                   ].map((item, index) => (
                     <li key={index}>
-                      {}
                       <a
                         onClick={(e) => changeTheme(e, item)}
                         className={`${theme === item ? 'active' : ''}`}
@@ -119,3 +131,4 @@ const ThemeChanger = ({
 };
 
 export default ThemeChanger;
+
