@@ -98,7 +98,6 @@ const PublicationCard = ({
           <div className="overflow-y-auto">
             <div className="card compact bg-base-100 shadow bg-opacity-40 h-full flex flex-col">
               <div className="card-body flex-grow">
-<<<<<<< HEAD
                 <div className="mx-3 flex flex-col items-center justify-center mb-4 gap-2">
                   {loading ? (
                     skeleton({ widthCls: 'w-40', heightCls: 'h-8' })
@@ -126,18 +125,6 @@ const PublicationCard = ({
                       </a>
                     </>
                   )}
-=======
-                <div className="mx-3 flex items-center justify-between mb-2">
-                  <h5 className="card-title">
-                    {loading ? (
-                      skeleton({ widthCls: 'w-40', heightCls: 'h-8' })
-                    ) : (
-                      <span className="text-base-content opacity-70">
-                        Publications
-                      </span>
-                    )}
-                  </h5>
->>>>>>> 269c628a0ba3c8245e6abc1f73587f1be97728f7
                 </div>
                 <div className="col-span-2">
                   <div className="grid grid-cols-1 gap-6">
@@ -167,10 +154,6 @@ const PublicationCard = ({
 export default PublicationCard;
 
 
-<<<<<<< HEAD
 
 
 
-
-=======
->>>>>>> 269c628a0ba3c8245e6abc1f73587f1be97728f7
