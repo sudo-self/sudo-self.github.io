@@ -6,7 +6,7 @@ on:
       - main
 
 permissions:
-  contents: write  
+  contents: write
 
 jobs:
   build-and-deploy:
@@ -16,7 +16,6 @@ jobs:
       - name: Checkout main branch
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
       - name: Setup Node.js
@@ -25,12 +24,19 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Build with Vite
-        run: npx vite build
+      - name: Build site with Vite
+        run: npm run build
 
-      - name: Clean old site files except workflow and config files
+      - name: Confirm dist folder exists
+        run: |
+          if [ ! -d "dist" ]; then
+            echo "❌ dist folder not found after build. Exiting."
+            exit 1
+          fi
+
+      - name: Clean old files (except key files)
         run: |
           find . -maxdepth 1 \
             ! -name '.' \
@@ -41,24 +47,27 @@ jobs:
             ! -name 'package.json' \
             ! -name 'package-lock.json' \
             ! -name 'README.md' \
+            ! -name 'CNAME' \
             -exec rm -rf {} +
 
-      - name: Copy dist files to repo root
+      - name: Copy build files to root
         run: cp -a dist/. .
 
-      - name: Commit and push changes
+      - name: Commit and Push to GitHub Pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/sudo-self/sudo-self.github.io.git
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
           git add -A
+
           if git diff --cached --quiet; then
-            echo "No changes to commit"
+            echo "✅ No changes to commit"
           else
-            git commit -m "Deploy updated site [skip ci]"
-            git push origin main
+            git commit -m "🚀 Deploy updated site [skip ci]"
+            git push origin main || (echo "❌ Push failed" && exit 1)
           fi
+
 
 
