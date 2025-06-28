@@ -1,4 +1,6 @@
-![Deploy with Vercel](https://vercel.com/button)
+## <a href="https://sudo-self.com">sudo-self.com</a>
+
+#### ![Deploy with Vercel](https://vercel.com/button)
 
 <img width="1440" alt="Screenshot 2025-06-27 at 1 23 47 PM" src="https://github.com/user-attachments/assets/a8bd84ce-38de-4476-82ca-c010e6a4666f" />
 
