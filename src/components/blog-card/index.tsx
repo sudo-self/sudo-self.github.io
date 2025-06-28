@@ -20,78 +20,36 @@ const BlogCard = ({
 
   useEffect(() => {
     if (blog.source === 'medium') {
-      getMediumPost({
-        user: blog.username,
-      }).then((res) => {
-        setArticles(res);
-      });
+      getMediumPost({ user: blog.username }).then((res) => setArticles(res));
     } else if (blog.source === 'dev') {
-      getDevPost({
-        user: blog.username,
-      }).then((res) => {
-        setArticles(res);
-      });
+      getDevPost({ user: blog.username }).then((res) => setArticles(res));
     }
   }, [blog.source, blog.username]);
 
   const renderSkeleton = () => {
-    const array = [];
-    for (let index = 0; index < blog.limit; index++) {
-      array.push(
-        <div className="card shadow-lg compact bg-base-100" key={index}>
-          <div className="p-8 h-full w-full">
-            <div className="flex items-center flex-col md:flex-row">
-              <div className="avatar mb-5 md:mb-0">
-                <div className="w-24 h-24 mask mask-squircle">
-                  {skeleton({
-                    widthCls: 'w-full',
-                    heightCls: 'h-full',
-                    shape: '',
-                  })}
-                </div>
-              </div>
-              <div className="w-full">
-                <div className="flex items-start px-4">
-                  <div className="w-full">
-                    <h2>
-                      {skeleton({
-                        widthCls: 'w-full',
-                        heightCls: 'h-8',
-                        className: 'mb-2 mx-auto md:mx-0',
-                      })}
-                    </h2>
-                    {skeleton({
-                      widthCls: 'w-24',
-                      heightCls: 'h-3',
-                      className: 'mx-auto md:mx-0',
-                    })}
-                    <div className="mt-3">
-                      {skeleton({
-                        widthCls: 'w-full',
-                        heightCls: 'h-4',
-                        className: 'mx-auto md:mx-0',
-                      })}
-                    </div>
-                    <div className="mt-4 flex items-center flex-wrap justify-center md:justify-start">
-                      {skeleton({
-                        widthCls: 'w-32',
-                        heightCls: 'h-4',
-                        className: 'md:mr-2 mx-auto md:mx-0',
-                      })}
-                    </div>
-                  </div>
-                </div>
+    return Array.from({ length: blog.limit }).map((_, index) => (
+      <div className="card shadow-lg compact bg-base-100" key={index}>
+        <div className="p-8 h-full w-full">
+          <div className="flex items-center flex-col md:flex-row">
+            <div className="avatar mb-5 md:mb-0">
+              <div className="w-24 h-24 mask mask-squircle">
+                {skeleton({ widthCls: 'w-full', heightCls: 'h-full', shape: '' })}
               </div>
             </div>
+            <div className="w-full px-4">
+              {skeleton({ widthCls: 'w-full', heightCls: 'h-8', className: 'mb-2' })}
+              {skeleton({ widthCls: 'w-24', heightCls: 'h-3' })}
+              {skeleton({ widthCls: 'w-full', heightCls: 'h-4', className: 'mt-3' })}
+              {skeleton({ widthCls: 'w-32', heightCls: 'h-4', className: 'mt-4' })}
+            </div>
           </div>
-        </div>,
-      );
-    }
-    return array;
+        </div>
+      </div>
+    ));
   };
 
-  const renderArticles = () => {
-    return articles && articles.length ? (
+  const renderArticles = () =>
+    articles && articles.length ? (
       articles.slice(0, blog.limit).map((article, index) => (
         <a
           className="card shadow-lg compact bg-base-100 cursor-pointer"
@@ -99,14 +57,12 @@ const BlogCard = ({
           href={article.link}
           onClick={(e) => {
             e.preventDefault();
-            try {
-              if (googleAnalyticsId) {
-                ga.event('Click Blog Post', {
-                  post: article.title,
-                });
+            if (googleAnalyticsId) {
+              try {
+                ga.event('Click Blog Post', { post: article.title });
+              } catch (error) {
+                console.error(error);
               }
-            } catch (error) {
-              console.error(error);
             }
             window?.open(article.link, '_blank');
           }}
@@ -117,7 +73,7 @@ const BlogCard = ({
                 <div className="w-24 h-24 mask mask-squircle">
                   <LazyImage
                     src={article.thumbnail}
-                    alt={'thumbnail'}
+                    alt="thumbnail"
                     placeholder={skeleton({
                       widthCls: 'w-full',
                       heightCls: 'h-full',
@@ -126,31 +82,23 @@ const BlogCard = ({
                   />
                 </div>
               </div>
-              <div className="w-full">
-                <div className="flex items-start px-4">
-                  <div className="text-center md:text-left w-full">
-                    <h2 className="font-medium text-base-content opacity-60">
-                      {article.title}
-                    </h2>
-                    <p className="text-base-content opacity-50 text-xs">
-                      {formatDistance(article.publishedAt, new Date(), {
-                        addSuffix: true,
-                      })}
-                    </p>
-                    <p className="mt-3 text-base-content text-opacity-60 text-sm">
-                      {article.description}
-                    </p>
-                    <div className="mt-4 flex items-center flex-wrap justify-center md:justify-start">
-                      {article.categories.map((category, index2) => (
-                        <div
-                          className="py-2 px-4 text-xs leading-3 rounded-full bg-base-300 mr-1 mb-1 opacity-50 text-base-content"
-                          key={index2}
-                        >
-                          #{category}
-                        </div>
-                      ))}
+              <div className="w-full px-4 text-center md:text-left">
+                <h2 className="font-medium text-base-content opacity-60">{article.title}</h2>
+                <p className="text-base-content opacity-50 text-xs">
+                  {formatDistance(article.publishedAt, new Date(), { addSuffix: true })}
+                </p>
+                <p className="mt-3 text-base-content text-opacity-60 text-sm">
+                  {article.description}
+                </p>
+                <div className="mt-4 flex items-center flex-wrap justify-center md:justify-start">
+                  {article.categories.map((category, idx) => (
+                    <div
+                      className="py-2 px-4 text-xs leading-3 rounded-full bg-base-300 mr-1 mb-1 opacity-50 text-base-content"
+                      key={idx}
+                    >
+                      #{category}
                     </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -160,12 +108,9 @@ const BlogCard = ({
     ) : (
       <div className="text-center mb-6">
         <AiOutlineContainer className="mx-auto h-12 w-12 opacity-30" />
-        <p className="mt-1 text-sm opacity-50 text-base-content">
-          No recent post
-        </p>
+        <p className="mt-1 text-sm opacity-50 text-base-content">No recent post</p>
       </div>
     );
-  };
 
   return (
     <div className="col-span-1 lg:col-span-2">
@@ -173,22 +118,20 @@ const BlogCard = ({
         <div className="col-span-2">
           <div
             className={`card compact bg-base-100 ${
-              loading || (articles && articles.length)
-                ? 'shadow bg-opacity-40'
-                : 'shadow-lg'
+              loading || (articles && articles.length) ? 'shadow bg-opacity-40' : 'shadow-lg'
             }`}
           >
             <div className="card-body">
-              <div className="mx-3 mb-2">
-                <h5 className="card-title">
-                  {loading ? (
-                    skeleton({ widthCls: 'w-28', heightCls: 'h-8' })
-                  ) : (
-                    <span className="text-base-content opacity-70">
-                      My Articles
-                    </span>
-                  )}
-                </h5>
+              <div className="mx-3 mb-2 flex justify-center">
+                {loading ? (
+                  skeleton({ widthCls: 'w-28', heightCls: 'h-8' })
+                ) : (
+                  <img
+                    src="https://img.shields.io/badge/dev.to-0A0A0A?style=for-the-badge&logo=devdotto&logoColor=white"
+                    alt="Dev.to Badge"
+                    className="h-6"
+                  />
+                )}
               </div>
               <div className="col-span-2">
                 <div className="grid grid-cols-1 gap-6">
@@ -209,7 +152,7 @@ const BlogCard = ({
                     background: 'transparent',
                   }}
                   sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-                  src="https://embed.music.apple.com/us/album/im-no-magician/1491526822?i=1491527286"
+                  src="https://embed.music.apple.com/us/album/no/1428721890?i=1428724823"
                   title="Apple Music Player"
                 ></iframe>
               </div>
@@ -222,7 +165,3 @@ const BlogCard = ({
 };
 
 export default BlogCard;
-
-
-
-
