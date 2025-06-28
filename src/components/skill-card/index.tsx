@@ -8,19 +8,22 @@ const SkillCard = ({
   return (
     <div className="card shadow-lg compact bg-base-100">
       <div className="card-body">
+        {/* Header with centered badge */}
         <div className="mx-3">
-          <h5 className="card-title">
+          <h5 className="card-title flex justify-center">
             {loading ? (
               skeleton({ widthCls: 'w-32', heightCls: 'h-8' })
             ) : (
               <img
-                src="https://img.shields.io/badge/Web-Languages-pink"
-                alt="Badge Preview"
+                src="https://komarev.com/ghpvc/?username=sudo-self&style=flat-square&color=blue"
+                alt="Profile Views Counter"
                 className="h-6"
               />
             )}
           </h5>
         </div>
+
+        {/* Top languages chart */}
         <div className="p-3 flex justify-center">
           {loading ? (
             skeleton({ widthCls: 'w-64', heightCls: 'h-32' })
@@ -38,5 +41,6 @@ const SkillCard = ({
 };
 
 export default SkillCard;
+
 
 
