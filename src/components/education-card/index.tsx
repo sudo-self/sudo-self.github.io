@@ -74,8 +74,8 @@ const EducationCard = ({
 
       {/* Education Card */}
       <div className="card shadow-lg compact bg-base-100 mb-8">
-        <div className="card-body flex flex-col md:flex-row justify-between items-start">
-          <div className="flex-1">
+        <div className="card-body flex flex-col md:flex-row justify-between items-start gap-6">
+          <div className="flex-1 min-w-0">
             <div className="mx-3">
               <h5 className="card-title">
                 {loading ? (
@@ -86,7 +86,7 @@ const EducationCard = ({
               </h5>
             </div>
             <div className="text-base-content text-opacity-60">
-              <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-4">
+              <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-4 max-h-[280px] overflow-y-auto pr-4">
                 {loading
                   ? renderSkeleton()
                   : educations.map((edu, i) => (
@@ -123,10 +123,13 @@ const EducationCard = ({
       {/* Badges inside mockup phone with dock */}
       {!loading && (
         <div className="flex justify-center">
-          <div className="w-[480px]">
-            <div className="mockup-phone border-primary shadow-lg">
-              <div className="mockup-phone-camera"></div>
-              <div className="mockup-phone-display bg-base-200 p-6 rounded-b-lg flex flex-col overflow-hidden h-[700px]">
+          <div className="w-[480px] max-w-full">
+            <div
+              className="mockup-phone border-4 border-primary shadow-lg rounded-3xl"
+              style={{ height: '720px' }}
+            >
+              <div className="mockup-phone-camera" />
+              <div className="mockup-phone-display bg-base-400 p-6 rounded-b-3xl flex flex-col overflow-hidden h-full">
                 {/* Badges Grid */}
                 <div className="grid grid-cols-3 gap-6 flex-grow overflow-y-auto mb-4">
                   {badges.map(({ src, alt }, idx) => (
@@ -141,23 +144,23 @@ const EducationCard = ({
                 </div>
 
                 {/* Dock */}
-                <div className="dock bg-neutral text-neutral-content flex justify-around py-2 rounded-t-lg">
-                  <button className="flex flex-col items-center gap-1 px-3">
+                <div className="dock bg-neutral text-neutral-content flex justify-around py-2 rounded-t-lg select-none">
+                  <button className="flex flex-col items-center gap-1 px-3 hover:text-primary transition-colors">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
-                      strokeLinecap="butt"
-                      strokeLinejoin="miter"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       className="w-6 h-6"
                     >
                       <polyline points="1 11 12 2 23 11" />
                       <path d="M5 13v7c0 1.105.895 2 2 2h10c1.105 0 2-.895 2-2v-7" />
                       <line x1="12" y1="22" x2="12" y2="18" />
                     </svg>
-                    <span className="select-none text-xs">Home</span>
+                    <span className="text-xs">Home</span>
                   </button>
 
                   <button className="dock-active flex flex-col items-center gap-1 px-3 text-primary">
@@ -167,31 +170,31 @@ const EducationCard = ({
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
-                      strokeLinecap="butt"
-                      strokeLinejoin="miter"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       className="w-6 h-6"
                     >
                       <polyline points="3 14 9 14 9 17 15 17 15 14 21 14" />
                       <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                     </svg>
-                    <span className="select-none text-xs">Inbox</span>
+                    <span className="text-xs">Inbox</span>
                   </button>
 
-                  <button className="flex flex-col items-center gap-1 px-3">
+                  <button className="flex flex-col items-center gap-1 px-3 hover:text-primary transition-colors">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
-                      strokeLinecap="butt"
-                      strokeLinejoin="miter"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       className="w-6 h-6"
                     >
                       <circle cx="12" cy="12" r="3" />
                       <path d="M22 13.25v-2.5l-2.318-.966c-.167-.581-.395-1.135-.682-1.654l.954-2.318-1.768-1.768-2.318.954c-.518-.287-1.073-.515-1.654-.682l-.966-2.318h-2.5l-.966 2.318c-.581.167-1.135.395-1.654.682l-2.318-.954-1.768 1.768.954 2.318c-.287.518-.515 1.073-.682 1.654l-2.318.966v2.5l2.318.966c.167.581.395 1.135.682 1.654l-.954 2.318 1.768 1.768 2.318-.954c.518.287 1.073.515 1.654.682l.966 2.318h2.5l.966-2.318c.581-.167 1.135-.395 1.654-.682l2.318.954 1.768-1.768-.954-2.318c.287-.518.515-1.073.682-1.654l2.318-.966z" />
                     </svg>
-                    <span className="select-none text-xs">Settings</span>
+                    <span className="text-xs">Settings</span>
                   </button>
                 </div>
               </div>
@@ -204,6 +207,7 @@ const EducationCard = ({
 };
 
 export default EducationCard;
+
 
 
 

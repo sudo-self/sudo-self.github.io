@@ -28,10 +28,7 @@ const BlogCard = ({
 
   const renderSkeleton = () =>
     Array.from({ length: blog.limit }).map((_, index) => (
-      <div
-        key={index}
-        className="card compact bg-base-200 shadow-md animate-pulse cursor-wait"
-      >
+      <div key={index} className="card bg-base-200 shadow animate-pulse">
         <div className="flex p-6 items-center gap-6">
           <div className="avatar">
             <div className="w-20 h-20 mask mask-squircle bg-base-300" />
@@ -66,7 +63,7 @@ const BlogCard = ({
             href={article.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="card compact bg-base-100 shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer group"
+            className="card bg-base-100 shadow-md hover:shadow-lg transition group"
             onClick={(e) => {
               e.preventDefault();
               if (googleAnalyticsId) {
@@ -81,7 +78,7 @@ const BlogCard = ({
           >
             <div className="flex p-6 items-center gap-6">
               <div className="avatar shrink-0">
-                <div className="w-24 h-24 mask mask-squircle bg-base-300 group-hover:scale-105 transition-transform duration-300 overflow-hidden">
+                <div className="w-24 h-24 mask mask-squircle overflow-hidden bg-base-300 group-hover:scale-105 transition-transform duration-300">
                   <LazyImage
                     src={article.thumbnail}
                     alt={`Thumbnail for ${article.title}`}
@@ -93,9 +90,8 @@ const BlogCard = ({
                   />
                 </div>
               </div>
-
               <div className="flex flex-col flex-1 text-base-content">
-                <h3 className="font-semibold text-lg leading-tight opacity-90 group-hover:text-primary transition-colors">
+                <h3 className="text-lg font-semibold leading-tight opacity-90 group-hover:text-primary transition-colors">
                   {article.title}
                 </h3>
                 <time
@@ -106,7 +102,7 @@ const BlogCard = ({
                 </time>
                 <p className="mt-3 text-sm opacity-70 line-clamp-3">{article.description}</p>
 
-                {article.categories.length > 0 && (
+                {!!article.categories.length && (
                   <div className="mt-4 flex flex-wrap gap-2">
                     {article.categories.map((category, i) => (
                       <span
@@ -127,75 +123,52 @@ const BlogCard = ({
   };
 
   return (
-    <section className="col-span-1 lg:col-span-2">
-      <div className="space-y-8">
-        {/* CodePen Embed */}
-        <div className="card compact bg-base-100 shadow-md">
-          <div className="card-body p-0">
+    <section className="col-span-1 lg:col-span-2 space-y-8">
+      {/* CodePen Embed */}
+      <div className="card bg-base-100 shadow-md">
+        <div className="card-body p-0">
+          <iframe
+            height={320}
+            className="w-full rounded-b-lg"
+            title="ToyStoryJessie"
+            src="https://git.jessejesse.workers.dev/"
+            frameBorder="0"
+            loading="lazy"
+            allowTransparency
+            allowFullScreen
+          />
+        </div>
+      </div>
+      {/* Article List */}
+      <div>{loading ? renderSkeleton() : renderArticles()}</div>
+
+      {/* iTunes-style Web Browser */}
+      <div className="mockup-browser border border-base-300">
+        <div className="mockup-browser-toolbar">
+          <div className="input input-sm input-bordered w-full max-w-full select-none text-sm truncate">
+            https://music.apple.com
+          </div>
+        </div>
+        <div className="p-4 space-y-4 bg-base-200">
+          {[
+            'https://embed.music.apple.com/us/album/no/1428721890?i=1428724823',
+            'https://embed.music.apple.com/us/album/superposition/1430224633?i=1430224650',
+            'https://embed.music.apple.com/us/album/youth/1440840097?i=1440840432',
+            'https://embed.music.apple.com/us/album/you-only-live-once/299740383?i=299740483',
+            'https://embed.music.apple.com/us/album/nobody-else/1716121730?i=1716121731',
+          ].map((url, idx) => (
             <iframe
-              height={320}
-              style={{ width: '100%' }}
-              scrolling="no"
-              title="ToyStoryJessie"
-              src="https://codepen.io/sudo-self/embed/dyEMJzw?default-tab=html%2Cresult&theme-id=dark"
+              key={idx}
+              allow="autoplay *; encrypted-media *;"
               frameBorder="0"
-              loading="lazy"
-              allowTransparency
-              allowFullScreen
-              className="rounded-b-lg"
+              height={150}
+              className="w-full rounded-lg"
+              style={{ background: 'transparent' }}
+              sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+              src={url}
+              title={`Apple Music Player ${idx + 1}`}
             />
-          </div>
-        </div>
-
-        {/* DEV.to Badge */}
-        <div className="flex justify-center">
-          {loading ? (
-            skeleton({ widthCls: 'w-32', heightCls: 'h-10', className: 'rounded-lg' })
-          ) : (
-            <img
-              src="https://img.shields.io/badge/dev.to-0A0A0A?style=for-the-badge&logo=devdotto&logoColor=white"
-              alt="Dev.to Badge"
-              className="h-10 rounded-lg"
-            />
-          )}
-        </div>
-
-        {/* Articles List */}
-        <div>{loading || !articles ? renderSkeleton() : renderArticles()}</div>
-
-        {/* Apple Music inside DaisyUI browser mockup */}
-        <div className="mockup-browser border border-base-300 rounded-lg">
-          <div className="mockup-browser-toolbar bg-base-200 border-b border-base-300 rounded-t-lg">
-            <div className="input input-sm input-bordered w-full max-w-full select-none text-sm truncate">
-              https://sudo-self.com
-            </div>
-          </div>
-          <div className="p-4 space-y-4 bg-base-200 rounded-b-lg">
-            <img
-              src="https://img.shields.io/badge/apple%20music-F34E68?style=for-the-badge&logo=apple%20music&logoColor=white"
-              alt="Apple Music Badge"
-              className="h-8 mx-auto"
-            />
-            {[
-              'https://embed.music.apple.com/us/album/no/1428721890?i=1428724823',
-              'https://embed.music.apple.com/us/album/superposition/1430224633?i=1430224650',
-              'https://embed.music.apple.com/us/album/youth/1440840097?i=1440840432',
-              'https://embed.music.apple.com/us/album/you-only-live-once/299740383?i=299740483',
-              'https://embed.music.apple.com/us/album/nobody-else/1716121730?i=1716121731',
-            ].map((url, idx) => (
-              <iframe
-                key={idx}
-                allow="autoplay *; encrypted-media *;"
-                frameBorder="0"
-                height={150}
-                className="w-full rounded-lg"
-                style={{ background: 'transparent' }}
-                sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-                src={url}
-                title={`Apple Music Player ${idx + 1}`}
-              />
-            ))}
-          </div>
+          ))}
         </div>
       </div>
     </section>
@@ -203,6 +176,8 @@ const BlogCard = ({
 };
 
 export default BlogCard;
+
+
 
 
 
