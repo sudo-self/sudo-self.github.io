@@ -142,11 +142,7 @@ const BlogCard = ({
                   loading="lazy"
                   allowTransparency={true}
                   allowFullScreen={true}
-                >
-                  See the Pen <a href="https://codepen.io/sudo-self/pen/dyEMJzw">
-                    ToyStoryJessie</a> by sudo-self (<a href="https://codepen.io/sudo-self">@sudo-self</a>)
-                  on <a href="https://codepen.io">CodePen</a>.
-                </iframe>
+                ></iframe>
               </div>
 
               {/* DEV.to Badge */}
@@ -165,40 +161,40 @@ const BlogCard = ({
               {/* Articles */}
               <div className="col-span-2">{loading || !articles ? renderSkeleton() : renderArticles()}</div>
 
-              {/* Apple Music Badge */}
-              <div className="mt-6 flex justify-center">
-                <img
-                  src="https://img.shields.io/badge/apple%20music-F34E68?style=for-the-badge&logo=apple%20music&logoColor=white"
-                  alt="Apple Music Badge"
-                  className="h-6"
-                />
-              </div>
-
-              {/* Apple Music Embeds */}
-              {[
-                'https://embed.music.apple.com/us/album/no/1428721890?i=1428724823',
-                'https://embed.music.apple.com/us/album/superposition/1430224633?i=1430224650',
-                'https://embed.music.apple.com/us/album/youth/1440840097?i=1440840432',
-                'https://embed.music.apple.com/us/album/you-only-live-once/299740383?i=299740483',
-                'https://embed.music.apple.com/us/album/nobody-else/1716121730?i=1716121731',
-              ].map((url, idx) => (
-                <div className="mt-4 flex justify-center" key={idx}>
-                  <iframe
-                    allow="autoplay *; encrypted-media *;"
-                    frameBorder="0"
-                    height="150"
-                    style={{
-                      width: '100%',
-                      maxWidth: 660,
-                      overflow: 'hidden',
-                      background: 'transparent',
-                    }}
-                    sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-                    src={url}
-                    title={`Apple Music Player ${idx + 1}`}
-                  ></iframe>
+              {/* Apple Music inside DaisyUI browser mockup */}
+              <div className="mt-10">
+                <div className="mockup-browser border-base-300 border w-full">
+                  <div className="mockup-browser-toolbar">
+                    <div className="input">https://sudo-self.com</div>
+                  </div>
+                  <div className="border-t border-base-300 p-4 space-y-4 bg-base-200">
+                    <img
+                      src="https://img.shields.io/badge/apple%20music-F34E68?style=for-the-badge&logo=apple%20music&logoColor=white"
+                      alt="Apple Music Badge"
+                      className="h-6 mx-auto"
+                    />
+                    {[
+                      'https://embed.music.apple.com/us/album/no/1428721890?i=1428724823',
+                      'https://embed.music.apple.com/us/album/superposition/1430224633?i=1430224650',
+                      'https://embed.music.apple.com/us/album/youth/1440840097?i=1440840432',
+                      'https://embed.music.apple.com/us/album/you-only-live-once/299740383?i=299740483',
+                      'https://embed.music.apple.com/us/album/nobody-else/1716121730?i=1716121731',
+                    ].map((url, idx) => (
+                      <iframe
+                        key={idx}
+                        allow="autoplay *; encrypted-media *;"
+                        frameBorder="0"
+                        height="150"
+                        className="w-full rounded-lg"
+                        style={{ background: 'transparent' }}
+                        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+                        src={url}
+                        title={`Apple Music Player ${idx + 1}`}
+                      ></iframe>
+                    ))}
+                  </div>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>
@@ -208,4 +204,8 @@ const BlogCard = ({
 };
 
 export default BlogCard;
+
+
+
+
 

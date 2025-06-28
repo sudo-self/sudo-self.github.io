@@ -73,6 +73,20 @@ svg {
   animation-duration: 1s;
 }
 
+.perspective-1000 {
+  perspective: 1000px;
+}
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -89,4 +103,17 @@ svg {
   to {
     opacity: 1;
   }
+}
+
+@keyframes rumble {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(2px, -2px); }
+  60% { transform: translate(-2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0, 0); }
+}
+
+.rumble {
+  animation: rumble 0.4s ease-in-out;
 }

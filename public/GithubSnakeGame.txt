@@ -1,3 +1,23 @@
+# Github Snake Game
+
+public/GithubSnakeGame.txt  <----- You are here
+
+public/snakeBG.png
+       
+EmojioneV1Snake.jsx
+          
+Add Rumble to tailwind.config.js
+          
+animation: {rumble: 'rumble 0.4s ease-in-out' },
+
+
+
+----------------------------------------------------------
+ // GithubSnakeGame.tsx
+----------------------------------------------------------
+ 
+
+
 import React, { useState, useEffect, useRef } from 'react';
 import EmojioneV1Snake from './EmojioneV1Snake';
 
@@ -264,6 +284,11 @@ const GithubSnakeGame: React.FC = () => {
 };
 
 export default GithubSnakeGame;
+
+------------------------------------------------------------
+  ¯\_(ツ)_/¯  sudo-self.com
+------------------------------------------------------------
+
 
 
 
