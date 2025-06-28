@@ -92,7 +92,7 @@ const CONFIG = {
   ],
   experiences: [
     {
-      company: 'Cable One (CABO)',
+      company: 'Cable One',
       position: 'Technical Support',
       from: 'September 2018',
       to: 'January 2021',
@@ -151,7 +151,7 @@ const CONFIG = {
   blog: {
     source: 'dev',
     username: 'sudo-self',
-    limit: 2,
+    limit: 4,
   },
   googleAnalytics: {
     id: '',
