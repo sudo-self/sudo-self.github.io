@@ -151,7 +151,7 @@ const CONFIG = {
   blog: {
     source: 'dev',
     username: 'sudo-self',
-    limit: 4,
+    limit: 2,
   },
   googleAnalytics: {
     id: '',
@@ -210,13 +210,20 @@ const CONFIG = {
       '--rounded-btn': '3rem',
     },
   },
-footer: `
-  <div class="flex justify-center items-center space-x-2">
-    <a href="https://sudo-self.com" target="_blank" rel="noreferrer">
-      <img src="https://img.shields.io/badge/sudoself-.com-cyan" alt="Website Badge" />
-    </a>
-  </div>
-`,
+    footer: `
+      <div class="flex justify-center items-center space-x-2">
+        <a href="http://cv.lbesson.qc.to/" target="_blank" rel="noreferrer">
+          <img src="https://img.shields.io/website-up-down-green-red/http/cv.lbesson.qc.to.svg" alt="Website Status Badge" />
+        </a>
+      </div>
+      <div class="flex justify-center items-center mt-2">
+        <a href="https://coff.ee/Jessew" target="_blank" rel="noreferrer">
+          <img src="https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me A Coffee Badge" />
+        </a>
+      </div>
+    `,
+
+
   enablePWA: true,
 };
 

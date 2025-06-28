@@ -26,8 +26,8 @@ const BlogCard = ({
     }
   }, [blog.source, blog.username]);
 
-  const renderSkeleton = () => {
-    return Array.from({ length: blog.limit }).map((_, index) => (
+  const renderSkeleton = () =>
+    Array.from({ length: blog.limit }).map((_, index) => (
       <div className="card shadow-lg compact bg-base-100" key={index}>
         <div className="p-8 h-full w-full">
           <div className="flex items-center flex-col md:flex-row">
@@ -46,71 +46,80 @@ const BlogCard = ({
         </div>
       </div>
     ));
-  };
 
-  const renderArticles = () =>
-    articles && articles.length ? (
-      articles.slice(0, blog.limit).map((article, index) => (
-        <a
-          className="card shadow-lg compact bg-base-100 cursor-pointer"
-          key={index}
-          href={article.link}
-          onClick={(e) => {
-            e.preventDefault();
-            if (googleAnalyticsId) {
-              try {
-                ga.event('Click Blog Post', { post: article.title });
-              } catch (error) {
-                console.error(error);
+  const renderArticles = () => {
+    if (!articles || articles.length === 0) {
+      return (
+        <div className="text-center mb-6">
+          <AiOutlineContainer className="mx-auto h-12 w-12 opacity-30" />
+          <p className="mt-1 text-sm opacity-50 text-base-content">No recent post</p>
+        </div>
+      );
+    }
+
+    // If only 2 articles, display side by side in 2 columns, else 1 column
+    const isTwoArticles = articles.length === 2;
+
+    return (
+      <div className={isTwoArticles ? "grid grid-cols-2 gap-6" : "grid grid-cols-1 gap-6"}>
+        {articles.slice(0, blog.limit).map((article, index) => (
+          <a
+            className="card shadow-lg compact bg-base-100 cursor-pointer"
+            key={index}
+            href={article.link}
+            onClick={(e) => {
+              e.preventDefault();
+              if (googleAnalyticsId) {
+                try {
+                  ga.event('Click Blog Post', { post: article.title });
+                } catch (error) {
+                  console.error(error);
+                }
               }
-            }
-            window?.open(article.link, '_blank');
-          }}
-        >
-          <div className="p-8 h-full w-full">
-            <div className="flex items-center flex-col md:flex-row">
-              <div className="avatar mb-5 md:mb-0 opacity-90">
-                <div className="w-24 h-24 mask mask-squircle">
-                  <LazyImage
-                    src={article.thumbnail}
-                    alt="thumbnail"
-                    placeholder={skeleton({
-                      widthCls: 'w-full',
-                      heightCls: 'h-full',
-                      shape: '',
-                    })}
-                  />
+              window?.open(article.link, '_blank');
+            }}
+          >
+            <div className="p-8 h-full w-full">
+              <div className="flex items-center flex-col md:flex-row">
+                <div className="avatar mb-5 md:mb-0 opacity-90">
+                  <div className="w-24 h-24 mask mask-squircle">
+                    <LazyImage
+                      src={article.thumbnail}
+                      alt="thumbnail"
+                      placeholder={skeleton({
+                        widthCls: 'w-full',
+                        heightCls: 'h-full',
+                        shape: '',
+                      })}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="w-full px-4 text-center md:text-left">
-                <h2 className="font-medium text-base-content opacity-60">{article.title}</h2>
-                <p className="text-base-content opacity-50 text-xs">
-                  {formatDistance(article.publishedAt, new Date(), { addSuffix: true })}
-                </p>
-                <p className="mt-3 text-base-content text-opacity-60 text-sm">
-                  {article.description}
-                </p>
-                <div className="mt-4 flex items-center flex-wrap justify-center md:justify-start">
-                  {article.categories.map((category, idx) => (
-                    <div
-                      className="py-2 px-4 text-xs leading-3 rounded-full bg-base-300 mr-1 mb-1 opacity-50 text-base-content"
-                      key={idx}
-                    >
-                      #{category}
-                    </div>
-                  ))}
+                <div className="w-full px-4 text-center md:text-left">
+                  <h2 className="font-medium text-base-content opacity-60">{article.title}</h2>
+                  <p className="text-base-content opacity-50 text-xs">
+                    {formatDistance(article.publishedAt, new Date(), { addSuffix: true })}
+                  </p>
+                  <p className="mt-3 text-base-content text-opacity-60 text-sm">
+                    {article.description}
+                  </p>
+                  <div className="mt-4 flex items-center flex-wrap justify-center md:justify-start">
+                    {article.categories.map((category, idx) => (
+                      <div
+                        className="py-2 px-4 text-xs leading-3 rounded-full bg-base-300 mr-1 mb-1 opacity-50 text-base-content"
+                        key={idx}
+                      >
+                        #{category}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </a>
-      ))
-    ) : (
-      <div className="text-center mb-6">
-        <AiOutlineContainer className="mx-auto h-12 w-12 opacity-30" />
-        <p className="mt-1 text-sm opacity-50 text-base-content">No recent post</p>
+          </a>
+        ))}
       </div>
     );
+  };
 
   return (
     <div className="col-span-1 lg:col-span-2">
@@ -122,6 +131,27 @@ const BlogCard = ({
             }`}
           >
             <div className="card-body">
+
+              {/* Correct CodePen Embed */}
+              <div className="mb-6">
+                <iframe
+                  height="320"
+                  style={{ width: '100%' }}
+                  scrolling="no"
+                  title="ToyStoryJessie"
+                  src="https://codepen.io/sudo-self/embed/dyEMJzw?default-tab=html%2Cresult&theme-id=dark"
+                  frameBorder="no"
+                  loading="lazy"
+                  allowTransparency={true}
+                  allowFullScreen={true}
+                >
+                  See the Pen <a href="https://codepen.io/sudo-self/pen/dyEMJzw">
+                  ToyStoryJessie</a> by sudo-self (<a href="https://codepen.io/sudo-self">@sudo-self</a>)
+                  on <a href="https://codepen.io">CodePen</a>.
+                </iframe>
+              </div>
+
+              {/* DEV.to Badge */}
               <div className="mx-3 mb-2 flex justify-center">
                 {loading ? (
                   skeleton({ widthCls: 'w-28', heightCls: 'h-8' })
@@ -133,14 +163,21 @@ const BlogCard = ({
                   />
                 )}
               </div>
-              <div className="col-span-2">
-                <div className="grid grid-cols-1 gap-6">
-                  {loading || !articles ? renderSkeleton() : renderArticles()}
-                </div>
+
+              {/* Articles Grid */}
+              <div className="col-span-2">{loading || !articles ? renderSkeleton() : renderArticles()}</div>
+
+              {/* Apple Music Badge */}
+              <div className="mt-6 flex justify-center">
+                <img
+                  src="https://img.shields.io/badge/apple%20music-F34E68?style=for-the-badge&logo=apple%20music&logoColor=white"
+                  alt="Apple Music Badge"
+                  className="h-6"
+                />
               </div>
 
-              {/* Apple Music Embed */}
-              <div className="mt-6 flex justify-center">
+              {/* Apple Music Embed 1 */}
+              <div className="mt-4 flex justify-center">
                 <iframe
                   allow="autoplay *; encrypted-media *;"
                   frameBorder="0"
@@ -153,7 +190,25 @@ const BlogCard = ({
                   }}
                   sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
                   src="https://embed.music.apple.com/us/album/no/1428721890?i=1428724823"
-                  title="Apple Music Player"
+                  title="Apple Music Player 1"
+                ></iframe>
+              </div>
+
+              {/* Apple Music Embed 2 */}
+              <div className="mt-4 flex justify-center">
+                <iframe
+                  allow="autoplay *; encrypted-media *;"
+                  frameBorder="0"
+                  height="150"
+                  style={{
+                    width: '100%',
+                    maxWidth: 660,
+                    overflow: 'hidden',
+                    background: 'transparent',
+                  }}
+                  sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+                  src="https://embed.music.apple.com/us/album/superposition/1430224633?i=1430224650"
+                  title="Apple Music Player 2"
                 ></iframe>
               </div>
             </div>
@@ -165,3 +220,7 @@ const BlogCard = ({
 };
 
 export default BlogCard;
+
+
+
+
