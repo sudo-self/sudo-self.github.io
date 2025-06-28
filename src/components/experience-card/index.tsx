@@ -196,7 +196,15 @@ const GithubSnakeGame: React.FC = () => {
     <div className="relative w-full max-w-lg mx-auto perspective-1000">
       <div className={`relative w-full h-[540px] duration-700 transition-transform transform-style-preserve-3d ${showCode ? 'rotate-y-180' : ''}`}>
         {/* Front: Game */}
-        <div className="card compact bg-base-100 shadow-lg backface-hidden absolute w-full h-full flex flex-col">
+        <div
+          className="card compact bg-base-100 shadow-lg absolute w-full h-full flex flex-col"
+          style={{
+            backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden',
+            transformStyle: 'preserve-3d',
+            display: showCode ? 'none' : 'flex',
+          }}
+        >
           <div className="card-body flex flex-col items-center p-6 gap-4">
             <div className="flex w-full justify-between items-center">
               <EmojioneV1Snake className="h-6 w-24" />
@@ -241,7 +249,16 @@ const GithubSnakeGame: React.FC = () => {
         </div>
 
         {/* Back: Code */}
-        <div className="card bg-base-900 text-indigo-700 p-4 backface-hidden rotate-y-180 absolute w-full h-full overflow-auto">
+        <div
+          className="card bg-base-900 text-indigo-700 p-4 absolute w-full h-full overflow-auto"
+          style={{
+            backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden',
+            transformStyle: 'preserve-3d',
+            transform: 'rotateY(180deg)',
+            display: showCode ? 'block' : 'none',
+          }}
+        >
           <pre className="whitespace-pre-wrap font-mono text-xs max-h-[480px] overflow-auto">
             {codeText || '// Loading...'}
           </pre>
@@ -283,8 +300,3 @@ const GithubSnakeGame: React.FC = () => {
 };
 
 export default GithubSnakeGame;
-
-
-
-
-
