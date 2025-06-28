@@ -221,6 +221,11 @@ const CONFIG = {
           <img src="https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me A Coffee Badge" />
         </a>
       </div>
+          <div class="flex justify-center items-center mt-2">
+            <a href="https://coff.ee/Jessew" target="_blank" rel="noreferrer">
+              <img src="https://img.shields.io/badge/hey-this%20is%20not%20myspace-blue" alt="Badge preview" />
+            </a>
+          </div>
     `,
 
 
@@ -228,11 +233,5 @@ const CONFIG = {
 };
 
 export default CONFIG;
-
-
-
-
-
-
 
 
