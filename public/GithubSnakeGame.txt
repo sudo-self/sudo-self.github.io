@@ -1,21 +1,6 @@
-# Github Snake Game
 
-public/GithubSnakeGame.txt  <----- You are here
-
-public/snakeBG.png
-       
-EmojioneV1Snake.jsx
-          
-Add Rumble to tailwind.config.js
-          
-animation: {rumble: 'rumble 0.4s ease-in-out' },
-
-
-
---------------------------------
- // GithubSnakeGame.tsx
---------------------------------
- 
+GithubSnakeGamw.tsx
+______________________
 
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -35,11 +20,9 @@ const FOOD_COLORS = ['#F43F5E', '#F59E0B', '#3B82F6', '#10B981', '#8B5CF6'];
 
 const useInterval = (callback: () => void, delay: number | null) => {
   const savedCallback = useRef(callback);
-
   useEffect(() => {
     savedCallback.current = callback;
   }, [callback]);
-
   useEffect(() => {
     if (delay === null) return;
     const id = setInterval(() => savedCallback.current(), delay);
@@ -97,12 +80,10 @@ const GithubSnakeGame: React.FC = () => {
     if (head.x === food.x && head.y === food.y) {
       const newScore = score + 1;
       setScore(newScore);
-
       if (newScore % 3 === 0) {
         triggerFlash(newSnake.length);
         setFoodColorIndex((prev) => (prev + 1) % FOOD_COLORS.length);
       }
-
       setFood(generateFood());
       setSpeed((prev) => Math.max(prev - 5, 50));
     } else {
@@ -160,23 +141,19 @@ const GithubSnakeGame: React.FC = () => {
     const ctx = canvas?.getContext('2d');
     if (!ctx || !canvas) return;
 
-    const width = canvas.width;
-    const height = canvas.height;
-
     const bgImage = new Image();
     bgImage.src = '/snakeBG.png';
 
     bgImage.onload = () => {
-      ctx.clearRect(0, 0, width, height);
-      ctx.drawImage(bgImage, 0, 0, width, height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
 
       snake.forEach((seg, i) => {
-        ctx.fillStyle = flashSegments[i]
-          ? '#FFEB3B'
-          : i === 0 ? '#6EE7B7' : '#34D399';
+        ctx.fillStyle = flashSegments[i] ? '#FFEB3B' : i === 0 ? '#6EE7B7' : '#34D399';
         ctx.fillRect(seg.x * GRID_SIZE, seg.y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
         ctx.strokeStyle = '#065F46';
-        ctx.strokeRect(seg.x * GRID_SIZE, seg.y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+        ctx.lineWidth = 2;
+        ctx.strokeRect(seg.x * GRID_SIZE + 1, seg.y * GRID_SIZE + 1, GRID_SIZE - 2, GRID_SIZE - 2);
       });
 
       ctx.fillStyle = FOOD_COLORS[foodColorIndex];
@@ -221,64 +198,91 @@ const GithubSnakeGame: React.FC = () => {
   }, [direction]);
 
   return (
-    <div className="relative perspective-1000 w-full max-w-lg mx-auto">
-      <div className={`transition-transform duration-700 transform-style-preserve-3d ${showCode ? 'rotate-y-180' : ''} relative w-full h-[540px]`}>
-
-        {/* Front */}
-        <div className="card shadow-lg compact bg-base-100 backface-hidden absolute w-full h-full">
-          <div className="card-body flex flex-col items-center">
-            <div className="bg-white border border-base-300 rounded-lg p-4 w-full flex flex-col items-center">
-              <div className="w-full flex justify-between mb-2 items-center">
-                <EmojioneV1Snake className="h-6 w-24" />GithubSnakeGame.tsx
-                <span className="text-sm font-medium text-indigo-400">🟥 {score}</span>
+    <div className="relative w-full max-w-lg mx-auto perspective-1000">
+      <div className={`relative w-full h-[540px] duration-700 transition-transform transform-style-preserve-3d ${showCode ? 'rotate-y-180' : ''}`}>
+        {/* Front: Game */}
+        <div className="card compact bg-base-100 shadow-lg backface-hidden absolute w-full h-full flex flex-col">
+          <div className="card-body flex flex-col items-center p-6 gap-4">
+            <div className="flex w-full justify-between items-center">
+              <EmojioneV1Snake className="h-6 w-24" />
+              <span className="text-indigo-500 font-semibold text-lg select-none">🟥 {score}</span>
+              <div className="flex gap-2">
                 <button
-                  className="bg-green-700 hover:bg-indigo-600 text-white text-sm font-bold px-3 py-1 rounded"
+                  className={`btn btn-xs ${gameOver ? 'btn-error' : 'btn-success'}`}
                   onClick={startGame}
+                  aria-label={gameOver ? 'Restart Game' : 'Start Game'}
                 >
                   {gameOver ? 'Restart' : 'Start'}
                 </button>
+                <button
+                  className="btn btn-xs btn-primary"
+                  onClick={handleShowCode}
+                  aria-label="View game component code"
+                >
+                  View Code
+                </button>
               </div>
-          <canvas
-            ref={gameCanvas}
-            width={400}
-            height={400}
-            className={`bg-gray-200 border border-gray-400 rounded-sm ${gameOver ? 'rumble' : ''}`}
-            style={{ touchAction: 'none' }}
-          />
+            </div>
 
-              {gameOver && (
-                <div className="mt-3 text-red-600 font-bold text-base">Game Over!</div>
-              )}
-              <button
-                className="mt-3 bg-indigo-600 text-white px-3 py-1 text-xs rounded hover:bg-blue-700"
-                onClick={handleShowCode}
-              >
-                view component
-              </button>
-            </div>
-            <div className="text-xs text-base-content opacity-40 mt-3">
-              W A S D on Keyboard to move the snake
-            </div>
-            <div className="text-xs text-base-content opacity-40 mt-1">
+            <canvas
+              ref={gameCanvas}
+              width={400}
+              height={400}
+              className={`bg-gray-200 rounded border border-gray-400 shadow-inner ${gameOver ? 'animate-[rumble_0.3s_infinite]' : ''}`}
+              style={{ touchAction: 'none' }}
+            />
+
+            {gameOver && (
+              <div className="text-error font-bold text-lg mt-2 select-none">Game Over!</div>
+            )}
+
+            <p className="text-xs text-base-content opacity-50 mt-4 select-none text-center">
+              Use W A S D or Arrow keys to move the snake
+            </p>
+            <p className="text-xs text-base-content opacity-40 select-none text-center">
               GithubSnakeGame.tsx
-            </div>
+            </p>
           </div>
         </div>
 
-        {/* Back */}
-        <div className="card bg-black text-gray-400 p-4 backface-hidden rotate-y-180 absolute w-full h-full overflow-auto">
-          <div className="text-xs font-mono whitespace-pre-wrap overflow-auto max-h-[400px]">
+        {/* Back: Code */}
+        <div className="card bg-base-900 text-indigo-700 p-4 backface-hidden rotate-y-180 absolute w-full h-full overflow-auto">
+          <pre className="whitespace-pre-wrap font-mono text-xs max-h-[480px] overflow-auto">
             {codeText || '// Loading...'}
-          </div>
+          </pre>
           <button
-            className="mt-4 bg-indigo-500 text-white px-3 py-1 text-xs rounded hover:bg-green-700"
+            className="btn btn-sm btn-secondary mt-4"
             onClick={() => setShowCode(false)}
+            aria-label="Back to game"
           >
             Back to Game
           </button>
         </div>
-
       </div>
+
+      <style>{`
+        .perspective-1000 {
+          perspective: 1000px;
+        }
+        .transform-style-preserve-3d {
+          transform-style: preserve-3d;
+        }
+        .backface-hidden {
+          backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+          transform: rotateY(180deg);
+        }
+        @keyframes rumble {
+          0%, 100% { transform: translate(0, 0) rotate(0deg); }
+          25% { transform: translate(1px, -1px) rotate(-1deg); }
+          50% { transform: translate(-1px, 1px) rotate(1deg); }
+          75% { transform: translate(1px, 1px) rotate(0deg); }
+        }
+        .animate-[rumble_0.3s_infinite] {
+          animation: rumble 0.3s infinite;
+        }
+      `}</style>
     </div>
   );
 };
