@@ -19,7 +19,7 @@ const CONFIG = {
         },
       },
       manual: {
-        projects: ['sudo-self/gitprofile', 'sudo-self/pandora'],
+        projects: ['sudo-self/repo-to-txt', 'sudo-self/'],
       },
     },
     external: {
