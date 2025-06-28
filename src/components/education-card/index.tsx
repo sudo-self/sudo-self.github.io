@@ -12,9 +12,7 @@ const ListItem = ({
   institution?: React.ReactNode;
 }) => (
   <li className="mb-5 ml-4 relative">
-    <div
-      className="absolute w-2 h-2 bg-base-300 rounded-full border border-base-300 mt-1.5 -left-4.5"
-    ></div>
+    <div className="absolute w-2 h-2 bg-base-300 rounded-full border border-base-300 mt-1.5 -left-4.5"></div>
     <div className="my-0.5 text-xs">{time}</div>
     <div className="font-medium">{degreeName}</div>
     <h3 className="mb-4 font-normal">{institution}</h3>
@@ -88,7 +86,6 @@ const EducationCard = ({
       alt: 'Dev Badge 8',
     },
   ];
-    
 
   return (
     <>
@@ -113,9 +110,9 @@ const EducationCard = ({
         `}
       </style>
 
-      <div className="card shadow-lg compact bg-base-100">
+      {/* Education Card */}
+      <div className="card shadow-lg compact bg-base-100 mb-8">
         <div className="card-body flex flex-col md:flex-row justify-between items-start">
-          {/* Left: Title + List + Badges */}
           <div className="flex-1">
             <div className="mx-3">
               <h5 className="card-title">
@@ -140,29 +137,11 @@ const EducationCard = ({
                     ))}
               </ol>
             </div>
-
-            {/* Badges below education list */}
-            {!loading && (
-              <>
-                <h5 className="card-title mt-8 mx-3 text-base-content opacity-70">Badges</h5>
-                <div className="my-4 mx-4 grid grid-cols-3 gap-6 justify-center">
-                  {badges.map(({ src, alt }, idx) => (
-                    <img
-                      key={idx}
-                      src={src}
-                      alt={alt}
-                      className="w-40 h-40 object-contain rounded cursor-pointer transition-transform duration-300 ease-in-out shake-hover"
-                      title={alt}
-                    />
-                  ))}
-                </div>
-              </>
-            )}
           </div>
 
-          {/* Right: Degree Badge */}
+          {/* Right: Degree Icon */}
           {!loading && (
-            <div className="mt-6 md:mt-0 md:ml-6 flex-shrink-0">
+            <div className="mt-6 md:mt-0 md:ml-6 w-full md:w-auto flex justify-center md:justify-start">
               <img
                 src="/degree.png"
                 alt="Degree Icon"
@@ -172,11 +151,32 @@ const EducationCard = ({
           )}
         </div>
       </div>
+
+      {/* Badges Card */}
+      {!loading && (
+        <div className="card shadow-lg compact bg-base-100">
+          <div className="card-body">
+            <h5 className="card-title text-base-content opacity-70 mx-3">Badges</h5>
+            <div className="my-4 mx-4 grid grid-cols-2 sm:grid-cols-3 gap-6 justify-center">
+              {badges.map(({ src, alt }, idx) => (
+                <img
+                  key={idx}
+                  src={src}
+                  alt={alt}
+                  className="w-32 h-32 sm:w-40 sm:h-40 object-contain rounded cursor-pointer transition-transform duration-300 ease-in-out shake-hover"
+                  title={alt}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
 
 export default EducationCard;
+
 
 
 

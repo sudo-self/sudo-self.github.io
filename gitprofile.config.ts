@@ -151,7 +151,7 @@ const CONFIG = {
   blog: {
     source: 'dev',
     username: 'sudo-self',
-    limit: 2,
+    limit: 3,
   },
   googleAnalytics: {
     id: '',
