@@ -119,18 +119,23 @@ const GithubProjectCard = ({
           <div className="col-span-2">
             <div className="card compact bg-base-100 shadow bg-opacity-40">
               <div className="card-body">
-       <div className="mx-3 flex items-center justify-between mb-2">
-  {loading ? (
-    skeleton({ widthCls: 'w-40', heightCls: 'h-8' })
-  ) : (
-    <img
-      src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"
-      alt="GitHub Badge"
-      className="h-6"
-    />
-  )}
-</div>
-
+                <div className="mx-3 flex items-center justify-between mb-2">
+                  {loading ? (
+                    skeleton({ widthCls: 'w-40', heightCls: 'h-8' })
+                  ) : (
+                    <a
+                      href="https://github.com/sudo-self"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img
+                        src="https://img.shields.io/github/stars/sudo-self?style=for-the-badge&logo=github&logoColor=white"
+                        alt="Total GitHub Stars"
+                        className="h-6"
+                      />
+                    </a>
+                  )}
+                </div>
                 <div className="col-span-2">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {loading ? renderSkeleton() : renderProjects()}
@@ -146,6 +151,7 @@ const GithubProjectCard = ({
 };
 
 export default GithubProjectCard;
+
 
 
 
