@@ -19,7 +19,6 @@ const useInterval = (callback: () => void, delay: number | null) => {
 
   useEffect(() => {
     if (delay === null) return;
-
     const id = setInterval(() => savedCallback.current(), delay);
     return () => clearInterval(id);
   }, [delay]);
@@ -44,15 +43,18 @@ const GithubSnakeGame = () => {
       case 'RIGHT': head.x += 1; break;
     }
 
+    // wall collision
     if (
-      head.x * GRID_SIZE >= gameCanvas.current!.width || head.x < 0 ||
-      head.y * GRID_SIZE >= gameCanvas.current!.height || head.y < 0
+      head.x * GRID_SIZE >= gameCanvas.current!.width ||
+      head.x < 0 ||
+      head.y * GRID_SIZE >= gameCanvas.current!.height ||
+      head.y < 0
     ) {
       setGameOver(true);
       return;
     }
-
-    if (checkCollision(head)) {
+    // self collision
+    if (snake.some(seg => seg.x === head.x && seg.y === head.y)) {
       setGameOver(true);
       return;
     }
@@ -68,22 +70,14 @@ const GithubSnakeGame = () => {
     setSnake(newSnake);
   };
 
-  const checkCollision = (head: Coordinate) => {
-    return snake.some(segment => segment.x === head.x && segment.y === head.y);
-  };
-
-  const checkFoodCollision = (foodPos: Coordinate) => {
-    return snake.some(segment => segment.x === foodPos.x && segment.y === foodPos.y);
-  };
-
-  const generateFood = () => {
+  const generateFood = (): Coordinate => {
     let newFood: Coordinate;
     do {
       newFood = {
         x: Math.floor(Math.random() * (gameCanvas.current!.width / GRID_SIZE)),
         y: Math.floor(Math.random() * (gameCanvas.current!.height / GRID_SIZE)),
       };
-    } while (checkFoodCollision(newFood));
+    } while (snake.some(seg => seg.x === newFood.x && seg.y === newFood.y));
     return newFood;
   };
 
@@ -96,20 +90,15 @@ const GithubSnakeGame = () => {
     setSpeed(GAME_SPEED);
   };
 
-  useInterval(() => {
-    moveSnake();
-  }, gameOver ? null : speed);
+  useInterval(moveSnake, gameOver ? null : speed);
 
+  // Keyboard controls
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      const key = e.key.toLowerCase();
-
-      // Prevent page scroll for arrow keys
-      if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
-        e.preventDefault();
+      if (['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key)) {
+        e.preventDefault(); // stop page scroll
       }
-
-      switch (key) {
+      switch (e.key.toLowerCase()) {
         case 'arrowup':
         case 'w':
           if (direction !== 'DOWN') setDirection('UP');
@@ -128,91 +117,75 @@ const GithubSnakeGame = () => {
           break;
       }
     };
-
     window.addEventListener('keydown', handleKeyDown, { passive: false });
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [direction]);
 
-  // Add touch controls
+  // Touch controls
   useEffect(() => {
+    const canvas = gameCanvas.current;
+    if (!canvas) return;
+
     const handleTouchStart = (e: TouchEvent) => {
-      const touch = e.touches[0];
-      touchStartRef.current = {
-        x: touch.clientX,
-        y: touch.clientY
-      };
+      const t = e.touches[0];
+      touchStartRef.current = { x: t.clientX, y: t.clientY };
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      // prevent scrolling on canvas
+      e.preventDefault();
     };
 
     const handleTouchEnd = (e: TouchEvent) => {
       if (!touchStartRef.current) return;
-      
-      const touch = e.changedTouches[0];
-      const endX = touch.clientX;
-      const endY = touch.clientY;
-      
-      const startX = touchStartRef.current.x;
-      const startY = touchStartRef.current.y;
-      
-      const diffX = startX - endX;
-      const diffY = startY - endY;
-      
-      // Determine the primary direction of the swipe
+      const t = e.changedTouches[0];
+      const diffX = touchStartRef.current.x - t.clientX;
+      const diffY = touchStartRef.current.y - t.clientY;
+
       if (Math.abs(diffX) > Math.abs(diffY)) {
-        // Horizontal swipe
-        if (diffX > 0 && direction !== 'RIGHT') {
-          setDirection('LEFT');
-        } else if (diffX < 0 && direction !== 'LEFT') {
-          setDirection('RIGHT');
-        }
+        // horizontal swipe
+        if (diffX > 0 && direction !== 'RIGHT') setDirection('LEFT');
+        else if (diffX < 0 && direction !== 'LEFT') setDirection('RIGHT');
       } else {
-        // Vertical swipe
-        if (diffY > 0 && direction !== 'DOWN') {
-          setDirection('UP');
-        } else if (diffY < 0 && direction !== 'UP') {
-          setDirection('DOWN');
-        }
+        // vertical swipe
+        if (diffY > 0 && direction !== 'DOWN') setDirection('UP');
+        else if (diffY < 0 && direction !== 'UP') setDirection('DOWN');
       }
-      
       touchStartRef.current = null;
     };
 
-    const canvas = gameCanvas.current;
-    if (canvas) {
-      canvas.addEventListener('touchstart', handleTouchStart, { passive: true });
-      canvas.addEventListener('touchend', handleTouchEnd, { passive: true });
-    }
+    canvas.addEventListener('touchstart', handleTouchStart, { passive: true });
+    canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+    canvas.addEventListener('touchend', handleTouchEnd, { passive: true });
 
     return () => {
-      if (canvas) {
-        canvas.removeEventListener('touchstart', handleTouchStart);
-        canvas.removeEventListener('touchend', handleTouchEnd);
-      }
+      canvas.removeEventListener('touchstart', handleTouchStart);
+      canvas.removeEventListener('touchmove', handleTouchMove);
+      canvas.removeEventListener('touchend', handleTouchEnd);
     };
   }, [direction]);
 
+  // Draw
   useEffect(() => {
     const ctx = gameCanvas.current?.getContext('2d');
     if (!ctx) return;
-
     ctx.clearRect(0, 0, gameCanvas.current!.width, gameCanvas.current!.height);
-
-    snake.forEach((segment, i) => {
+    snake.forEach((seg, i) => {
       ctx.fillStyle = i === 0 ? '#6EE7B7' : '#34D399';
-      ctx.fillRect(segment.x * GRID_SIZE, segment.y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+      ctx.fillRect(seg.x * GRID_SIZE, seg.y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
       ctx.strokeStyle = '#065F46';
-      ctx.strokeRect(segment.x * GRID_SIZE, segment.y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+      ctx.strokeRect(seg.x * GRID_SIZE, seg.y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
     });
-
     ctx.fillStyle = '#F43F5E';
     ctx.fillRect(food.x * GRID_SIZE, food.y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
-  }, [snake, food, gameOver]);
+  }, [snake, food]);
 
   return (
     <div className="card shadow-lg compact bg-base-100">
       <div className="card-body flex flex-col items-center">
         <div className="bg-white border border-base-300 rounded-lg p-4 w-full flex flex-col items-center">
           <div className="w-full flex justify-between mb-2">
-            <span className="text-sm font-medium text-base-content">🐍 {score}</span>
+            <span className="text-sm font-medium">🐍 {score}</span>
             <button
               className="bg-green-700 hover:bg-indigo-600 text-white text-sm font-bold px-3 py-1 rounded"
               onClick={startGame}
@@ -225,6 +198,7 @@ const GithubSnakeGame = () => {
             width={400}
             height={400}
             className="bg-gray-200 border border-gray-400 rounded-sm"
+            style={{ touchAction: 'none' }}
           />
           {gameOver && (
             <div className="mt-3 text-red-600 font-bold text-base">Game Over!</div>
@@ -242,6 +216,7 @@ const GithubSnakeGame = () => {
 };
 
 export default GithubSnakeGame;
+
 
 
 
