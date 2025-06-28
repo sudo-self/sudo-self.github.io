@@ -33,6 +33,7 @@ const GithubSnakeGame = () => {
   const [score, setScore] = useState(0);
   const [speed, setSpeed] = useState(GAME_SPEED);
   const gameCanvas = useRef<HTMLCanvasElement>(null);
+  const touchStartRef = useRef<Coordinate | null>(null);
 
   const moveSnake = () => {
     const head = { ...snake[0] };
@@ -132,6 +133,63 @@ const GithubSnakeGame = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [direction]);
 
+  // Add touch controls
+  useEffect(() => {
+    const handleTouchStart = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      touchStartRef.current = {
+        x: touch.clientX,
+        y: touch.clientY
+      };
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (!touchStartRef.current) return;
+      
+      const touch = e.changedTouches[0];
+      const endX = touch.clientX;
+      const endY = touch.clientY;
+      
+      const startX = touchStartRef.current.x;
+      const startY = touchStartRef.current.y;
+      
+      const diffX = startX - endX;
+      const diffY = startY - endY;
+      
+      // Determine the primary direction of the swipe
+      if (Math.abs(diffX) > Math.abs(diffY)) {
+        // Horizontal swipe
+        if (diffX > 0 && direction !== 'RIGHT') {
+          setDirection('LEFT');
+        } else if (diffX < 0 && direction !== 'LEFT') {
+          setDirection('RIGHT');
+        }
+      } else {
+        // Vertical swipe
+        if (diffY > 0 && direction !== 'DOWN') {
+          setDirection('UP');
+        } else if (diffY < 0 && direction !== 'UP') {
+          setDirection('DOWN');
+        }
+      }
+      
+      touchStartRef.current = null;
+    };
+
+    const canvas = gameCanvas.current;
+    if (canvas) {
+      canvas.addEventListener('touchstart', handleTouchStart, { passive: true });
+      canvas.addEventListener('touchend', handleTouchEnd, { passive: true });
+    }
+
+    return () => {
+      if (canvas) {
+        canvas.removeEventListener('touchstart', handleTouchStart);
+        canvas.removeEventListener('touchend', handleTouchEnd);
+      }
+    };
+  }, [direction]);
+
   useEffect(() => {
     const ctx = gameCanvas.current?.getContext('2d');
     if (!ctx) return;
@@ -173,7 +231,10 @@ const GithubSnakeGame = () => {
           )}
         </div>
         <div className="text-xs text-base-content opacity-40 mt-3">
-          Use [Arrow Keys] or [W][A][S][D] to move the snake
+          W A S D on Keyboard to move the snake
+        </div>
+        <div className="text-xs text-base-content opacity-40 mt-1">
+          swipe anywhere on the game area on mobile device
         </div>
       </div>
     </div>
