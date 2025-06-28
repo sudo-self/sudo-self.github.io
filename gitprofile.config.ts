@@ -212,9 +212,6 @@ const CONFIG = {
   },
 footer: `
   <div class="flex justify-center items-center space-x-2">
-    <a href="https://sudo-self.github.io" target="_blank" rel="noreferrer">
-      <img src="https://img.shields.io/badge/sudoself-.github.io-blue" alt="GitHub Badge" />
-    </a>
     <a href="https://sudo-self.com" target="_blank" rel="noreferrer">
       <img src="https://img.shields.io/badge/sudoself-.com-cyan" alt="Website Badge" />
     </a>

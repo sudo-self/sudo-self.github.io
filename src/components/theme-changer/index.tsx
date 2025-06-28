@@ -7,12 +7,11 @@ import { MouseEvent } from 'react';
 /**
  * Renders a theme changer component.
  *
- * @param {Object} props - The props object.
+ * @param {Object} props
  * @param {string} props.theme - The current theme.
- * @param {function} props.setTheme - A function to set the theme.
- * @param {boolean} props.loading - Whether the component is in a loading state.
- * @param {SanitizedThemeConfig} props.themeConfig - The theme configuration object.
- * @return {JSX.Element} The rendered theme changer component.
+ * @param {function} props.setTheme - Function to set the theme.
+ * @param {boolean} props.loading - Loading state.
+ * @param {SanitizedThemeConfig} props.themeConfig - The theme config.
  */
 const ThemeChanger = ({
   theme,
@@ -30,12 +29,9 @@ const ThemeChanger = ({
     selectedTheme: string,
   ) => {
     e.preventDefault();
-
     document.querySelector('html')?.setAttribute('data-theme', selectedTheme);
-
     typeof window !== 'undefined' &&
       localStorage.setItem(LOCAL_STORAGE_KEY_NAME, selectedTheme);
-
     setTheme(selectedTheme);
   };
 
@@ -52,15 +48,16 @@ const ThemeChanger = ({
               })
             ) : (
               <span className="text-base-content opacity-70 flex items-center space-x-2">
-                🌼UI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                🌼&nbsp;&nbsp;&nbsp;
+                {/* GitHub Stars Badge */}
                 <a
-                  href="https://vercel.com/new/clone?repository-url=https://github.com/sudo-self/sudo-self.github.io"
+                  href="https://github.com/sudo-self"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                 >
                   <img
-                    src="https://vercel.com/button"
-                    alt="Deploy with Vercel"
+                    src="https://img.shields.io/github/stars/sudo-self?style=for-the-badge&logo=github&logoColor=white"
+                    alt="Total GitHub Stars"
                     className="h-5"
                   />
                 </a>
@@ -131,5 +128,6 @@ const ThemeChanger = ({
 };
 
 export default ThemeChanger;
+
 
 

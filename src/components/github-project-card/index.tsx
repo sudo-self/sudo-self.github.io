@@ -1,28 +1,24 @@
-import { useEffect, Fragment } from 'react';
+import { Fragment } from 'react';
 import { AiOutlineFork, AiOutlineStar } from 'react-icons/ai';
 import { MdInsertLink } from 'react-icons/md';
 import { ga, getLanguageColor, skeleton } from '../../utils';
 import { GithubProject } from '../../interfaces/github-project';
 
 const GithubProjectCard = ({
-  header,
   githubProjects,
   loading,
   limit,
-  username,
   googleAnalyticsId,
 }: {
-  header: string;
   githubProjects: GithubProject[];
   loading: boolean;
   limit: number;
-  username: string;
   googleAnalyticsId?: string;
 }) => {
   if (!loading && githubProjects.length === 0) return null;
 
-  const renderSkeleton = () => {
-    return Array.from({ length: limit }, (_, index) => (
+  const renderSkeleton = () =>
+    Array.from({ length: limit }, (_, index) => (
       <div className="card shadow-lg compact bg-base-100" key={index}>
         <div className="flex justify-between flex-col p-8 h-full w-full">
           <div>
@@ -54,10 +50,9 @@ const GithubProjectCard = ({
         </div>
       </div>
     ));
-  };
 
-  const renderProjects = () => {
-    return githubProjects.map((item, index) => (
+  const renderProjects = () =>
+    githubProjects.map((item, index) => (
       <a
         className="card shadow-lg compact bg-base-100 cursor-pointer"
         href={item.html_url}
@@ -71,7 +66,7 @@ const GithubProjectCard = ({
           } catch (error) {
             console.error(error);
           }
-          window?.open(item.html_url, '_blank');
+          window.open(item.html_url, '_blank');
         }}
       >
         <div className="flex justify-between flex-col p-8 h-full w-full">
@@ -110,7 +105,6 @@ const GithubProjectCard = ({
         </div>
       </a>
     ));
-  };
 
   return (
     <Fragment>
@@ -129,8 +123,8 @@ const GithubProjectCard = ({
                       rel="noopener noreferrer"
                     >
                       <img
-                        src="https://img.shields.io/github/stars/sudo-self?style=for-the-badge&logo=github&logoColor=white"
-                        alt="Total GitHub Stars"
+                        src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white&color=000000"
+                        alt="GitHub Badge"
                         className="h-6"
                       />
                     </a>
@@ -151,6 +145,8 @@ const GithubProjectCard = ({
 };
 
 export default GithubProjectCard;
+
+
 
 
 
