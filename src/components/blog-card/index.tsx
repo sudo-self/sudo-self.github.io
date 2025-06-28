@@ -124,51 +124,26 @@ const BlogCard = ({
 
   return (
     <section className="col-span-1 lg:col-span-2 space-y-8">
-      {/* CodePen Embed */}
-      <div className="card bg-base-100 shadow-md">
-        <div className="card-body p-0">
-          <iframe
-            height={320}
-            className="w-full rounded-b-lg"
-            title="ToyStoryJessie"
-            src="https://git.jessejesse.workers.dev/"
-            frameBorder="0"
-            loading="lazy"
-            allowTransparency
-            allowFullScreen
-          />
-        </div>
-      </div>
-      {/* Article List */}
-      <div>{loading ? renderSkeleton() : renderArticles()}</div>
-
-      {/* iTunes-style Web Browser */}
-      <div className="mockup-browser border border-base-300">
-        <div className="mockup-browser-toolbar">
-          <div className="input input-sm input-bordered w-full max-w-full select-none text-sm truncate">
-            https://music.apple.com
+      {/* Two Column Layout: Iframe + Articles */}
+      <div className="flex flex-col lg:flex-row gap-8">
+        {/* Left: Iframe */}
+        <div className="w-full lg:w-1/2">
+          <div className="card bg-base-100 shadow-md h-full">
+            <div className="card-body p-0 h-full">
+              <iframe
+                src="https://edge-chat-demo.jessejesse.workers.dev/"
+                title="GitReactRepos"
+                className="w-full h-[600px] rounded-lg"
+                frameBorder="0"
+                allow="clipboard-write; fullscreen"
+              />
+            </div>
           </div>
         </div>
-        <div className="p-4 space-y-4 bg-base-200">
-          {[
-            'https://embed.music.apple.com/us/album/no/1428721890?i=1428724823',
-            'https://embed.music.apple.com/us/album/superposition/1430224633?i=1430224650',
-            'https://embed.music.apple.com/us/album/youth/1440840097?i=1440840432',
-            'https://embed.music.apple.com/us/album/you-only-live-once/299740383?i=299740483',
-            'https://embed.music.apple.com/us/album/nobody-else/1716121730?i=1716121731',
-          ].map((url, idx) => (
-            <iframe
-              key={idx}
-              allow="autoplay *; encrypted-media *;"
-              frameBorder="0"
-              height={150}
-              className="w-full rounded-lg"
-              style={{ background: 'transparent' }}
-              sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-              src={url}
-              title={`Apple Music Player ${idx + 1}`}
-            />
-          ))}
+
+        {/* Right: Articles */}
+        <div className="w-full lg:w-1/2">
+          {loading ? renderSkeleton() : renderArticles()}
         </div>
       </div>
     </section>
@@ -176,6 +151,7 @@ const BlogCard = ({
 };
 
 export default BlogCard;
+
 
 
 

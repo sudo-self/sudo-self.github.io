@@ -10,7 +10,6 @@ const GRID_SIZE = 20;
 const SNAKE_START: Coordinate[] = [{ x: 8, y: 8 }];
 const FOOD_START: Coordinate = { x: 12, y: 12 };
 const GAME_SPEED = 150;
-
 const FOOD_COLORS = ['#F43F5E', '#F59E0B', '#3B82F6', '#10B981', '#8B5CF6'];
 
 const useInterval = (callback: () => void, delay: number | null) => {
@@ -30,14 +29,15 @@ const GithubSnakeGame: React.FC = () => {
   const [food, setFood] = useState<Coordinate>(FOOD_START);
   const [direction, setDirection] = useState<'UP' | 'DOWN' | 'LEFT' | 'RIGHT'>('RIGHT');
   const [gameOver, setGameOver] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
   const [score, setScore] = useState(0);
   const [speed, setSpeed] = useState(GAME_SPEED);
   const [flashSegments, setFlashSegments] = useState<boolean[]>([]);
   const [foodColorIndex, setFoodColorIndex] = useState(0);
-  const gameCanvas = useRef<HTMLCanvasElement>(null);
-  const touchStartRef = useRef<Coordinate | null>(null);
   const [showCode, setShowCode] = useState(false);
   const [codeText, setCodeText] = useState('');
+  const gameCanvas = useRef<HTMLCanvasElement>(null);
+  const touchStartRef = useRef<Coordinate | null>(null);
 
   const handleShowCode = () => {
     fetch('/GithubSnakeGame.txt')
@@ -57,16 +57,11 @@ const GithubSnakeGame: React.FC = () => {
     }
 
     if (
-      head.x < 0 ||
-      head.y < 0 ||
+      head.x < 0 || head.y < 0 ||
       head.x * GRID_SIZE >= (gameCanvas.current?.width ?? 0) ||
-      head.y * GRID_SIZE >= (gameCanvas.current?.height ?? 0)
+      head.y * GRID_SIZE >= (gameCanvas.current?.height ?? 0) ||
+      snake.some(seg => seg.x === head.x && seg.y === head.y)
     ) {
-      setGameOver(true);
-      return;
-    }
-
-    if (snake.some(seg => seg.x === head.x && seg.y === head.y)) {
       setGameOver(true);
       return;
     }
@@ -113,13 +108,14 @@ const GithubSnakeGame: React.FC = () => {
     setSpeed(GAME_SPEED);
     setFlashSegments([]);
     setFoodColorIndex(0);
+    setHasStarted(true);
   };
 
-  useInterval(moveSnake, gameOver ? null : speed);
+  useInterval(moveSnake, hasStarted && !gameOver && !showCode ? speed : null);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key)) e.preventDefault();
+      if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) e.preventDefault();
       switch (e.key.toLowerCase()) {
         case 'arrowup': case 'w': if (direction !== 'DOWN') setDirection('UP'); break;
         case 'arrowdown': case 's': if (direction !== 'UP') setDirection('DOWN'); break;
@@ -156,105 +152,73 @@ const GithubSnakeGame: React.FC = () => {
     };
   }, [snake, food, flashSegments, foodColorIndex]);
 
-  useEffect(() => {
-    const canvas = gameCanvas.current;
-    if (!canvas) return;
-
-    const handleTouchStart = (e: TouchEvent) => {
-      const t = e.touches[0];
-      touchStartRef.current = { x: t.clientX, y: t.clientY };
-    };
-    const handleTouchMove = (e: TouchEvent) => e.preventDefault();
-    const handleTouchEnd = (e: TouchEvent) => {
-      if (!touchStartRef.current) return;
-      const t = e.changedTouches[0];
-      const diffX = touchStartRef.current.x - t.clientX;
-      const diffY = touchStartRef.current.y - t.clientY;
-
-      if (Math.abs(diffX) > Math.abs(diffY)) {
-        if (diffX > 0 && direction !== 'RIGHT') setDirection('LEFT');
-        else if (diffX < 0 && direction !== 'LEFT') setDirection('RIGHT');
-      } else {
-        if (diffY > 0 && direction !== 'DOWN') setDirection('UP');
-        else if (diffY < 0 && direction !== 'UP') setDirection('DOWN');
-      }
-      touchStartRef.current = null;
-    };
-
-    canvas.addEventListener('touchstart', handleTouchStart, { passive: true });
-    canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
-    canvas.addEventListener('touchend', handleTouchEnd, { passive: true });
-
-    return () => {
-      canvas.removeEventListener('touchstart', handleTouchStart);
-      canvas.removeEventListener('touchmove', handleTouchMove);
-      canvas.removeEventListener('touchend', handleTouchEnd);
-    };
-  }, [direction]);
-
   return (
     <div className="relative w-full max-w-lg mx-auto perspective-1000">
       <div className={`relative w-full h-[540px] duration-700 transition-transform transform-style-preserve-3d ${showCode ? 'rotate-y-180' : ''}`}>
-        {/* Front: Game */}
+        {/* Front Face */}
         <div
-          className="card compact bg-base-100 shadow-lg absolute w-full h-full flex flex-col"
+          className="absolute w-full h-full card bg-base-100 shadow-lg p-6 flex flex-col"
           style={{
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
             transformStyle: 'preserve-3d',
-            display: showCode ? 'none' : 'flex',
+            display: !showCode ? 'flex' : 'none',
           }}
         >
-          <div className="card-body flex flex-col items-center p-6 gap-4">
-            <div className="flex w-full justify-between items-center">
-              <EmojioneV1Snake className="h-6 w-24" />
-              <span className="text-indigo-500 font-semibold text-lg select-none">🟥 {score}</span>
-              <div className="flex gap-2">
-                <button
-                  className={`btn btn-xs ${gameOver ? 'btn-error' : 'btn-success'}`}
-                  onClick={startGame}
-                  aria-label={gameOver ? 'Restart Game' : 'Start Game'}
-                >
-                  {gameOver ? 'Restart' : 'Start'}
-                </button>
-                <button
-                  className="btn btn-xs btn-primary"
-                  onClick={handleShowCode}
-                  aria-label="View game component code"
-                >
-                  View Code
-                </button>
-              </div>
+          {!hasStarted ? (
+            <div className="flex flex-col items-center justify-center flex-grow">
+              <EmojioneV1Snake className="w-28 h-28 mb-4" />
+              <h2 className="text-xl font-bold mb-2">Welcome to Snake</h2>
+              <p className="mb-4 text-sm opacity-70">Move the snake with Arrows or Swipe Gestures</p>
+              <button className="btn btn-primary btn-lg" onClick={startGame}>Start Game</button>
             </div>
+          ) : (
+            <>
+              <div className="flex justify-between items-center w-full">
+                <EmojioneV1Snake className="h-6 w-24" />
+                <span className="text-indigo-500 font-semibold text-lg select-none">🟥 {score}</span>
+                <div className="flex gap-2">
+                  <button
+                    className={`btn btn-xs ${gameOver ? 'btn-error' : 'btn-success'}`}
+                    onClick={startGame}
+                  >
+                    {gameOver ? 'Restart' : 'Restart'}
+                  </button>
+                  <button className="btn btn-xs btn-primary" onClick={handleShowCode}>
+                    View Code
+                  </button>
+                </div>
+              </div>
 
-            <canvas
-              ref={gameCanvas}
-              width={400}
-              height={400}
-              className={`bg-gray-200 rounded border border-gray-400 shadow-inner ${gameOver ? 'animate-[rumble_0.3s_infinite]' : ''}`}
-              style={{ touchAction: 'none' }}
-            />
+              <canvas
+                ref={gameCanvas}
+                width={400}
+                height={400}
+                className={`bg-gray-200 rounded border border-gray-400 shadow-inner ${gameOver ? 'animate-[rumble_0.3s_infinite]' : ''}`}
+                style={{ touchAction: 'none' }}
+              />
 
-            {gameOver && (
-              <div className="text-error font-bold text-lg mt-2 select-none">Game Over!</div>
-            )}
-
-            <p className="text-xs text-base-content opacity-50 mt-4 select-none text-center">
-              Use W A S D or Arrow keys to move the snake
-            </p>
-            <p className="text-xs text-base-content opacity-40 select-none text-center">
-              GithubSnakeGame.tsx
-            </p>
-          </div>
+              {gameOver && (
+                <div className="text-error font-bold text-lg mt-2 select-none text-center">
+                  Game Over!
+                </div>
+              )}
+              <p className="text-xs text-base-content opacity-50 mt-4 select-none text-center">
+                Use W A S D or Arrow keys to move the snake
+              </p>
+              <p className="text-xs text-base-content opacity-40 select-none text-center">
+                GithubSnakeGame.tsx
+              </p>
+            </>
+          )}
         </div>
 
-        {/* Back: Code */}
+        {/* Back Face (Code Viewer) */}
         <div
-          className="card bg-base-900 text-indigo-700 p-4 absolute w-full h-full overflow-auto"
+          className="absolute w-full h-full card bg-base-900 text-indigo-700 p-4 overflow-auto"
           style={{
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
-            transformStyle: 'preserve-3d',
             transform: 'rotateY(180deg)',
             display: showCode ? 'block' : 'none',
           }}
@@ -265,7 +229,6 @@ const GithubSnakeGame: React.FC = () => {
           <button
             className="btn btn-sm btn-secondary mt-4"
             onClick={() => setShowCode(false)}
-            aria-label="Back to game"
           >
             Back to Game
           </button>
@@ -278,9 +241,6 @@ const GithubSnakeGame: React.FC = () => {
         }
         .transform-style-preserve-3d {
           transform-style: preserve-3d;
-        }
-        .backface-hidden {
-          backface-visibility: hidden;
         }
         .rotate-y-180 {
           transform: rotateY(180deg);
@@ -300,3 +260,4 @@ const GithubSnakeGame: React.FC = () => {
 };
 
 export default GithubSnakeGame;
+
