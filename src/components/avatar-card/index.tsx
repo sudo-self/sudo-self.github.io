@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import { FALLBACK_IMAGE } from '../../constants';
 import { Profile } from '../../interfaces/profile';
 import { skeleton } from '../../utils';
 import LazyImage from '../lazy-image';
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
 
 interface AvatarCardProps {
   profile: Profile | null;
@@ -10,24 +13,90 @@ interface AvatarCardProps {
   resumeFileUrl?: string;
 }
 
-/**
- * Renders an AvatarCard component.
- * @param profile - The profile object.
- * @param loading - A boolean indicating if the profile is loading.
- * @param avatarRing - A boolean indicating if the avatar should have a ring.
- * @param resumeFileUrl - The URL of the resume file.
- * @returns JSX element representing the AvatarCard.
- */
+// Minimal Equalizer Component with CSS-in-JS
+const Equalizer: React.FC<{ isActive?: boolean }> = ({ isActive = true }) => {
+  return (
+    <div className="flex items-end space-x-1 w-16 h-10 mx-auto mb-4">
+      {[...Array(5)].map((_, i) => (
+        <div
+          key={i}
+          className={`bg-primary rounded-sm w-2 ${
+            isActive ? `animate-equalizer-delay${i}` : 'h-1'
+          }`}
+          style={{
+            animationDuration: '1s',
+            animationTimingFunction: 'ease-in-out',
+            animationIterationCount: 'infinite',
+            animationDirection: 'alternate',
+          }}
+        />
+      ))}
+      <style jsx>{`
+        .animate-equalizer-delay0 {
+          animation-name: equalizer;
+          animation-delay: 0s;
+          height: 4px;
+        }
+        .animate-equalizer-delay1 {
+          animation-name: equalizer;
+          animation-delay: 0.2s;
+          height: 6px;
+        }
+        .animate-equalizer-delay2 {
+          animation-name: equalizer;
+          animation-delay: 0.4s;
+          height: 8px;
+        }
+        .animate-equalizer-delay3 {
+          animation-name: equalizer;
+          animation-delay: 0.6s;
+          height: 5px;
+        }
+        .animate-equalizer-delay4 {
+          animation-name: equalizer;
+          animation-delay: 0.8s;
+          height: 7px;
+        }
+
+        @keyframes equalizer {
+          0% {
+            height: 4px;
+          }
+          50% {
+            height: 20px;
+          }
+          100% {
+            height: 4px;
+          }
+        }
+      `}</style>
+    </div>
+  );
+};
+
 const AvatarCard: React.FC<AvatarCardProps> = ({
   profile,
   loading,
   avatarRing,
-  resumeFileUrl,
 }): JSX.Element => {
+  const [currentTrack, setCurrentTrack] = useState<'No_Magician' | 'TheStrokes'>('No_Magician');
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  // Map track names to audio file paths
+  const tracks = {
+    No_Magician: '/Vincent - Im No Magician.mp3',
+    TheStrokes: '/TheStrokes.mp3',
+  };
+
+  // Map track names to album art images
+  const albumArts = {
+    No_Magician: '/art1.png',
+    TheStrokes: '/art2.png',
+  };
+
   return (
     <div className="card shadow-lg compact bg-base-100">
       <div className="grid place-items-center py-8">
-
         {/* Top GIFs */}
         <div className="flex gap-3 mb-4">
           <img
@@ -44,14 +113,11 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
           />
         </div>
 
+        {/* Avatar */}
         {loading || !profile ? (
           <div className="avatar opacity-90">
             <div className="mb-8 rounded-full w-32 h-32">
-              {skeleton({
-                widthCls: 'w-full',
-                heightCls: 'h-full',
-                shape: '',
-              })}
+              {skeleton({ widthCls: 'w-full', heightCls: 'h-full', shape: '' })}
             </div>
           </div>
         ) : (
@@ -64,7 +130,7 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
               }`}
             >
               <LazyImage
-                src={profile.avatar ? profile.avatar : FALLBACK_IMAGE}
+                src={profile.avatar || FALLBACK_IMAGE}
                 alt={profile.name}
                 placeholder={skeleton({
                   widthCls: 'w-full',
@@ -76,6 +142,7 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
           </div>
         )}
 
+        {/* Name & Bio */}
         <div className="text-center mx-auto px-8">
           <h5 className="font-bold text-2xl">
             {loading || !profile ? (
@@ -91,30 +158,55 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
           </div>
         </div>
 
-        {resumeFileUrl &&
-          (loading ? (
-            <div className="mt-6">
-              {skeleton({ widthCls: 'w-40', heightCls: 'h-8' })}
-            </div>
-          ) : (
-            <a
-              href={resumeFileUrl}
-              target="_blank"
-              className="btn btn-outline btn-sm text-xs mt-6 opacity-50"
-              download
-              rel="noreferrer"
-            >
-              Download Resume
-            </a>
-          ))}
+        {/* Equalizer under Name & Bio */}
+        {!loading && <Equalizer isActive={isPlaying} />}
 
+        {/* 🎧 Single Audio Player with Track Selector and Album Art */}
         {!loading && (
-          <div className="mt-6 px-6 w-full flex justify-center">
-            <img
-              src="https://github-readme-stats.vercel.app/api?username=sudo-self&show_icons=true&theme=radical"
-              alt="Sudo-self's GitHub stats"
-              className="rounded-lg shadow max-w-full"
-            />
+          <div className="mt-2 w-full max-w-md px-4 space-y-4">
+            <div className="flex justify-center gap-4">
+              {(['No_Magician', 'TheStrokes'] as const).map((track) => (
+                <button
+                  key={track}
+                  onClick={() => setCurrentTrack(track)}
+                  className={`btn btn-sm ${
+                    currentTrack === track ? 'btn-primary' : 'btn-outline'
+                  }`}
+                >
+                  {track.replace('_', ' ')}
+                </button>
+              ))}
+            </div>
+
+            {/* Album Art */}
+            <div className="flex justify-center mb-2">
+              <img
+                src={albumArts[currentTrack]}
+                alt={`${currentTrack} album art`}
+                className="w-48 h-48 rounded-xl shadow-lg object-cover"
+              />
+            </div>
+
+            <div className="bg-base-200 border border-base-300 p-4 rounded-xl shadow-lg flex items-center justify-center">
+              <AudioPlayer
+                src={tracks[currentTrack]}
+                showJumpControls={false}
+                autoPlayAfterSrcChange={true}
+                style={{
+                  borderRadius: '0.75rem',
+                  background: 'transparent',
+                  boxShadow: 'none',
+                  width: '100%',
+                  maxWidth: '400px',
+                }}
+                onPlay={() => {
+                  setIsPlaying(true);
+                  console.log(`Playing ${currentTrack}`);
+                }}
+                onPause={() => setIsPlaying(false)}
+                onEnded={() => setIsPlaying(false)}
+              />
+            </div>
           </div>
         )}
       </div>
@@ -123,6 +215,11 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
 };
 
 export default AvatarCard;
+
+
+
+
+
 
 
 

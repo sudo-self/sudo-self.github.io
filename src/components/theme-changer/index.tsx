@@ -48,19 +48,7 @@ const ThemeChanger = ({
               })
             ) : (
               <span className="text-base-content opacity-70 flex items-center space-x-2">
-                🌼UI&nbsp;&nbsp;&nbsp;&nbsp;
-                {/* GitHub Stars Badge */}
-                <a
-                  href="https://github.com/sudo-self"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img
-                    src="https://img.shields.io/github/stars/sudo-self?style=for-the-badge&logo=github&logoColor=white"
-                    alt="Total GitHub Stars"
-                    className="h-5"
-                  />
-                </a>
+                🌼daisyUI&nbsp;&nbsp;&nbsp;&nbsp;
               </span>
             )}
           </h5>
@@ -86,7 +74,7 @@ const ThemeChanger = ({
                 className="btn btn-ghost m-1 normal-case opacity-50 text-base-content"
               >
                 <AiOutlineControl className="inline-block w-5 h-5 stroke-current md:mr-2" />
-                <span className="hidden md:inline">DaisyUI 5.0.43</span>
+                <span className="hidden md:inline">Theme  v5.0.43</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 1792 1792"
