@@ -57,11 +57,10 @@ const BlogCard = ({
       );
     }
 
-    // If only 2 articles, display side by side in 2 columns, else 1 column
     const isTwoArticles = articles.length === 2;
 
     return (
-      <div className={isTwoArticles ? "grid grid-cols-2 gap-6" : "grid grid-cols-1 gap-6"}>
+      <div className={isTwoArticles ? 'grid grid-cols-2 gap-6' : 'grid grid-cols-1 gap-6'}>
         {articles.slice(0, blog.limit).map((article, index) => (
           <a
             className="card shadow-lg compact bg-base-100 cursor-pointer"
@@ -130,9 +129,8 @@ const BlogCard = ({
               loading || (articles && articles.length) ? 'shadow bg-opacity-40' : 'shadow-lg'
             }`}
           >
-            <div className="card-body">
-
-              {/* Correct CodePen Embed */}
+            <div className="card-body pb-8">
+              {/* CodePen Embed */}
               <div className="mb-6">
                 <iframe
                   height="320"
@@ -146,7 +144,7 @@ const BlogCard = ({
                   allowFullScreen={true}
                 >
                   See the Pen <a href="https://codepen.io/sudo-self/pen/dyEMJzw">
-                  ToyStoryJessie</a> by sudo-self (<a href="https://codepen.io/sudo-self">@sudo-self</a>)
+                    ToyStoryJessie</a> by sudo-self (<a href="https://codepen.io/sudo-self">@sudo-self</a>)
                   on <a href="https://codepen.io">CodePen</a>.
                 </iframe>
               </div>
@@ -164,7 +162,7 @@ const BlogCard = ({
                 )}
               </div>
 
-              {/* Articles Grid */}
+              {/* Articles */}
               <div className="col-span-2">{loading || !articles ? renderSkeleton() : renderArticles()}</div>
 
               {/* Apple Music Badge */}
@@ -176,41 +174,31 @@ const BlogCard = ({
                 />
               </div>
 
-              {/* Apple Music Embed 1 */}
-              <div className="mt-4 flex justify-center">
-                <iframe
-                  allow="autoplay *; encrypted-media *;"
-                  frameBorder="0"
-                  height="150"
-                  style={{
-                    width: '100%',
-                    maxWidth: 660,
-                    overflow: 'hidden',
-                    background: 'transparent',
-                  }}
-                  sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-                  src="https://embed.music.apple.com/us/album/no/1428721890?i=1428724823"
-                  title="Apple Music Player 1"
-                ></iframe>
-              </div>
-
-              {/* Apple Music Embed 2 */}
-              <div className="mt-4 flex justify-center">
-                <iframe
-                  allow="autoplay *; encrypted-media *;"
-                  frameBorder="0"
-                  height="150"
-                  style={{
-                    width: '100%',
-                    maxWidth: 660,
-                    overflow: 'hidden',
-                    background: 'transparent',
-                  }}
-                  sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-                  src="https://embed.music.apple.com/us/album/superposition/1430224633?i=1430224650"
-                  title="Apple Music Player 2"
-                ></iframe>
-              </div>
+              {/* Apple Music Embeds */}
+              {[
+                'https://embed.music.apple.com/us/album/no/1428721890?i=1428724823',
+                'https://embed.music.apple.com/us/album/superposition/1430224633?i=1430224650',
+                'https://embed.music.apple.com/us/album/youth/1440840097?i=1440840432',
+                'https://embed.music.apple.com/us/album/you-only-live-once/299740383?i=299740483',
+                'https://embed.music.apple.com/us/album/nobody-else/1716121730?i=1716121731',
+              ].map((url, idx) => (
+                <div className="mt-4 flex justify-center" key={idx}>
+                  <iframe
+                    allow="autoplay *; encrypted-media *;"
+                    frameBorder="0"
+                    height="150"
+                    style={{
+                      width: '100%',
+                      maxWidth: 660,
+                      overflow: 'hidden',
+                      background: 'transparent',
+                    }}
+                    sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+                    src={url}
+                    title={`Apple Music Player ${idx + 1}`}
+                  ></iframe>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -220,7 +208,4 @@ const BlogCard = ({
 };
 
 export default BlogCard;
-
-
-
 
