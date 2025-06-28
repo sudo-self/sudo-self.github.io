@@ -87,7 +87,6 @@ const BlogCard = ({
         </div>,
       );
     }
-
     return array;
   };
 
@@ -100,7 +99,6 @@ const BlogCard = ({
           href={article.link}
           onClick={(e) => {
             e.preventDefault();
-
             try {
               if (googleAnalyticsId) {
                 ga.event('Click Blog Post', {
@@ -110,7 +108,6 @@ const BlogCard = ({
             } catch (error) {
               console.error(error);
             }
-
             window?.open(article.link, '_blank');
           }}
         >
@@ -198,6 +195,24 @@ const BlogCard = ({
                   {loading || !articles ? renderSkeleton() : renderArticles()}
                 </div>
               </div>
+
+              {/* Apple Music Embed */}
+              <div className="mt-6 flex justify-center">
+                <iframe
+                  allow="autoplay *; encrypted-media *;"
+                  frameBorder="0"
+                  height="150"
+                  style={{
+                    width: '100%',
+                    maxWidth: 660,
+                    overflow: 'hidden',
+                    background: 'transparent',
+                  }}
+                  sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+                  src="https://embed.music.apple.com/us/album/im-no-magician/1491526822?i=1491527286"
+                  title="Apple Music Player"
+                ></iframe>
+              </div>
             </div>
           </div>
         </div>
@@ -207,3 +222,7 @@ const BlogCard = ({
 };
 
 export default BlogCard;
+
+
+
+
