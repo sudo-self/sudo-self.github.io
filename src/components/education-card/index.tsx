@@ -11,11 +11,11 @@ const ListItem = ({
   degreeName?: React.ReactNode;
   institution?: React.ReactNode;
 }) => (
-  <li className="mb-5 ml-4 relative">
-    <div className="absolute w-2 h-2 bg-base-300 rounded-full border border-base-300 mt-1.5 -left-4.5"></div>
-    <div className="my-0.5 text-xs">{time}</div>
-    <div className="font-medium">{degreeName}</div>
-    <h3 className="mb-4 font-normal">{institution}</h3>
+  <li className="mb-6 ml-6 relative">
+    <div className="absolute w-3 h-3 bg-primary rounded-full -left-1.5 border-2 border-base-100 shadow-md"></div>
+    <div className="text-sm text-base-content text-opacity-70 mb-1">{time}</div>
+    <div className="font-semibold text-base-content">{degreeName}</div>
+    <p className="text-sm text-base-content text-opacity-60">{institution}</p>
   </li>
 );
 
@@ -30,9 +30,9 @@ const EducationCard = ({
     Array.from({ length: 2 }, (_, i) => (
       <ListItem
         key={i}
-        time={skeleton({ widthCls: 'w-5/12', heightCls: 'h-4' })}
-        degreeName={skeleton({ widthCls: 'w-6/12', heightCls: 'h-4', className: 'my-1.5' })}
-        institution={skeleton({ widthCls: 'w-6/12', heightCls: 'h-3' })}
+        time={skeleton({ widthCls: 'w-4/12', heightCls: 'h-4' })}
+        degreeName={skeleton({ widthCls: 'w-6/12', heightCls: 'h-4', className: 'my-1' })}
+        institution={skeleton({ widthCls: 'w-5/12', heightCls: 'h-3' })}
       />
     ));
 
@@ -44,11 +44,11 @@ const EducationCard = ({
     { src: 'https://github.com/user-attachments/assets/4962670c-d88b-4bfd-8697-753044e16c33', alt: 'Dev Badge 3' },
     { src: 'https://github.com/user-attachments/assets/3aa8db8c-ec26-4248-85a2-a147c1b74e06', alt: 'Dev Badge 2' },
     { src: 'https://github.com/user-attachments/assets/a3a9c3b1-4389-4ccb-a6d7-c48ef81ea222', alt: 'Dev Badge 1' },
-    { src: 'https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/Android%20studio.svg', alt: 'Dev Badge 4' },
-    { src: 'https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/gdeveloper.svg', alt: 'Dev Badge 5' },
-    { src: 'https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/firebase.svg', alt: 'Dev Badge 6' },
+    { src: 'https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/Android%20studio.svg', alt: 'Android Studio' },
+    { src: 'https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/gdeveloper.svg', alt: 'GDE Badge' },
+    { src: 'https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/firebase.svg', alt: 'Firebase Badge' },
     { src: 'https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/Image%205.png', alt: 'Dev Badge 7' },
-    { src: 'https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/techplus.png', alt: 'Dev Badge 8' },
+    { src: 'https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/techplus.png', alt: 'Tech Plus' },
   ];
 
   return (
@@ -72,135 +72,90 @@ const EducationCard = ({
         }
       `}</style>
 
-      {/* Education Card */}
-      <div className="card shadow-lg compact bg-base-100 mb-8">
-        <div className="card-body flex flex-col md:flex-row justify-between items-start gap-6">
-          <div className="flex-1 min-w-0">
-            <div className="mx-3">
-              <h5 className="card-title">
-                {loading ? (
-                  skeleton({ widthCls: 'w-32', heightCls: 'h-8' })
-                ) : (
-                  <span className="text-base-content opacity-70">Education</span>
-                )}
-              </h5>
-            </div>
-            <div className="text-base-content text-opacity-60">
-              <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-4 max-h-[280px] overflow-y-auto pr-4">
-                {loading
-                  ? renderSkeleton()
-                  : educations.map((edu, i) => (
-                      <ListItem
-                        key={i}
-                        time={`${edu.from} – ${edu.to}`}
-                        degreeName={edu.degree}
-                        institution={edu.institution}
-                      />
-                    ))}
-              </ol>
-            </div>
+      {/* Education Section */}
+      <div className="card shadow-lg bg-base-100 mb-8">
+        <div className="card-body md:flex md:flex-row gap-8">
+          <div className="flex-1">
+            <h2 className="text-lg font-bold text-base-content mb-2">
+              {loading ? skeleton({ widthCls: 'w-32', heightCls: 'h-7' }) : 'Education'}
+            </h2>
+            <ol className="relative border-l-2 border-base-200 ml-3 mt-4">
+              {loading ? renderSkeleton() : educations.map((edu, i) => (
+                <ListItem
+                  key={i}
+                  time={`${edu.from} – ${edu.to}`}
+                  degreeName={edu.degree}
+                  institution={edu.institution}
+                />
+              ))}
+            </ol>
           </div>
 
           {!loading && (
-            <div className="mt-6 md:mt-0 md:ml-6 w-full md:w-auto flex justify-center md:justify-start">
+            <div className="flex-shrink-0 flex items-center justify-center md:justify-start mt-6 md:mt-0">
               <img
-                src="/degree.png"
-                alt="Degree Icon"
-                className="w-[150px] h-auto rounded shadow"
+                src="/techplus.png"
+                alt="Tech Plus Badge"
+                className="w-36 h-auto rounded-lg shadow-lg border border-base-300"
               />
             </div>
           )}
         </div>
       </div>
 
-      {/* Developer Badges Title */}
+      {/* Developer Badges */}
       {!loading && (
-        <h2 className="text-center text-lg font-semibold mb-4 text-base-content opacity-80">
-          Developer Badges
-        </h2>
-      )}
-
-      {/* Badges inside mockup phone with dock */}
-      {!loading && (
-        <div className="flex justify-center">
-          <div className="w-[480px] max-w-full">
-            <div
-              className="mockup-phone border-4 border-primary shadow-lg rounded-3xl"
-              style={{ height: '720px' }}
-            >
-              <div className="mockup-phone-camera" />
-              <div className="mockup-phone-display bg-base-400 p-6 rounded-b-3xl flex flex-col overflow-hidden h-full">
-                {/* Badges Grid */}
-                <div className="grid grid-cols-3 gap-6 flex-grow overflow-y-auto mb-4">
-                  {badges.map(({ src, alt }, idx) => (
-                    <img
-                      key={idx}
-                      src={src}
-                      alt={alt}
-                      title={alt}
-                      className="w-28 h-28 object-contain rounded-lg cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 shake-hover"
-                    />
-                  ))}
-                </div>
-
-                {/* Dock */}
-                <div className="dock bg-neutral text-neutral-content flex justify-around py-2 rounded-t-lg select-none">
-                  <button className="flex flex-col items-center gap-1 px-3 hover:text-primary transition-colors">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="w-6 h-6"
-                    >
-                      <polyline points="1 11 12 2 23 11" />
-                      <path d="M5 13v7c0 1.105.895 2 2 2h10c1.105 0 2-.895 2-2v-7" />
-                      <line x1="12" y1="22" x2="12" y2="18" />
-                    </svg>
-                    <span className="text-xs">Home</span>
-                  </button>
-
-                  <button className="dock-active flex flex-col items-center gap-1 px-3 text-primary">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="w-6 h-6"
-                    >
-                      <polyline points="3 14 9 14 9 17 15 17 15 14 21 14" />
-                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                    </svg>
-                    <span className="text-xs">Inbox</span>
-                  </button>
-
-                  <button className="flex flex-col items-center gap-1 px-3 hover:text-primary transition-colors">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="w-6 h-6"
-                    >
-                      <circle cx="12" cy="12" r="3" />
-                      <path d="M22 13.25v-2.5l-2.318-.966c-.167-.581-.395-1.135-.682-1.654l.954-2.318-1.768-1.768-2.318.954c-.518-.287-1.073-.515-1.654-.682l-.966-2.318h-2.5l-.966 2.318c-.581.167-1.135.395-1.654.682l-2.318-.954-1.768 1.768.954 2.318c-.287.518-.515 1.073-.682 1.654l-2.318.966v2.5l2.318.966c.167.581.395 1.135.682 1.654l-.954 2.318 1.768 1.768 2.318-.954c.518.287 1.073.515 1.654.682l.966 2.318h2.5l.966-2.318c.581-.167 1.135-.395 1.654-.682l2.318.954 1.768-1.768-.954-2.318c.287-.518.515-1.073.682-1.654l2.318-.966z" />
-                    </svg>
-                    <span className="text-xs">Settings</span>
-                  </button>
+        <>
+          <h2 className="text-center text-lg font-semibold mb-4 text-base-content opacity-80">
+            Developer Badges
+          </h2>
+          <div className="flex justify-center">
+            <div className="w-[480px] max-w-full">
+              <div
+                className="mockup-phone border-primary border-4 rounded-3xl shadow-lg"
+                style={{ height: '720px' }}
+              >
+                <div className="mockup-phone-camera" />
+                <div className="mockup-phone-display bg-base-300 p-6 flex flex-col h-full rounded-b-3xl">
+                  <div className="grid grid-cols-3 gap-6 flex-grow overflow-y-auto mb-4">
+                    {badges.map(({ src, alt }, idx) => (
+                      <img
+                        key={idx}
+                        src={src}
+                        alt={alt}
+                        title={alt}
+                        className="w-24 h-24 object-contain rounded-lg cursor-pointer hover:scale-105 shake-hover transition-transform duration-300"
+                      />
+                    ))}
+                  </div>
+                  <div className="dock bg-neutral text-neutral-content py-2 rounded-t-lg flex justify-around">
+                    <button className="flex flex-col items-center text-xs hover:text-primary">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <polyline points="1 11 12 2 23 11" />
+                        <path d="M5 13v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7" />
+                      </svg>
+                      Home
+                    </button>
+                    <button className="dock-active flex flex-col items-center text-xs text-primary">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <polyline points="3 14 9 14 9 17 15 17 15 14 21 14" />
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                      </svg>
+                      Inbox
+                    </button>
+                    <button className="flex flex-col items-center text-xs hover:text-primary">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="3" />
+                        <path d="M22 13.25v-2.5l-2.318-.966a8.96 8.96 0 0 0-.682-1.654l.954-2.318-1.768-1.768-2.318.954a8.96 8.96 0 0 0-1.654-.682L13.25 2h-2.5l-.966 2.318a8.96 8.96 0 0 0-1.654.682l-2.318-.954L4.044 5.818l.954 2.318a8.96 8.96 0 0 0-.682 1.654L2 10.75v2.5l2.318.966a8.96 8.96 0 0 0 .682 1.654l-.954 2.318 1.768 1.768 2.318-.954a8.96 8.96 0 0 0 1.654.682l.966 2.318h2.5l.966-2.318a8.96 8.96 0 0 0 1.654-.682l2.318.954 1.768-1.768-.954-2.318a8.96 8.96 0 0 0 .682-1.654L22 13.25z" />
+                      </svg>
+                      Settings
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </>
       )}
     </>
   );

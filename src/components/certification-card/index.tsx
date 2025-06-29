@@ -13,17 +13,18 @@ const ListItem = ({
   body?: React.ReactNode;
   link?: string;
 }) => (
-  <li className="mb-5 ml-4 relative">
-    <div
-      className="absolute w-2 h-2 bg-base-300 rounded-full border border-base-300 mt-1.5 -left-4.5"
-    ></div>
-    <div className="my-0.5 text-xs">{year}</div>
-    <div className="font-medium">
-      <a href={link} target="_blank" rel="noreferrer">
-        {name}
-      </a>
-    </div>
-    <h3 className="mb-4 font-normal">{body}</h3>
+  <li className="mb-8 ml-6 relative">
+    <div className="absolute w-3 h-3 bg-primary rounded-full -left-1.5 border-2 border-base-100 shadow-md"></div>
+    <div className="text-sm text-base-content text-opacity-70 mb-1">{year}</div>
+    <a
+      href={link}
+      target="_blank"
+      rel="noreferrer"
+      className="text-base font-semibold text-base-content hover:text-primary transition-colors"
+    >
+      {name}
+    </a>
+    <p className="text-sm text-base-content text-opacity-60 mt-1">{body}</p>
   </li>
 );
 
@@ -40,48 +41,40 @@ const CertificationCard = ({
         key={i}
         year={skeleton({ widthCls: 'w-5/12', heightCls: 'h-4' })}
         name={skeleton({ widthCls: 'w-6/12', heightCls: 'h-4', className: 'my-1.5' })}
-        body={skeleton({ widthCls: 'w-6/12', heightCls: 'h-3' })}
+        body={skeleton({ widthCls: 'w-8/12', heightCls: 'h-3' })}
       />
     ));
 
   return (
-    <div className="card shadow-lg compact bg-base-100">
-      <div className="card-body flex flex-col md:flex-row justify-between items-start">
-        {/* Left: Title + List */}
+    <div className="card shadow-xl bg-base-100">
+      <div className="card-body md:flex md:items-start md:justify-between gap-8">
+        {/* Left Column */}
         <div className="flex-1">
-          <div className="mx-3">
-            <h5 className="card-title">
-              {loading ? (
-                skeleton({ widthCls: 'w-32', heightCls: 'h-8' })
-              ) : (
-                <span className="text-base-content opacity-70">Certifications</span>
-              )}
-            </h5>
-          </div>
-          <div className="text-base-content text-opacity-60">
-            <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-4">
-              {loading
-                ? renderSkeleton()
-                : certifications.map((cert, i) => (
-                    <ListItem
-                      key={i}
-                      year={cert.year}
-                      name={cert.name}
-                      body={cert.body}
-                      link={cert.link}
-                    />
-                  ))}
-            </ol>
-          </div>
+          <h2 className="text-lg font-bold mb-2 text-base-content">
+            {loading ? skeleton({ widthCls: 'w-32', heightCls: 'h-7' }) : 'Certifications'}
+          </h2>
+          <ol className="relative border-l-2 border-base-200 ml-3 mt-4">
+            {loading
+              ? renderSkeleton()
+              : certifications.map((cert, i) => (
+                  <ListItem
+                    key={i}
+                    year={cert.year}
+                    name={cert.name}
+                    body={cert.body}
+                    link={cert.link}
+                  />
+                ))}
+          </ol>
         </div>
 
-        {/* Right: Badge */}
+        {/* Right Column - Badge */}
         {!loading && (
-          <div className="mt-6 md:mt-0 md:ml-6 flex-shrink-0">
+          <div className="flex-shrink-0 mt-6 md:mt-0">
             <img
               src="/techplus.png"
               alt="Tech Plus Badge"
-              className="w-[150px] h-auto rounded shadow"
+              className="w-36 h-auto rounded-lg shadow-lg border border-base-300"
             />
           </div>
         )}
@@ -91,6 +84,7 @@ const CertificationCard = ({
 };
 
 export default CertificationCard;
+
 
 
 
