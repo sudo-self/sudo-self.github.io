@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { FALLBACK_IMAGE } from '../../constants';
 import { Profile } from '../../interfaces/profile';
 import { skeleton } from '../../utils';
-import LazyImage from '../lazy-image';
 import AudioPlayer from 'react-h5-audio-player';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls, useGLTF } from '@react-three/drei';
 import 'react-h5-audio-player/lib/styles.css';
 
 interface AvatarCardProps {
@@ -13,7 +14,6 @@ interface AvatarCardProps {
   resumeFileUrl?: string;
 }
 
-// Minimal Equalizer Component with CSS-in-JS
 const Equalizer: React.FC<{ isActive?: boolean }> = ({ isActive = true }) => {
   return (
     <div className="flex items-end space-x-1 w-16 h-10 mx-auto mb-4">
@@ -74,6 +74,12 @@ const Equalizer: React.FC<{ isActive?: boolean }> = ({ isActive = true }) => {
   );
 };
 
+// Component to load and display firebase.glb
+const FirebaseAvatar = () => {
+  const gltf = useGLTF('/firebase.glb', true);
+  return <primitive object={gltf.scene} scale={1.5} />;
+};
+
 const AvatarCard: React.FC<AvatarCardProps> = ({
   profile,
   loading,
@@ -82,13 +88,11 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
   const [currentTrack, setCurrentTrack] = useState<'No_Magician' | 'TheStrokes'>('No_Magician');
   const [isPlaying, setIsPlaying] = useState(false);
 
-  // Map track names to audio file paths
   const tracks = {
     No_Magician: '/Vincent - Im No Magician.mp3',
     TheStrokes: '/TheStrokes.mp3',
   };
 
-  // Map track names to album art images
   const albumArts = {
     No_Magician: '/art1.png',
     TheStrokes: '/art2.png',
@@ -113,34 +117,21 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
           />
         </div>
 
-        {/* Avatar */}
-        {loading || !profile ? (
-          <div className="avatar opacity-90">
-            <div className="mb-8 rounded-full w-32 h-32">
-              {skeleton({ widthCls: 'w-full', heightCls: 'h-full', shape: '' })}
-            </div>
-          </div>
-        ) : (
-          <div className="avatar opacity-90">
-            <div
-              className={`mb-8 rounded-full w-32 h-32 ${
-                avatarRing
-                  ? 'ring ring-primary ring-offset-base-100 ring-offset-2'
-                  : ''
-              }`}
-            >
-              <LazyImage
-                src={profile.avatar || FALLBACK_IMAGE}
-                alt={profile.name}
-                placeholder={skeleton({
-                  widthCls: 'w-full',
-                  heightCls: 'h-full',
-                  shape: '',
-                })}
-              />
-            </div>
-          </div>
-        )}
+        {/* Avatar with firebase.glb */}
+        <div
+          className={`avatar opacity-90 mb-8 rounded-full w-32 h-32 ${
+            avatarRing ? 'ring ring-primary ring-offset-base-100 ring-offset-2' : ''
+          }`}
+        >
+          <Canvas className="rounded-full" camera={{ position: [0, 0, 5], fov: 35 }}>
+            <ambientLight intensity={0.6} />
+            <directionalLight position={[0, 5, 5]} intensity={1} />
+            <Suspense fallback={null}>
+              <FirebaseAvatar />
+            </Suspense>
+            <OrbitControls enableZoom={false} autoRotate />
+          </Canvas>
+        </div>
 
         {/* Name & Bio */}
         <div className="text-center mx-auto px-8">
@@ -158,10 +149,10 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
           </div>
         </div>
 
-        {/* Equalizer under Name & Bio */}
+        {/* Equalizer */}
         {!loading && <Equalizer isActive={isPlaying} />}
 
-        {/* 🎧 Single Audio Player with Track Selector and Album Art */}
+        {/* Audio Player Section */}
         {!loading && (
           <div className="mt-2 w-full max-w-md px-4 space-y-4">
             <div className="flex justify-center gap-4">
@@ -178,7 +169,6 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
               ))}
             </div>
 
-            {/* Album Art */}
             <div className="flex justify-center mb-2">
               <img
                 src={albumArts[currentTrack]}
@@ -199,10 +189,7 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
                   width: '100%',
                   maxWidth: '400px',
                 }}
-                onPlay={() => {
-                  setIsPlaying(true);
-                  console.log(`Playing ${currentTrack}`);
-                }}
+                onPlay={() => setIsPlaying(true)}
                 onPause={() => setIsPlaying(false)}
                 onEnded={() => setIsPlaying(false)}
               />
@@ -215,11 +202,6 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
 };
 
 export default AvatarCard;
-
-
-
-
-
 
 
 
