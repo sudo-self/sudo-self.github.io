@@ -39,6 +39,9 @@ const GithubSnakeGame: React.FC = () => {
   const gameCanvas = useRef<HTMLCanvasElement>(null);
   const touchStartRef = useRef<Coordinate | null>(null);
 
+  // --- Swipe Threshold (minimum distance to count as swipe) ---
+  const SWIPE_THRESHOLD = 30;
+
   const handleShowCode = () => {
     fetch('/GithubSnakeGame.txt')
       .then((res) => res.text())
@@ -50,17 +53,26 @@ const GithubSnakeGame: React.FC = () => {
   const moveSnake = () => {
     const head = { ...snake[0] };
     switch (direction) {
-      case 'UP': head.y -= 1; break;
-      case 'DOWN': head.y += 1; break;
-      case 'LEFT': head.x -= 1; break;
-      case 'RIGHT': head.x += 1; break;
+      case 'UP':
+        head.y -= 1;
+        break;
+      case 'DOWN':
+        head.y += 1;
+        break;
+      case 'LEFT':
+        head.x -= 1;
+        break;
+      case 'RIGHT':
+        head.x += 1;
+        break;
     }
 
     if (
-      head.x < 0 || head.y < 0 ||
+      head.x < 0 ||
+      head.y < 0 ||
       head.x * GRID_SIZE >= (gameCanvas.current?.width ?? 0) ||
       head.y * GRID_SIZE >= (gameCanvas.current?.height ?? 0) ||
-      snake.some(seg => seg.x === head.x && seg.y === head.y)
+      snake.some((seg) => seg.x === head.x && seg.y === head.y)
     ) {
       setGameOver(true);
       return;
@@ -92,10 +104,14 @@ const GithubSnakeGame: React.FC = () => {
     let newFood: Coordinate;
     do {
       newFood = {
-        x: Math.floor(Math.random() * ((gameCanvas.current?.width ?? 0) / GRID_SIZE)),
-        y: Math.floor(Math.random() * ((gameCanvas.current?.height ?? 0) / GRID_SIZE)),
+        x: Math.floor(
+          Math.random() * ((gameCanvas.current?.width ?? 0) / GRID_SIZE)
+        ),
+        y: Math.floor(
+          Math.random() * ((gameCanvas.current?.height ?? 0) / GRID_SIZE)
+        ),
       };
-    } while (snake.some(seg => seg.x === newFood.x && seg.y === newFood.y));
+    } while (snake.some((seg) => seg.x === newFood.x && seg.y === newFood.y));
     return newFood;
   };
 
@@ -113,18 +129,74 @@ const GithubSnakeGame: React.FC = () => {
 
   useInterval(moveSnake, hasStarted && !gameOver && !showCode ? speed : null);
 
+  // Keyboard input
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) e.preventDefault();
+      if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key))
+        e.preventDefault();
       switch (e.key.toLowerCase()) {
-        case 'arrowup': case 'w': if (direction !== 'DOWN') setDirection('UP'); break;
-        case 'arrowdown': case 's': if (direction !== 'UP') setDirection('DOWN'); break;
-        case 'arrowleft': case 'a': if (direction !== 'RIGHT') setDirection('LEFT'); break;
-        case 'arrowright': case 'd': if (direction !== 'LEFT') setDirection('RIGHT'); break;
+        case 'arrowup':
+        case 'w':
+          if (direction !== 'DOWN') setDirection('UP');
+          break;
+        case 'arrowdown':
+        case 's':
+          if (direction !== 'UP') setDirection('DOWN');
+          break;
+        case 'arrowleft':
+        case 'a':
+          if (direction !== 'RIGHT') setDirection('LEFT');
+          break;
+        case 'arrowright':
+        case 'd':
+          if (direction !== 'LEFT') setDirection('RIGHT');
+          break;
       }
     };
     window.addEventListener('keydown', handleKeyDown, { passive: false });
     return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [direction]);
+
+  // Touch swipe handling
+  useEffect(() => {
+    const canvas = gameCanvas.current;
+    if (!canvas) return;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (!touchStartRef.current) return;
+
+      const touch = e.changedTouches[0];
+      const deltaX = touch.clientX - touchStartRef.current.x;
+      const deltaY = touch.clientY - touchStartRef.current.y;
+
+      if (Math.abs(deltaX) < SWIPE_THRESHOLD && Math.abs(deltaY) < SWIPE_THRESHOLD) {
+        // Not a valid swipe, ignore
+        return;
+      }
+
+      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        // Horizontal swipe
+        if (deltaX > 0 && direction !== 'LEFT') setDirection('RIGHT');
+        else if (deltaX < 0 && direction !== 'RIGHT') setDirection('LEFT');
+      } else {
+        // Vertical swipe
+        if (deltaY > 0 && direction !== 'UP') setDirection('DOWN');
+        else if (deltaY < 0 && direction !== 'DOWN') setDirection('UP');
+      }
+    };
+
+    canvas.addEventListener('touchstart', handleTouchStart, { passive: true });
+    canvas.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+    return () => {
+      canvas.removeEventListener('touchstart', handleTouchStart);
+      canvas.removeEventListener('touchend', handleTouchEnd);
+    };
   }, [direction]);
 
   useEffect(() => {
@@ -154,7 +226,11 @@ const GithubSnakeGame: React.FC = () => {
 
   return (
     <div className="relative w-full max-w-lg mx-auto perspective-1000">
-      <div className={`relative w-full h-[540px] duration-700 transition-transform transform-style-preserve-3d ${showCode ? 'rotate-y-180' : ''}`}>
+      <div
+        className={`relative w-full h-[540px] duration-700 transition-transform transform-style-preserve-3d ${
+          showCode ? 'rotate-y-180' : ''
+        }`}
+      >
         {/* Front Face */}
         <div
           className="absolute w-full h-full card bg-base-100 shadow-lg p-6 flex flex-col"
@@ -170,7 +246,9 @@ const GithubSnakeGame: React.FC = () => {
               <EmojioneV1Snake className="w-28 h-28 mb-4" />
               <h2 className="text-xl font-bold mb-2">Welcome to Snake</h2>
               <p className="mb-4 text-sm opacity-70">Move the snake with Arrows or Swipe Gestures</p>
-              <button className="btn btn-primary btn-lg" onClick={startGame}>Start Game</button>
+              <button className="btn btn-primary btn-lg" onClick={startGame}>
+                Start Game
+              </button>
             </div>
           ) : (
             <>
@@ -194,7 +272,9 @@ const GithubSnakeGame: React.FC = () => {
                 ref={gameCanvas}
                 width={400}
                 height={400}
-                className={`bg-gray-200 rounded border border-gray-400 shadow-inner ${gameOver ? 'animate-[rumble_0.3s_infinite]' : ''}`}
+                className={`bg-gray-200 rounded border border-gray-400 shadow-inner ${
+                  gameOver ? 'animate-[rumble_0.3s_infinite]' : ''
+                }`}
                 style={{ touchAction: 'none' }}
               />
 
@@ -260,4 +340,3 @@ const GithubSnakeGame: React.FC = () => {
 };
 
 export default GithubSnakeGame;
-
