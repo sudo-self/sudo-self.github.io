@@ -24,6 +24,7 @@ export default defineConfig({
             registerType: 'autoUpdate',
             workbox: {
               navigateFallback: undefined,
+              maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // ← ✅ allow up to 5MB
             },
             includeAssets: ['logo.png'],
             manifest: {
