@@ -157,41 +157,40 @@ const GithubSnakeGame: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [direction]);
 
-  // Touch swipe handling
+  // Touch swipe handling (updated per your request)
   useEffect(() => {
     const canvas = gameCanvas.current;
     if (!canvas) return;
 
     const handleTouchStart = (e: TouchEvent) => {
-      const touch = e.touches[0];
-      touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+      if (e.touches.length === 1) {
+        const touch = e.touches[0];
+        touchStartRef.current = { x: touch.pageX, y: touch.pageY };
+      }
     };
 
     const handleTouchEnd = (e: TouchEvent) => {
-      if (!touchStartRef.current) return;
+      if (!touchStartRef.current || e.changedTouches.length !== 1) return;
 
       const touch = e.changedTouches[0];
-      const deltaX = touch.clientX - touchStartRef.current.x;
-      const deltaY = touch.clientY - touchStartRef.current.y;
+      const deltaX = touch.pageX - touchStartRef.current.x;
+      const deltaY = touch.pageY - touchStartRef.current.y;
 
-      if (Math.abs(deltaX) < SWIPE_THRESHOLD && Math.abs(deltaY) < SWIPE_THRESHOLD) {
-        // Not a valid swipe, ignore
-        return;
-      }
+      if (Math.abs(deltaX) < SWIPE_THRESHOLD && Math.abs(deltaY) < SWIPE_THRESHOLD) return;
 
       if (Math.abs(deltaX) > Math.abs(deltaY)) {
-        // Horizontal swipe
         if (deltaX > 0 && direction !== 'LEFT') setDirection('RIGHT');
         else if (deltaX < 0 && direction !== 'RIGHT') setDirection('LEFT');
       } else {
-        // Vertical swipe
         if (deltaY > 0 && direction !== 'UP') setDirection('DOWN');
         else if (deltaY < 0 && direction !== 'DOWN') setDirection('UP');
       }
+
+      touchStartRef.current = null; // reset after swipe
     };
 
-    canvas.addEventListener('touchstart', handleTouchStart, { passive: true });
-    canvas.addEventListener('touchend', handleTouchEnd, { passive: true });
+    canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+    canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
 
     return () => {
       canvas.removeEventListener('touchstart', handleTouchStart);
@@ -245,7 +244,7 @@ const GithubSnakeGame: React.FC = () => {
             <div className="flex flex-col items-center justify-center flex-grow">
               <EmojioneV1Snake className="w-28 h-28 mb-4" />
               <h2 className="text-xl font-bold mb-2">Welcome to Snake</h2>
-              <p className="mb-4 text-sm opacity-70">Move the snake with Arrows or Swipe Gestures</p>
+              <p className="mb-4 text-sm opacity-70">move the snake with the arrow keys or swipe gestures</p>
               <button className="btn btn-primary btn-lg" onClick={startGame}>
                 Start Game
               </button>
@@ -340,3 +339,5 @@ const GithubSnakeGame: React.FC = () => {
 };
 
 export default GithubSnakeGame;
+
+

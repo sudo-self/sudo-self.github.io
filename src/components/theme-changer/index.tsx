@@ -1,37 +1,57 @@
 import { AiOutlineControl } from 'react-icons/ai';
-import { SanitizedThemeConfig } from '../../interfaces/sanitized-config';
+import { useState, MouseEvent } from 'react';
 import { LOCAL_STORAGE_KEY_NAME } from '../../constants';
 import { skeleton } from '../../utils';
-import { MouseEvent } from 'react';
 
-/**
- * Renders a theme changer component.
- *
- * @param {Object} props
- * @param {string} props.theme - The current theme.
- * @param {function} props.setTheme - Function to set the theme.
- * @param {boolean} props.loading - Loading state.
- * @param {SanitizedThemeConfig} props.themeConfig - The theme config.
- */
+const DAISYUI_THEMES = [
+  "light",
+  "dark",
+  "cupcake",
+  "bumblebee",
+  "emerald",
+  "corporate",
+  "synthwave",
+  "retro",
+  "cyberpunk",
+  "valentine",
+  "halloween",
+  "garden",
+  "forest",
+  "aqua",
+  "lofi",
+  "pastel",
+  "fantasy",
+  "wireframe",
+  "black",
+  "luxury",
+  "dracula",
+  "cmyk",
+  "autumn",
+  "business",
+  "acid",
+  "lemonade",
+  "night",
+  "coffee",
+  "winter",
+];
+
 const ThemeChanger = ({
   theme,
   setTheme,
   loading,
-  themeConfig,
+  defaultTheme = 'light', // fallback default theme
 }: {
   theme: string;
   setTheme: (theme: string) => void;
   loading: boolean;
-  themeConfig: SanitizedThemeConfig;
+  defaultTheme?: string;
 }) => {
-  const changeTheme = (
-    e: MouseEvent<HTMLAnchorElement>,
-    selectedTheme: string,
-  ) => {
+  const changeTheme = (e: MouseEvent<HTMLAnchorElement>, selectedTheme: string) => {
     e.preventDefault();
     document.querySelector('html')?.setAttribute('data-theme', selectedTheme);
-    typeof window !== 'undefined' &&
+    if (typeof window !== 'undefined') {
       localStorage.setItem(LOCAL_STORAGE_KEY_NAME, selectedTheme);
+    }
     setTheme(selectedTheme);
   };
 
@@ -55,7 +75,7 @@ const ThemeChanger = ({
           <span className="text-base-content text-opacity-40 capitalize text-sm">
             {loading
               ? skeleton({ widthCls: 'w-16', heightCls: 'h-5' })
-              : theme === themeConfig.defaultTheme
+              : theme === defaultTheme
               ? 'Default'
               : theme}
           </span>
@@ -88,19 +108,15 @@ const ThemeChanger = ({
                 className="mt-16 overflow-y-auto shadow-2xl top-px dropdown-content max-h-96 w-52 rounded-lg bg-base-200 text-base-content z-10"
               >
                 <ul className="p-4 menu compact">
-                  {[
-                    themeConfig.defaultTheme,
-                    ...themeConfig.themes.filter(
-                      (item) => item !== themeConfig.defaultTheme,
-                    ),
-                  ].map((item, index) => (
+                  {DAISYUI_THEMES.map((item, index) => (
                     <li key={index}>
                       <a
+                        href="#"
                         onClick={(e) => changeTheme(e, item)}
                         className={`${theme === item ? 'active' : ''}`}
                       >
                         <span className="opacity-60 capitalize">
-                          {item === themeConfig.defaultTheme ? 'Default' : item}
+                          {item === defaultTheme ? 'Default' : item}
                         </span>
                       </a>
                     </li>

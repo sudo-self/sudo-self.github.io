@@ -74,7 +74,6 @@ const ExternalProjectCard = ({
         href={item.link}
         onClick={(e) => {
           e.preventDefault();
-
           try {
             if (googleAnalyticId) {
               ga.event('Click External Project', {
@@ -84,7 +83,6 @@ const ExternalProjectCard = ({
           } catch (error) {
             console.error(error);
           }
-
           window?.open(item.link, '_blank');
         }}
       >
@@ -125,7 +123,28 @@ const ExternalProjectCard = ({
 
   return (
     <Fragment>
-      <div className="col-span-1 lg:col-span-2">
+      <div className="col-span-1 lg:col-span-2 space-y-8">
+          {/* --- Embedded Iframe --- */}
+          <div className="card compact bg-base-100 shadow p-6">
+            <div className="flex justify-center mb-4">
+              <img
+                src="https://img.shields.io/badge/Cloudflare-F38020?style=for-the-badge&logo=Cloudflare&logoColor=white"
+                alt="Cloudflare Badge"
+                className="h-6"
+              />
+            </div>
+            <div className="w-full aspect-video">
+              <iframe
+                src="https://git.jessejesse.workers.dev"
+                title="Git JesseJesse"
+                className="w-full h-full border-0 rounded-md"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+
+
+        {/* --- External Projects UI --- */}
         <div className="grid grid-cols-2 gap-6">
           <div className="col-span-2">
             <div className="card compact bg-base-100 shadow bg-opacity-40">
@@ -135,9 +154,7 @@ const ExternalProjectCard = ({
                     {loading ? (
                       skeleton({ widthCls: 'w-40', heightCls: 'h-8' })
                     ) : (
-                      <span className="text-base-content opacity-70">
-                        {header}
-                      </span>
+                      <span className="text-base-content opacity-70">{header}</span>
                     )}
                   </h5>
                 </div>
@@ -156,3 +173,5 @@ const ExternalProjectCard = ({
 };
 
 export default ExternalProjectCard;
+
+

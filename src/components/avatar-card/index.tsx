@@ -74,10 +74,10 @@ const Equalizer: React.FC<{ isActive?: boolean }> = ({ isActive = true }) => {
   );
 };
 
-// Component to load and display firebase.glb
+
 const FirebaseAvatar = () => {
-  const gltf = useGLTF('/firebase.glb', true);
-  return <primitive object={gltf.scene} scale={1.5} />;
+  const gltf = useGLTF('/github.glb', true);
+  return <primitive object={gltf.scene} scale={0.028} />;
 };
 
 const AvatarCard: React.FC<AvatarCardProps> = ({

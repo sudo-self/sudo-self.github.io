@@ -1,81 +1,40 @@
 import React from 'react';
-import { SanitizedCertification } from '../../interfaces/sanitized-config';
-import { skeleton } from '../../utils';
 
-const ListItem = ({
-  year,
-  name,
-  body,
-  link,
-}: {
-  year?: React.ReactNode;
-  name?: React.ReactNode;
-  body?: React.ReactNode;
-  link?: string;
-}) => (
-  <li className="mb-8 ml-6 relative">
-    <div className="absolute w-3 h-3 bg-primary rounded-full -left-1.5 border-2 border-base-100 shadow-md"></div>
-    <div className="text-sm text-base-content text-opacity-70 mb-1">{year}</div>
-    <a
-      href={link}
-      target="_blank"
-      rel="noreferrer"
-      className="text-base font-semibold text-base-content hover:text-primary transition-colors"
-    >
-      {name}
-    </a>
-    <p className="text-sm text-base-content text-opacity-60 mt-1">{body}</p>
-  </li>
-);
+const badges = [
+  { src: 'https://github.com/sudo-self/sudo-self/assets/119916323/591566e1-cd9a-445c-9d0b-82ca60b4c37f', alt: 'Pull Shark' },
+  { src: 'https://github.com/sudo-self/sudo-self/assets/119916323/9d692e82-ae9f-4703-9355-74a0e8bebbfe', alt: 'Quickdraw' },
+  { src: 'https://github.com/sudo-self/sudo-self/assets/119916323/5c4f6626-7c67-4277-97a6-b67b77d08953', alt: 'Starstruck' },
+  { src: 'https://github.com/sudo-self/sudo-self/assets/119916323/f135932f-d44f-4bb9-b72a-ac23219112bc', alt: 'Yolo' },
+  { src: 'https://github.com/user-attachments/assets/4962670c-d88b-4bfd-8697-753044e16c33', alt: 'Dev Badge 3' },
+  { src: 'https://github.com/user-attachments/assets/3aa8db8c-ec26-4248-85a2-a147c1b74e06', alt: 'Dev Badge 2' },
+  { src: 'https://github.com/user-attachments/assets/a3a9c3b1-4389-4ccb-a6d7-c48ef81ea222', alt: 'Dev Badge 1' },
+  { src: 'https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/Android%20studio.svg', alt: 'Android Studio' },
+  { src: 'https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/gdeveloper.svg', alt: 'GDE Badge' },
+  { src: 'https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/firebase.svg', alt: 'Firebase Badge' },
+  { src: 'https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/Image%205.png', alt: 'Dev Badge 7' },
+  { src: 'https://bucket.jessejesse.com/avatar.svg', alt: 'Tech Plus' },
+];
 
-const CertificationCard = ({
-  certifications,
-  loading,
-}: {
-  certifications: SanitizedCertification[];
-  loading: boolean;
-}) => {
-  const renderSkeleton = () =>
-    Array.from({ length: 2 }, (_, i) => (
-      <ListItem
-        key={i}
-        year={skeleton({ widthCls: 'w-5/12', heightCls: 'h-4' })}
-        name={skeleton({ widthCls: 'w-6/12', heightCls: 'h-4', className: 'my-1.5' })}
-        body={skeleton({ widthCls: 'w-8/12', heightCls: 'h-3' })}
-      />
-    ));
-
+const CertificationCard = ({ loading }: { loading: boolean }) => {
   return (
     <div className="card shadow-xl bg-base-100">
-      <div className="card-body md:flex md:items-start md:justify-between gap-8">
-        {/* Left Column */}
-        <div className="flex-1">
-          <h2 className="text-lg font-bold mb-2 text-base-content">
-            {loading ? skeleton({ widthCls: 'w-32', heightCls: 'h-7' }) : 'Certifications'}
-          </h2>
-          <ol className="relative border-l-2 border-base-200 ml-3 mt-4">
-            {loading
-              ? renderSkeleton()
-              : certifications.map((cert, i) => (
-                  <ListItem
-                    key={i}
-                    year={cert.year}
-                    name={cert.name}
-                    body={cert.body}
-                    link={cert.link}
-                  />
-                ))}
-          </ol>
-        </div>
-
-        {/* Right Column - Badge */}
-        {!loading && (
-          <div className="flex-shrink-0 mt-6 md:mt-0">
-            <img
-              src="/techplus.png"
-              alt="Tech Plus Badge"
-              className="w-36 h-auto rounded-lg shadow-lg border border-base-300"
-            />
+      <div className="card-body">
+        <h2 className="text-lg font-bold mb-4 text-base-content text-center">
+          Developer Badges
+        </h2>
+        {loading ? (
+          <p className="text-center text-base-content opacity-50">Loading badges...</p>
+        ) : (
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6 justify-center">
+            {badges.map(({ src, alt }, i) => (
+              <img
+                key={i}
+                src={src}
+                alt={alt}
+                title={alt}
+                className="w-24 h-24 object-contain cursor-pointer hover:scale-105 transition-transform duration-300"
+              />
+            ))}
           </div>
         )}
       </div>
@@ -84,6 +43,8 @@ const CertificationCard = ({
 };
 
 export default CertificationCard;
+
+
 
 
 

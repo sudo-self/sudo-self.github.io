@@ -48,46 +48,48 @@ const BlogCard = ({
     }
   };
 
-    const EmbedBlock = ({
-      label,
-      code,
-      language,
-    }: {
-      label: string;
-      code: string;
-      language: string;
-    }) => (
-      <div className="flex flex-col gap-2">
-        <div className="flex items-center justify-between">
-          <label className="font-semibold text-sm">{label}</label>
-          <button
-            onClick={() => handleCopy(code, label)}
-            className="btn btn-xs btn-ghost"
-            aria-label="Copy to clipboard"
-          >
-            {copied === label ? 'ok!' : '⧉'}
-          </button>
-        </div>
-        <div className="mockup-code bg-base-300 rounded-md overflow-hidden">
-          <SyntaxHighlighter
-            language={language}
-            style={atomDark}
-            customStyle={{
-              margin: 0,
-              padding: '1rem',
-              background: 'transparent',
-              fontSize: '0.8rem',
-              lineHeight: '1.5',
-            }}
-            showLineNumbers
-            wrapLines
-          >
-            {code}
-          </SyntaxHighlighter>
-        </div>
+  const EmbedBlock = ({
+    label,
+    code,
+    language,
+  }: {
+    label: string;
+    code: string;
+    language: string;
+  }) => (
+    <div className="flex flex-col gap-2">
+      <div className="flex items-center justify-between">
+        <label className="font-semibold text-sm">{label}</label>
+        <button
+          onClick={() => handleCopy(code, label)}
+          className="btn btn-xs btn-ghost"
+          aria-label="Copy to clipboard"
+        >
+          {copied === label ? 'ok!' : '⧉'}
+        </button>
       </div>
-    );
-
+      <div
+        className="mockup-code rounded-md overflow-hidden"
+        style={{ backgroundColor: '#000' }} // Black background here
+      >
+        <SyntaxHighlighter
+          language={language}
+          style={atomDark}
+          customStyle={{
+            margin: 0,
+            padding: '1rem',
+            background: '#000', // Ensure black background in SyntaxHighlighter too
+            fontSize: '0.8rem',
+            lineHeight: '1.5',
+          }}
+          showLineNumbers
+          wrapLines
+        >
+          {code}
+        </SyntaxHighlighter>
+      </div>
+    </div>
+  );
 
   const renderSkeleton = () =>
     Array.from({ length: blog.limit }).map((_, index) => (
@@ -217,22 +219,10 @@ const BlogCard = ({
         </div>
 
         {/* Right side: blog posts */}
-        <div className="w-full lg:w-1/3">
-          {loading ? renderSkeleton() : renderArticles()}
-        </div>
+        <div className="w-full lg:w-1/3">{loading ? renderSkeleton() : renderArticles()}</div>
       </div>
     </section>
   );
 };
 
 export default BlogCard;
-
-
-
-
-
-
-
-
-
-
