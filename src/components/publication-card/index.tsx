@@ -113,6 +113,16 @@ const PublicationCard = ({
                           alt="Node.js Package"
                         />
                       </a>
+                       <a
+                        href="https://github.com/sudo-self/device-detector/actions/workflows/nextjs.yml"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <img
+                          src="https://github.com/sudo-self/device-detector/actions/workflows/nextjs.yml/badge.svg"
+                          alt="Node.js Package"
+                        />
+                      </a>
                       <a
                         href="https://github.com/sudo-self/sudo-self/actions/workflows/blogpost.yml"
                         target="_blank"
